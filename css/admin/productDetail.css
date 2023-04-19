@@ -1,0 +1,178 @@
+#main div.content-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 10px;
+}
+
+#main div.content-container>div.content>form#addProductForm {
+    background-color: #435C70;
+    width: 100%;
+    height: auto;
+    padding: 40px 20px 40px 40px;
+}
+
+div.content form#addProductForm .title {
+    width: 100%;
+    height: auto;
+    font-size: 19px;
+    font-weight: bold;
+    color: white;
+}
+
+div.content form#addProductForm .top {
+    width: 100%;
+    height: auto;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: row;
+    color: white;
+}
+
+div.content form#addProductForm .top .left {
+    width: 60%;
+    height: auto;
+}
+
+div.content form#addProductForm .top .left .name-container {
+    padding: 15px 0;
+}
+
+div.content form#addProductForm .top .left label {
+    font-size: 16px;
+}
+
+div.content form#addProductForm .top .left textarea::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #567086;
+}
+
+div.content form#addProductForm .top .left textarea::-webkit-scrollbar {
+    width: 6px;
+    background-color: #567086;
+}
+
+div.content form#addProductForm .top .left textarea::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #4E657A;
+}
+
+
+div.content form#addProductForm .top .left input,
+div.content form#addProductForm .top .left textarea,
+div.content form#addProductForm .top .left select {
+    background-color: #54657D;
+    margin-top: 10px;
+    outline: none;
+    border: 4px solid #54657D;
+    color: white;
+}
+
+div.content form#addProductForm .top .left input:focus,
+div.content form#addProductForm .top .left textarea:focus,
+div.content form#addProductForm .top .left select:focus {
+    border-color: transparent;
+    transition: .2s;
+    box-shadow: 0 0 0 4px rgb(97, 141, 184, 0.7);
+}
+
+
+
+div.content form#addProductForm .top .left .name-container input,
+div.content form#addProductForm .top .left .description-container textarea {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+}
+
+div.content form#addProductForm .top .left .category-container {
+    padding: 10px 20px 10px 0;
+    width: 50%;
+    float: left;
+}
+
+div.content form#addProductForm .top .left .category-container select,
+div.content form#addProductForm .top .left .status-container select {
+    width: 100%;
+    padding: 10px 0;
+    margin-top: 10px;
+    height: 53px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+div.content form#addProductForm .top .left .price-container,
+div.content form#addProductForm .top .left .quantity-container {
+    width: 50%;
+    height: auto;
+    float: left;
+    padding: 10px 0;
+}
+
+div.content form#addProductForm .top .left .price-container input,
+div.content form#addProductForm .top .left .quantity-container input {
+    padding: 15px;
+    font-size: 16px;
+    width: 100%;
+}
+
+div.content form#addProductForm .top .left .status-container {
+    clear: both;
+    width: 50%;
+    float: left;
+    padding: 10px 20px 10px 0;
+}
+
+div.content form#addProductForm .top .right {
+    width: 40%;
+    height: auto;
+    margin-left: 20px;
+    padding: 40px 0 20px;
+}
+
+div.content form#addProductForm .top .right .image-container {
+    width: 100%;
+    height: 300px;
+}
+
+div.content form#addProductForm .top .right .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+div.content form#addProductForm .top .right .change-image-container {
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+    padding: 0 20px;
+}
+
+div.content form#addProductForm .top .right input,
+div.content form#addProductForm .bottom input {
+    width: 100%;
+    height: 50px;
+    background-color: #27AE60;
+    outline: none;
+    border: 3px solid #27AE60;
+    cursor: pointer;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+div.content form#addProductForm .top .right input:hover,
+div.content form#addProductForm .bottom input:hover {
+    background-color: white;
+    color: #27AE60;
+    transition: .2s;
+}
+
+div.content form#addProductForm .bottom {
+    width: 100%;
+    height: auto;
+}

@@ -8,7 +8,7 @@
                     <a href="/faion/index.php/"><i class="fa-solid fa-house fa-xs"></i> Trang chủ</a>
                 </span>
                 <span class="divider"> / </span>
-                <span id="breadcrumb-inner-title">Sản phẩm</span>
+                <span id="breadcrumb-inner-title"><a href="/faion/index.php/products?category=all&page=1">Sản phẩm</a></span>
             </nav>
         </div>
     </div>
@@ -60,8 +60,8 @@ include('../faion/template/sidebar.php');
             <ul id="menu-items">
                 <?php
                 echo "<li><a href=\"/faion/index.php/products?category=all&page=1\" class=\"menu-value\">Tất cả</a></li>";
-                for ($i = 0; $i < count($menuList); $i++) {
-                    echo "<li><a href='/faion/index.php/products?category=" . strtolower($menuList[$i]) . "&page=1' class=\"menu-value\">" .  $menuList[$i] . "</a></li>";
+                for ($i = 0; $i < count($categoryList); $i++) {
+                    echo "<li><a href='/faion/index.php/products?category=" . strtolower($categoryList[$i]) . "&page=1' class=\"menu-value\">" .  $categoryList[$i] . "</a></li>";
                 }
                 // Kích hoạt class active  
                 $temp = explode("?", $uri);
@@ -71,8 +71,8 @@ include('../faion/template/sidebar.php');
                     echo "<script>document.getElementsByClassName('menu-value')[0].classList.add('active'); </script>";
                 } else {
                     echo "<script>document.getElementsByClassName('menu-value')[0].classList.remove('active'); </script>";
-                    for ($i = 0; $i < count($menuList); $i++) {
-                        if ($temp == strtolower($menuList[$i])) {
+                    for ($i = 0; $i < count($categoryList); $i++) {
+                        if ($temp == strtolower($categoryList[$i])) {
                             echo "<script>document.getElementsByClassName('menu-value')[" . $i + 1 . "].classList.add('active'); </script>";
                         } else {
                             echo "<script>document.getElementsByClassName('menu-value')[" . $i + 1 . "].classList.remove('active'); </script>";
@@ -87,53 +87,17 @@ include('../faion/template/sidebar.php');
     <div class="content-container" id="maincontent">
         <div id="products">
             <?php
-            showProducts();
+            showProducts(12, 8);
             ?>
         </div>
         <!-- Product Detail Information -->
-        <div id="product-info-container">
-            <div id="product-info">
-                <button type="button" id="close-product-info-btn" onclick="closeProductInfo()">
-                    <i class="fa-solid fa-xmark fa-2x"></i>
-                </button>
-                <div class="product-info-left">
-                    <img id="product-info-img" alt="Image">
-                </div>
-                <div class="product-info-right">
-                    <h2 id="product-name"></h2>
-                    <h3 id="product-price"></h3>
-                    <h4>SIZE</h4>
-                    <div id="check-size-container">
-                        <div class="check-size-wrapper">
-                            <label class="radio-check" id="sizeM"><input type="radio" name="size-option" class="size-option" value="M" onclick="choose('M')" />M</label>
-                        </div>
-                        <div class="check-size-wrapper">
-                            <label class="radio-check" id="sizeL"><input type="radio" name="size-option" class="size-option" value="L" onclick="choose('L')" />L</label>
-                        </div>
-                        <div class="check-size-wrapper">
-                            <label class="radio-check" id="sizeXL"><input type="radio" name="size-option" class="size-option" value="XL" onclick="choose('XL')" />XL</label>
-                        </div>
-                    </div>
-                    <h4>Số lượng</h4>
-                    <button class="minusQuantity" onclick="quantityDown()">−</button>
-                    <input type="text" id="quantity" value="">
-                    <button class="plusQuantity" onclick="quantityUp()">+</button>
-                    <button class="addToCart-btn">
-                        <i class="fa fa-cart-shopping fa-lg"></i>
-                        Thêm vào giỏ hàng
-                    </button>
-                </div>
-            </div>
-        </div>
         <div id="page"></div>
     </div>
 </main>
 
 <?php
-function showProducts()
-{
-    include('../faion/object/Product.php');
-    include('../faion/object/Category.php');
+function showProducts($main, $sub)
+{    
     $db = new Database();
     mysqli_query($db->getConnection(), "set names 'utf8'");
     $kq = mysqli_query($db->getConnection(), "SELECT * FROM product");
@@ -150,30 +114,27 @@ function showProducts()
             $row['quantity'],
             $row['sold'],
             $row['status'],
-            $row['featured'],
             $row['created_at']
         );
         $productList[] = $product;
     }
 
     $uri = $_SERVER['REQUEST_URI'];
-    //$temp = explode("?", $uri)[1];
-    //$category = explode("=", explode("&", explode("?", $uri)[1])[0])[1];
     $category = $_GET['category'];
     $position = explode("=", explode("&", explode("?", $uri)[1])[1])[1];
     $pageAmount = $count = 0;
 
     if ($category == "all") {
-        for ($i = ($position - 1) * 8; $i < count($productList); $i++) {
-            echo "<div class=\"card\" onClick=\"showProductInfo(" . $productList[$i]->getId() . ")\"><div class=\"image-container\">
+        for ($i = ($position - 1) * $main; $i < count($productList); $i++) {
+            echo "<div class=\"card\"><a href=\"/faion/index.php/products?info=" . $productList[$i]->getId() . "\"><div class=\"image-container\">
                 <img src=\"" . $productList[$i]->getImage() . "\" alt=\"Image\"></div><div class=\"container\"><h4>" . $productList[$i]->getName()
-                . "</h4><h5>Giá: " . $productList[$i]->getPrice() . "đ</h5></div><div class=\"addToCart-container\"><button class=\"addToCart-btn\" onclick=\"checkUser()\">Mua ngay</button></div></div>";
+                . "</h4><h5>Giá: " . changeMoney($productList[$i]->getPrice()) . "₫</h5></div><div class=\"addToCart-container\"><button class=\"addToCart-btn\">Mua ngay</button></div></a></div>";
             ++$count;
-            if ($count == 8) {
+            if ($count == $main) {
                 break;
             }
         }
-        $pageAmount = ceil(count($productList) / 8);
+        $pageAmount = ceil(count($productList) / $main);
         $pageNumberLink = "'";
         for ($i = 1; $i <= $pageAmount; $i++) {
             $position = $i;
@@ -185,27 +146,23 @@ function showProducts()
             document.getElementsByClassName(\"page-number\")[" . $_GET['page'] - 1 . "].classList.add(\"active\"); }; </script>";
     } else {
         $categoryArr = array();
-        $kq = mysqli_query($db->getConnection(), "SELECT * FROM category");
+        $kq = mysqli_query($db->getConnection(), "SELECT * FROM category WHERE id <> 0");
         while ($row = mysqli_fetch_array($kq)) {
             $temp = new Category(
                 $row['id'],
                 $row['name'],
-                $row['parent_id'],
-                $row['description'],
-                $row['status'],
-                $row['created_at']
             );
             $categoryArr[] = $temp;
         }
         $flag = 0;
-        for ($i = ($position - 1) * 8; $i < count($productList); $i++) {
+        for ($i = ($position - 1) * $sub; $i < count($productList); $i++) {
             for ($j = 0; $j < count($categoryArr); $j++) {
                 if ($productList[$i]->getCategoryId() == $categoryArr[$j]->getId() && $category == strtolower($categoryArr[$j]->getName())) {
-                    echo "<div class=\"card\" onClick=\"showProductInfo(" . $productList[$i]->getId() . ")\"><div class=\"image-container\">
+                    echo "<div class=\"card\"><a href=\"/faion/index.php/products?info=" . $productList[$i]->getId() . "\"><div class=\"image-container\">
                     <img src=\"" . $productList[$i]->getImage() . "\" alt=\"Image\"></div><div class=\"container\"><h4>" . $productList[$i]->getName()
-                        . "</h4><h5>Giá: " . $productList[$i]->getPrice() . "đ</h5></div><div class=\"addToCart-container\"><button class=\"addToCart-btn\">Mua ngay</button></div></div>";
+                        . "</h4><h5>Giá: " . changeMoney($productList[$i]->getPrice()) . "₫</h5></div><div class=\"addToCart-container\"><button class=\"addToCart-btn\">Mua ngay</button></div></a></div>";
                     ++$count;
-                    if ($count == 8) {
+                    if ($count == $sub) {
                         $flag = 1;
                         break;
                     }
@@ -223,7 +180,7 @@ function showProducts()
                 }
             }
         }
-        $pageAmount = ceil(count($tempArr) / 8);
+        $pageAmount = ceil(count($tempArr) / $sub);
         $pageNumberLink = "'";
         for ($i = 1; $i <= $pageAmount; $i++) {
             $position = $i;

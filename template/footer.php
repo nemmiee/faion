@@ -11,14 +11,14 @@
             <div class="top-footer-menu">
                 <h3>Danh mục</h3>
                 <a href="#">Tìm kiếm</a>
-                <a href="../File/sizecheck.html">Kiểm tra size áo</a>
-                <a href="../File/contact.html">Liên hệ</a>
+                <a href="/faion/index.php/sizeguide/">Kiểm tra size áo</a>
+                <a href="/faion/index.php/contact/">Liên hệ</a>
             </div>
             <div class="top-footer-menu" id="top-footer-menu-category">
                 <?php
                 echo "<h3>Sản phẩm</h3>";
-                for ($i = 0; $i < count($menuList); $i++) {
-                    echo "<a href='/FAION/index.php/products?category=" . strtolower($menuList[$i]) . "&page=1'>" .  $menuList[$i] . "</a>";
+                for ($i = 0; $i < count($categoryList); $i++) {
+                    echo "<a href='/FAION/index.php/products?category=" . strtolower($categoryList[$i]) . "&page=1'>" .  $categoryList[$i] . "</a>";
                 } 
                 $db->disconnect();            
                 ?>

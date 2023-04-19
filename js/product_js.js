@@ -96,13 +96,15 @@ function closeProductInfo() {
     document.getElementById("product-info-container").classList.toggle("hienThi");
 }
 
-function quantityDown() {
-    if (document.getElementById("quantity").value > 1)
-        --document.getElementById("quantity").value;
+function quantityDown(e) {
+    e.preventDefault();
+    if (document.getElementById("pQuantity").value > 1)
+        --document.getElementById("pQuantity").value;
 }
 
-function quantityUp() {
-    ++document.getElementById("quantity").value;
+function quantityUp(e) {
+    e.preventDefault();
+    ++document.getElementById("pQuantity").value;
 }
 /* Thêm sản phẩm vào giỏ hàng */
 

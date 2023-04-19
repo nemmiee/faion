@@ -72,56 +72,67 @@
         var confirmPassword = document.getElementById("confirmPassword");
 
         if (fullname.value == "" || fullname.value == undefined || fullname.value == NaN) {
+            //alertMessage("fail", "Mời nhập họ và tên!");
             alert("Mời nhập họ và tên");
             fullname.focus();
             e.preventDefault();
             return false;
         } else if (fullnameRegEx.test(fullname.value) == true && fullname.value != "") {
+            //alertMessage("fail", "Họ và tên không hợp lệ!");
             alert("Họ và tên không hợp lệ");
             fullname.focus();
             e.preventDefault();
             return false;
         } else if (address.value == "" || address.value == undefined || address.value == NaN) {
-            alert("Mời nhập địa chỉ");
+            //alertMessage("fail", "Mời nhập địa chỉ!");
+             alert("Mời nhập địa chỉ");
             address.focus();
             e.preventDefault();
             return false;
         } else if (phoneNum.value == "" || phoneNum.value == undefined || phoneNum.value == NaN) {
+            //alertMessage("fail", "Mời nhập số điện thoại!");
             alert("Mời nhập số điện thoại");
             phoneNum.focus();
             e.preventDefault();
             return false;
         } else if (!phoneRegEx.test(phoneNum.value) && phoneNum.value != "") {
+            //alertMessage("fail", "Số điện thoại không đúng định dạng!");
             alert("Số điện thoại không đúng");
             phoneNum.focus();
             e.preventDefault();
             return false;
         } else if (email.value == "" || email.value == undefined || email.value == NaN) {
-            alert("Mời nhập email");
+            //alertMessage("fail", "Mời nhập email");
+             alert("Mời nhập email");
             email.focus();
             e.preventDefault();
             return false;
         } else if (!emailRegEx.test(email.value) && email.value != "") {
+            //alertMessage("fail", "Email không đúng!");
             alert("Email không đúng");
             email.focus();
             e.preventDefault();
             return false;
         } else if (username.value == "" || username.value == undefined || username.value == NaN) {
+            //alertMessage("fail", "Mời nhập tên đăng nhập!");
             alert("Mời nhập tên đăng nhập");
             username.focus();
             e.preventDefault();
             return false;
         } else if (password.value == "" || password.value == undefined || password.value == NaN) {
+            //alertMessage("fail", "Mời nhập mật khẩu!");
             alert("Mời nhập mật khẩu");
             password.focus();
             e.preventDefault();
             return false;
         } else if (confirmPassword.value == "" || confirmPassword.value == undefined || confirmPassword == NaN) {
+            //alertMessage("fail", "Mời nhập xác nhận mật khẩu!");
             alert("Mời nhập xác nhận mật khẩu");
             confirmPassword.focus();
             e.preventDefault();
             return false;
         } else if (confirmPassword.value != password.value && confirmPassword.value != "" && password.value != "") {
+            //alertMessage("fail", "Mật khẩu bạn vừa nhập không trùng khớp!");
             alert("Mật khẩu bạn vừa nhập không trùng khớp");
             confirmPassword.focus();
             e.preventDefault();
@@ -146,6 +157,7 @@ function createAccountId()
     } else if (count($arr) == 1) {
         $id = 2;
     } else {
+        sort($arr);
         for ($i = 0; $i < count($arr) - 1; $i++) {
             if ($arr[$i + 1] - $arr[$i] > 1) {
                 $id = $arr[$i] + 1;
@@ -180,9 +192,9 @@ if (
         echo "<script>
             alert(\"Đăng ký thành công\");
             window.location = '/faion/index.php/login/'; 
-        </script>";        
+        </script>";
     } else {
-        echo "<script>alert(\"Đăng ký không thành công\"); </script>";        
+        echo "<script>alertMessage(\"fail\", \"Đăng ký không thành công\"); </script>";
     }
 }
 

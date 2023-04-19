@@ -4,6 +4,76 @@
 /* |                | */
 /* #----------------# */
 
+function alertMessage(type, message) {
+    document.getElementById("alert-theme").classList.add("alertActive");
+    var alert = document.getElementById("alert-container");
+    var alertIcon = document.querySelectorAll(".alert-icon")[0];
+    var typeMessage = document.querySelectorAll(".type-message")[0];
+    var msg = document.querySelectorAll(".message")[0];
+    var button = document.getElementById("confirm-btn");
+    switch (type) {
+        case "success":
+            alert.classList.add("active");
+            alertIcon.innerHTML = "<i class=\"fa-solid fa-check\" style=\"color: #A5DC86;\"></i>";
+            alertIcon.style.border = "3px solid #EDF8E7";
+            typeMessage.innerText = "Success"
+            msg.innerText = message;
+            break;
+        case "fail":
+            alert.classList.add("active");
+            alertIcon.innerHTML = "<i class=\"fa-solid fa-xmark\" style=\"color: #F37777;\"></i>";
+            alertIcon.style.border = "3px solid #F27474";
+            typeMessage.innerText = "Error!"
+            msg.innerText = message;
+            break;
+        case "warning":
+            alert.classList.add("active");
+            alertIcon.innerHTML = "<i class=\"fa-solid fa-exclamation\" style=\"color: #F8BB86;\"></i>";
+            alertIcon.style.border = "3px solid #FACEA8";
+            typeMessage.innerText = "Warning!"
+            msg.innerText = message;
+        break;
+        case "info":
+            alert.classList.add("active");
+            alertIcon.innerHTML = "<i class=\"fa-solid fa-info\" style=\"color: #3FC3EE;\"></i>";
+            alertIcon.style.border = "3px solid #9DE0F6";
+            typeMessage.innerText = "Info!"
+            msg.innerText = message;
+        break;
+        case "question": 
+            alert.classList.add("active");
+            alertIcon.innerHTML = "<i class=\"fa-solid fa-question\" style=\"color: #87ADBD;\"></i>";
+            alertIcon.style.border = "3px solid #C9DAE1";
+            typeMessage.innerText = "Question!"
+            msg.innerText = message;
+        break;
+    }
+    button.focus();
+    setTimeout(closeAlert, 3000);
+}
+
+function closeAlert() {
+    var message = document.getElementById("alert-container").querySelectorAll(".message")[0].innerText;
+    switch (message) {
+        case "Bạn cần phải đăng nhập để thêm sản phẩm vào giỏ hàng":
+            window.location.replace("/faion/index.php/login/");
+            break;
+        case "Đăng ký thành công":
+            //window.location.replace("/faion/index.php/login/"); 
+            break;
+        default:
+            document.getElementById("alert-container").classList.remove("active");
+            document.getElementById("alert-theme").classList.remove("alertActive");
+    }
+}
+
+var btn = document.getElementById("confirm-btn");
+btn.addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+        btn.click();
+    }
+});
+
 
 /* Hiển thị Menu 3 gạch khi responsive */
 let showSidebar = document.getElementById("hamburger-icon");
@@ -176,3 +246,4 @@ function changeTheme() {
     }
     localStorage.setItem("theme", theme);
 }
+

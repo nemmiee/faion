@@ -40,7 +40,7 @@ include('../FAION/template/slider.php');
                 <h4>WITH A GIFT FOR EVERYONE ON YOUR LIST</h4>
             </div>
             <div class="shopnow-inner">
-                <a href="/File/products.html">
+                <a href="/file/products.html">
                     <button>
                         SHOP NOW
                     </button>
@@ -50,7 +50,7 @@ include('../FAION/template/slider.php');
     </div>
     <div id="main-content">
         <div class="main-content-inner">
-            <a href="/File/products.html?shirt&0">
+            <a href="/file/products.html?shirt&0">
                 <div class="content-img-container">
                     <img src="/FAION/img/slider/shirt.jpg" alt="">
                 </div>
@@ -58,7 +58,7 @@ include('../FAION/template/slider.php');
             </a>
         </div>
         <div class="main-content-inner">
-            <a href="/File/products.html?hoodie&0">
+            <a href="/file/products.html?hoodie&0">
                 <div class="content-img-container">
                     <img src="/FAION/img/slider/hoodie.jpg" alt="">
                 </div>
@@ -66,7 +66,7 @@ include('../FAION/template/slider.php');
             </a>
         </div>
         <div class="main-content-inner">
-            <a href="/File/products.html?sweater&0">
+            <a href="/file/products.html?sweater&0">
                 <div class="content-img-container">
                     <img src="/FAION/img/slider/sweater.jpg" alt="">
                 </div>
@@ -74,7 +74,7 @@ include('../FAION/template/slider.php');
             </a>
         </div>
         <div class="main-content-inner">
-            <a href="/File/products.html?jacket&0">
+            <a href="/file/products.html?jacket&0">
                 <div class="content-img-container">
                     <img src="/FAION/img/slider/jacket.jpg" alt="">
                 </div>
@@ -87,48 +87,12 @@ include('../FAION/template/slider.php');
                 <h4>WITH A GIFT FOR EVERYONE ON YOUR LIST</h4>
             </div>
             <div class="shopnow-inner">
-                <a href="/File/products.html">
+                <a href="/file/products.html">
                     <button>
                         SHOP NOW
                     </button>
                 </a>
             </div>
         </div>
-    </div>
-
-    <!-- Product info -->
-    <div class="" id="product-info-container">
-        <div id="product-info">
-            <button type="button" id="close-product-info-btn" onclick="closeProductInfo()">
-                <i class="fa-solid fa-xmark fa-2x"></i>
-            </button>
-            <div class="product-info-left">
-                <img id="product-info-img" alt="Image">
-            </div>
-            <div class="product-info-right">
-                <h2 id="product-name"></h2>
-                <h3 id="product-price"></h3>
-                <h4>SIZE</h4>
-                <div id="check-size-container">
-                    <div class="check-size-wrapper">
-                        <label class="radio-check" id="sizeM"><input type="radio" name="size-option" class="size-option" value="M" onclick="choose('M')" />M</label>
-                    </div>
-                    <div class="check-size-wrapper">
-                        <label class="radio-check" id="sizeL"><input type="radio" name="size-option" class="size-option" value="L" onclick="choose('L')" />L</label>
-                    </div>
-                    <div class="check-size-wrapper">
-                        <label class="radio-check" id="sizeXL"><input type="radio" name="size-option" class="size-option" value="XL" onclick="choose('XL')" />XL</label>
-                    </div>
-                </div>
-                <h4>Số lượng</h4>
-                <button class="minusQuantity" onclick="quantityDown()">−</button>
-                <input type="text" id="quantity" value="">
-                <button class="plusQuantity" onclick="quantityUp()">+</button>
-                <button class="addToCart-btn">
-                    <i class="fa fa-cart-shopping fa-lg"></i>
-                    Thêm vào giỏ hàng
-                </button>
-            </div>
-        </div>
-    </div>
+    </div>    
 </main>

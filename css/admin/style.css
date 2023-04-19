@@ -1,0 +1,331 @@
+#main {
+	width: 100%;
+	height: auto;
+	display: table;
+	font-family: Arial, Helvetica, sans-serif;
+	position: relative;
+}
+
+#admin-sidebar-container {
+	float: left;
+	width: 20%;
+	height: 100%;
+	position: absolute;
+}
+
+#admin-sidebar-container .sidebar {
+	position: sticky;
+	flex-grow: 1;
+	left: 0;
+	top: 0;
+}
+
+#admin-sidebar-container .sidebar-user {
+	padding: 30px 5px;
+	width: 100%;
+	height: auto;
+	display: block;
+}
+
+#admin-sidebar-container .sidebar-user .icon {
+	border: solid #27A9E3;
+	border-radius: 50%;
+	float: left;
+	width: 75px;
+	height: 75px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-left: 15px;
+}
+
+#admin-sidebar-container .sidebar-user .icon i {
+	color: #27A9E3;
+}
+
+#admin-sidebar-container .sidebar-user .info {
+	width: auto;
+	float: left;
+	height: auto;
+	padding-left: 20px;
+}
+
+#admin-sidebar-container .sidebar-user .info .welcome {
+	padding-top: 13px;
+	padding-bottom: 8px;
+	color: #777777;
+	font-size: 16px;
+}
+
+#admin-sidebar-container .sidebar-user .info .name {
+	font-weight: bold;
+	color: #2A2D31;
+	font-size: 19px;
+}
+
+#admin-sidebar-container .sidebar-list {
+	display: flex;
+	justify-content: center;
+	align-items: start;
+	flex-direction: column;
+	width: 100%;
+	padding: 30px 20px 30px 10px;
+}
+
+#admin-sidebar-container .sidebar-list a {
+	color: black;
+	width: 100%;
+}
+
+#admin-sidebar-container .sidebar-list a li {
+	background-color: #FFFFFF;
+	width: 100%;
+	height: 50px;
+	padding: 10px 20px;
+	display: flex;
+	align-items: center;
+}
+
+#admin-sidebar-container .sidebar-list a li:hover {
+	background-color: #F2F7FF;
+	transition: .25s;
+
+}
+
+#admin-sidebar-container .sidebar-list a li.active {	
+	background-color: #F4F9FD;
+}
+
+#admin-sidebar-container .sidebar-list a li i {
+	margin-right: 15px;
+}
+
+#admin-sidebar-container .sidebar-list a li .sidebar-item {
+	color: #606263;
+}
+
+#main div.right-content-container {
+	float: right;
+	width: 80%;
+	background-color: #F2F7FF;
+}
+
+/* ---------------------- TOP SUB HEADER ------------------ */
+#top-sub-header {
+    width: 100%;
+    height: 100px;
+    background-color: red;
+    float: left;
+}
+
+/* ----------------------------------------------------- */
+#add-category-container {
+    width: 100%;
+    height: 100%;
+    position: fixed;    
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 10;
+    display: none;
+}
+
+#add-category-container.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#add-category-container .container {
+    width: 60%;
+    height: auto;
+    padding: 0;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;    
+    animation-name: upper;
+    animation-duration: 1s;
+}
+
+#add-category-container .container .close-container {
+    padding: 15px 30px;
+    width: 100%;
+    height: auto;
+    text-align: end;
+}
+
+#add-category-container .container .close-container i {
+    cursor: pointer;
+}
+
+#add-category-container .container .close-container i:hover {
+    color: #444444;
+    transition: .2s;
+}
+
+#add-category-container .container form {
+    width: 100%;
+    height: auto;
+    padding: 0px 40px 20px;
+}
+
+#add-category-container .container form .title {
+    width: 100%;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+#add-category-container .container form .name {
+    width: 100%;
+    height: auto;
+    padding: 0 20px 30px;
+}
+
+#add-category-container .container form .name > label {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#add-category-container .container form .name > input {
+    width: 100%;
+    padding: 20px 20px;
+    margin-top: 5px;
+    font-size: 16px;
+    outline: none;
+    border: 3px solid #666666;
+}
+
+#add-category-container .container form .name > input:focus {
+    border-color: black;
+    transition: .2s;
+}
+
+#add-category-container .container form .button-container {
+    width: 100%;
+    height: auto;
+    padding: 0 20px 20px;
+}
+
+#add-category-container .container form .button-container > input {
+    padding: 20px;
+    width: 100%;
+    height: auto;
+    outline: none;
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+    background-color: #2C7873;
+    border: none;
+    cursor: pointer;
+}
+
+#add-category-container .container form .button-container > input:hover {
+    background-color: #004445;
+    transition: .2s;
+}
+
+/* ------------------- DELETE PRODUCT CONTAINER ------------------ */
+#delete-container {
+    width: 100%;
+    height: 100%;
+    position: fixed;    
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 10;
+    display: none;
+}
+
+#delete-container.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#delete-container .container {
+    width: 40%;
+    height: auto;
+    padding: 40px 20px 20px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;    
+    animation-name: upper;
+    animation-duration: 1s;
+}
+
+#delete-container div.container > form .delete-product-icon {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    padding-bottom: 20px;
+}
+
+#delete-container div.container > form .delete-product-icon .alert-icon {
+    border: 3px solid #FACEA8;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#delete-container div.container > form .delete-product-icon .alert-icon i {
+    font-size: 40px;
+}
+
+#delete-container div.container > form .message {
+    width: 100%;
+    text-align: center;
+    height: auto;
+    font-size: 18px;
+    padding-top: 5px;
+}
+
+#delete-container div.container > form .btn-container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    padding: 30px 0 40px;    
+}
+
+#delete-container div.container > form .btn-container input[type='text'] {
+    display: none;
+}
+
+#delete-container div.container > form .btn-container .left,
+#delete-container div.container > form .btn-container .right {
+    width: 40%;
+    padding: 0 10px;
+    display: flex;
+    justify-content: center;
+}
+
+#delete-container div.container > form .btn-container .left input,
+#delete-container div.container > form .btn-container .right input {
+    width: 100px;
+    height: 50px;
+    background-color: #0099FF;
+    font-size: 16px;
+    color: white;
+    outline: none;
+    border: 4px double white;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#delete-container div.container > form .btn-container .left input:hover,
+#delete-container div.container > form .btn-container .right input:hover {
+    background-color: #3085D6;
+    transition: .8s;
+}
+
+

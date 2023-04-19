@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <title>Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            padding-top: 100px;
+            display: flex;
+            justify-content: center;
+        }
+
+        #alert-theme {
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            z-index: 15;
+            position: fixed;
+            top: 0;
+            right: 0;
+            display: none;
+
+        }
+
+        #alert-theme.alertActive {
+            display: flex;
+            justify-content: center;
+            padding-top: 50px;
+        }
+
+        #btn {
+            width: 50px;
+            height: 30px;
+        }
+
+        #alert-container {
+            width: 400px;
+            border: none;
+            border-radius: 7px;
+            height: 260px;
+            padding: 30px;
+            font-family: Arial, Helvetica, sans-serif;
+            display: none;
+            animation-name: alertAppear;
+            animation-duration: .8s;
+            z-index: 11;
+            background-color: white;
+        }
+
+        #alert-container.active {
+            display: block !important;
+        }
+
+        #alert-container .alert-icon-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            height: auto;
+            padding-bottom: 20px;
+        }
+
+        #alert-container .alert-icon-container .alert-icon {
+            /* border: 3px solid #EDF8E7; */
+            /* border: 3px solid #F27474; */
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #alert-container .alert-icon-container .alert-icon i {
+            /* color: #A5DC86; */
+            /* color: #F37777; */
+            font-size: 40px;
+        }
+
+        #alert-container .type-message {
+            width: 100%;
+            height: auto;
+            text-align: center;
+            font-weight: bold;
+            font-size: 24px;
+            color: #595959;
+            padding-bottom: 10px;
+        }
+
+        #alert-container .message {
+            font-size: 15px;
+            padding-bottom: 15px;
+            display: flex;
+            justify-content: center;
+        }
+
+        #alert-container .confirm-container {
+            width: 100%;
+            height: auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        #alert-container .confirm-container #confirm-btn {
+            width: 70px;
+            height: 35px;
+            background-color: #0099FF;
+            color: white;
+            outline: none;
+            border: 4px double white;
+            border-radius: 3px;
+            cursor: pointer;
+
+        }
+
+        #alert-container .confirm-container #confirm-btn:hover {
+            background-color: #3085D6;
+            transition: .8s;
+        }
+
+        @keyframes alertAppear {
+            0% {
+                transform: translateY(-1000px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div id="alert-container">
+        <div class="alert-icon-container">
+            <div class="alert-icon">
+                <i class="fa-solid fa-check"></i>
+            </div>
+        </div>
+        <div class="type-message">
+            Success
+        </div>
+        <div class="message">
+            Đã thêm sản phẩm vào giỏ hàng thành công!
+        </div>
+        <div class="confirm-container">
+            <button id="confirm-btn">OK</button>
+        </div>
+    </div> -->
+    <div id="alert-theme" onclick="closeAlert()">
+        <div id="alert-container">
+            <div class="alert-icon-container">
+                <div class="alert-icon"></div>
+            </div>
+            <div class="type-message"></div>
+            <div class="message"></div>
+            <div class="confirm-container">
+                <button id="confirm-btn" onclick="closeAlert()">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <button id="btn1" onclick="alertMessage('success', 'Bạn đã đăng ký thành công.')">Success</button>
+    <button id="btn2" onclick="alertMessage('fail', 'Bạn đã đăng ký thất bại.')">Fail</button>
+    <button id="btn3" onclick="alertMessage('warning', 'Bạn đã phạm lỗi.')">Warning</button>
+    <button id="btn4" onclick="alertMessage('info', 'Đây là thông tin bạn cần biết.')">Info</button>
+    <button id="btn5" onclick="alertMessage('question', 'Bạn chắc chắn chứ?.')">Question</button>
+    <script>
+        function alertMessage(type, message) {
+            document.getElementById("alert-theme").classList.add("alertActive");
+            var alert = document.getElementById("alert-container");
+            var alertIcon = document.querySelectorAll(".alert-icon")[0];
+            var typeMessage = document.querySelectorAll(".type-message")[0];
+            var msg = document.querySelectorAll(".message")[0];
+
+            switch (type) {
+                case "success":
+                    alert.classList.add("active");
+                    alertIcon.innerHTML = "<i class=\"fa-solid fa-check\" style=\"color: #A5DC86;\"></i>";
+                    alertIcon.style.border = "3px solid #EDF8E7";
+                    typeMessage.innerText = "Success"
+                    msg.innerText = message;
+                    break;
+                case "fail":
+                    alert.classList.add("active");
+                    alertIcon.innerHTML = "<i class=\"fa-solid fa-xmark\" style=\"color: #F37777;\"></i>";
+                    alertIcon.style.border = "3px solid #F27474";
+                    typeMessage.innerText = "Error!"
+                    msg.innerText = message;
+                    break;
+                case "warning":
+                    alert.classList.add("active");
+                    alertIcon.innerHTML = "<i class=\"fa-solid fa-exclamation\" style=\"color: #F8BB86;\"></i>";
+                    alertIcon.style.border = "3px solid #FACEA8";
+                    typeMessage.innerText = "Warning!"
+                    msg.innerText = message;
+                break;
+                case "info":
+                    alert.classList.add("active");
+                    alertIcon.innerHTML = "<i class=\"fa-solid fa-info\" style=\"color: #3FC3EE;\"></i>";
+                    alertIcon.style.border = "3px solid #9DE0F6";
+                    typeMessage.innerText = "Info!"
+                    msg.innerText = message;
+                break;
+                case "question": 
+                    alert.classList.add("active");
+                    alertIcon.innerHTML = "<i class=\"fa-solid fa-question\" style=\"color: #87ADBD;\"></i>";
+                    alertIcon.style.border = "3px solid #C9DAE1";
+                    typeMessage.innerText = "Question!"
+                    msg.innerText = message;
+                break;
+            }
+        }
+
+        function closeAlert() {
+            document.getElementById("alert-container").classList.remove("active");
+            document.getElementById("alert-theme").classList.remove("alertActive");
+        }
+    </script>
+</body>
+
+</html>

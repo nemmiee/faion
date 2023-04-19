@@ -9,6 +9,8 @@
     width: 100%;
     height: auto;
     float: left;
+    display: table;
+    position: relative;
 }
 
 #mainDKContent-theme.darkmode {
@@ -20,13 +22,16 @@
     float: left;
     display: flex;
     width: 49.5%;
-    height: 560px;
+    height: 100%;
     justify-content: center;
     border-right: 1px solid gainsboro;
     align-items: center;
+    position: absolute;
 }
 
 .header-page {
+    text-align: center;
+    width: 100%;
     font-size: 50px;
     font-weight: 900;
     text-decoration: underline orangered;
@@ -45,10 +50,15 @@
 }
 
 .content-account {
-    float: left;
+    float: right;
     width: 50.5%;
-    height: auto;
+    height: 550px;
+    overflow-y: scroll;
     padding: 0px 60px;
+}
+
+.content-account::-webkit-scrollbar {
+    display: none;
 }
 
 #mainDKContent-theme .userbox {
@@ -167,6 +177,7 @@
 
     #mainDKContent-theme .heading-account {
         height: 130px;
+        position: relative;
     }
 
     #mainDKContent-theme .header-page {
@@ -205,6 +216,7 @@
         height: 200px;
         padding: 0;
         border-bottom: 1px solid gainsboro;
+        position: relative;
     }
 
     .content-account {

@@ -235,6 +235,11 @@ element.style {
     transition: 0.3s;
 }
 
+.card a {
+    text-decoration-color: black;
+    color: black;
+}
+
 #maincontent.darkmode #products .card:hover {
     box-shadow: 0 5px 15px rgba(48, 227, 202, 0.5);
     transition: 0.3s;
@@ -269,6 +274,7 @@ element.style {
     height: 40px;
     font-size: 18px;
     overflow-x: hidden;
+    color: black;
 }
 
 #maincontent.darkmode #products .card h4,
@@ -280,6 +286,7 @@ element.style {
     margin: 5px 0;
     float: left;
     font-size: 16px;
+    color: black;
 }
 
 #products .addToCart-container {

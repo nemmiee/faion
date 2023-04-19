@@ -1,0 +1,425 @@
+.shop-page-title-container {
+    display: block;
+    width: 100%;
+    background: #EEEEEE;
+    clear: both;
+    height: auto;
+    z-index: 1;
+
+}
+
+.shop-page-title-container.darkmode {
+    background-color: #2D333B;
+}
+
+.shop-page-title-inner {
+    padding: 15px 30px;
+}
+
+.page-title {
+    width: 100%;
+    padding-bottom: 10px;
+    color: black;
+}
+
+.shop-page-title-container.darkmode .page-title {
+    color: #BB86FC;
+}
+
+.breadcrumb {
+    font-size: large;
+    color: #666666;
+    font-weight: 600;
+}
+
+.shop-page-title-container.darkmode .breadcrumb {
+    color: #BBBBBB;
+}
+
+.breadcrumb {
+    font-size: large;
+}
+
+.breadcrumb .back-home-page a {
+    color: black;
+}
+
+.shop-page-title-container.darkmode .breadcrumb a {
+    color: white;
+}
+
+.breadcrumb .breadcrumb-inner-title a {
+    color: #666666;
+}
+
+.divider {
+    font-size: 18px;
+    padding: 5px;
+}
+
+element.style {
+    background-color: white;
+    color: white;
+}
+
+/* ------------------------------------------------------------------------------ */
+#main {
+    width: 100%;
+    height: auto;
+    background-color: white;
+    padding: 20px 40px 60px;
+    display: table;
+    position: relative;
+}
+
+#main .left {
+    width: 40%;
+    height: 100%;
+    float: left;
+    position: absolute;
+}
+
+#main .left .image-container {
+    height: auto;
+    width: 40%;
+    position: sticky;
+    top: 30px;
+    left: 0;
+    flex-grow: 1;
+}
+
+#main .left .image-container img {
+    height: 550px;
+    width: 550px;
+}
+
+#main .right {
+    float: right;
+    width: 50%;
+    height: auto;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#main .right .name {
+    height: auto;
+    padding: 20px 0;
+    font-size: 50px;
+    color: rgb(19, 154, 221);
+}
+
+#main .right .star-rate-sold-container {
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: left;
+}
+
+#main .right .stars {
+    width: auto;
+    display: inline-block;
+}
+
+#main .right form {
+    float: left;
+}
+
+#main .right input.star {
+    display: none;
+}
+
+#main .right label.star {
+    float: right;
+    padding: 5px;
+    font-size: 15px;
+    color: #444;
+    transition: all .2s;
+}
+
+#main .right input.star:checked~label.star:before {
+    content: '\f005';
+    color: #FD4;
+    transition: all .25s;
+}
+
+#main .right input.star-5:checked~label.star:before {
+    color: #EBC608;
+}
+
+#main .right input.star-1:checked~label.star:before {
+    color: #F62;
+}
+
+#main .right label.star:hover {
+    transform: rotate(-15deg) scale(1.3);
+    cursor: pointer;
+}
+
+#main .right label.star:before {
+    content: '\f006';
+    font-family: FontAwesome;
+}
+
+#main .right .rate {
+    padding: 5px;
+}
+
+#main .right .divide {
+    border: 1px solid #E8E8E8;
+    width: auto;
+    height: 25px;
+    margin-right: 5px;
+}
+
+#main .right .sold {
+    padding: 5px 0;
+}
+
+#main .right .price {
+    font-size: 35px;
+    font-weight: bold;
+    padding: 15px 0;
+    border-bottom: 2px solid #F3F3F3;
+}
+
+/* ---------------- SIZE CHECK ------------------ */
+#main .right .bottom-info form .size-container {
+    padding: 20px 0;
+}
+
+#main .right .bottom-info form .size-container h3 {
+    padding-bottom: 15px;
+}
+
+#main .right .bottom-info form .size-container .sizeCheck {
+    display: inline-block;
+}
+
+#main .right .bottom-info form .size-container .sizeCheck .sizeLabel {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    border: none;
+    border-radius: 7px;
+    background-color: #DDDDDD;
+    padding: 10px;
+    margin-right: 7px;
+    font-size: 15px;
+    text-align: center;
+    width: 40px;
+    height: 35px;
+    font-weight: 600;
+}
+
+#main .right .bottom-info form .size-container .sizeCheck .sizeLabel:hover {
+    background-color: black;
+    transition: .3s;
+    color: white;
+}
+
+#main .right .bottom-info form .size-container .sizeCheck .sizeLabel .pSize {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
+
+#main .right .bottom-info form .size-container .sizeCheck .sizeLabel.checked {
+    background-color: black;
+    color: white;
+}
+
+/* ---------------- COLOR CHECK ------------------ */
+#main .right .bottom-info form .color-container {
+    position: relative;
+}
+
+#main .right .bottom-info form .color-container h3 {
+    padding-bottom: 15px;
+}
+
+#main .right .bottom-info form .color-container .colorLabel {
+    display: inline-block;
+    position: relative;
+    padding: 20px;
+    margin: 0 10px 12px 0;
+    cursor: pointer;
+    font-size: 22px; 
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#main .right .bottom-info form .color-container .colorLabel .pColor {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+#main .right .bottom-info form .color-container .colorLabel .colorCheck {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 35px;
+    width: 35px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+#main .right .bottom-info form .color-container .colorLabel #colorCheckRed {
+    border: 5px solid #C14344;
+}
+
+#main .right .bottom-info form .color-container .colorLabel #colorCheckBlue {
+    border: 5px solid #1F63C7;
+}
+
+#main .right .bottom-info form .color-container .colorLabel #colorCheckYellow {
+    border: 5px solid #EBC608;
+}
+
+#main .right .bottom-info form .color-container .colorLabel #colorCheckGreen {
+    border: 5px solid #33AC1F;
+}
+
+#main .right .bottom-info form .color-container .colorLabel:hover .pColor~#colorCheckRed {
+    background-color: #C14344;
+    transition: .2s;
+}
+
+#main .right .bottom-info form .color-container .colorLabel:hover .pColor~#colorCheckBlue {
+    background-color: #1F63C7;
+    transition: .2s;
+}
+
+#main .right .bottom-info form .color-container .colorLabel:hover .pColor~#colorCheckYellow {
+    background-color: #EBC608;
+    transition: .2s;
+}
+
+#main .right .bottom-info form .color-container .colorLabel:hover .pColor~#colorCheckGreen {
+    background-color: #33AC1F;
+    transition: .2s;
+}
+
+#main .right .bottom-info form .color-container .colorLabel input:checked~#colorCheckRed {
+    background-color: #C14344;
+}
+
+#main .right .bottom-info form .color-container .colorLabel input:checked~#colorCheckBlue {
+    background-color: #1F63C7;
+}
+
+#main .right .bottom-info form .color-container .colorLabel input:checked~#colorCheckYellow {
+    background-color: #EBC608;
+}
+
+#main .right .bottom-info form .color-container .colorLabel input:checked~#colorCheckGreen {
+    background-color: #33AC1F;
+}
+
+#main .right .bottom-info form .color-container .colorLabel .pColor .colorCheck:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+#main .right .bottom-info form .color-container .colorLabel input:checked~.colorCheck:after {
+    display: block;
+}
+
+#main .right .bottom-info form .color-container .colorLabel .colorCheck:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+
+/* ---------------------------------- */
+#main .right .bottom-info form .quantity-container {
+    width: auto;
+    float: left;
+    padding: 18px 30px 20px 0;
+}
+
+#main .right .bottom-info form .quantity-container .quantity {
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    float: left;
+    background-color: #DDDDDD;
+    /* color: #888888; */
+    color: black;
+    padding: 15px 20px;
+}
+
+#main .right .bottom-info form .quantity-container .quantity:hover {
+    background-color: #888888;
+    transition: .2s;
+    color: black;
+}
+
+#main .right .bottom-info form .quantity-container #pQuantity {
+    float: left;
+    border-top: 1px solid #DDDDDD;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid #DDDDDD;
+    width: 75px;
+    outline: none;
+    text-align: center;
+    background-color: white;
+    margin-bottom: 20px;
+    padding: 15px 5px 10px;
+    font-weight: bold;
+    font-size: 23px;
+}
+
+#main .right .bottom-info form .addToCart-container {
+    padding: 20px;
+    float: right;
+    width: auto;  
+}
+
+#main .right .bottom-info form #addToCartButton {
+    clear: both;
+    display: block;
+    padding: 15px 30px;
+    border-radius: 50px;
+    border: solid black;
+    font-weight: bold;
+    outline: none;
+    cursor: pointer;
+    background: black;
+    color: white;
+}
+
+#main .right .bottom-info form #addToCartButton i {
+    padding-right: 10px;
+}
+
+#main .right .bottom-info form #addToCartButton:hover {
+    background: white;
+    color: black;
+    transition: .25s;
+}
+
+#main .right .bottom-info .description-container {
+    border-top: 2px solid #F3F3F3;
+    clear: both;
+    width: 100%;
+    padding: 20px 0 0;
+}
+
+#main .right .bottom-info .description-container b {
+    font-size: 23px;
+    color: rgb(19, 154, 221);
+}
