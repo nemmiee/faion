@@ -48,7 +48,7 @@
 function displayProductTable()
 {
     $db = new Database();
-    mysqli_query($db->getConnection(), "set names 'utf-8'");
+    // mysqli_query($db->getConnection(), "set names 'utf-8'");
     $kq = mysqli_query($db->getConnection(), "SELECT * FROM product");
     $productArr = array();
     while ($row = mysqli_fetch_assoc($kq)) {
@@ -85,7 +85,7 @@ function displayProductTable()
 function displayCategoryTable()
 {
     $db = new Database();
-    mysqli_query($db->getConnection(), "set names 'utf-8'");
+    // mysqli_query($db->getConnection(), "set names 'utf-8'");
     $kq = mysqli_query($db->getConnection(), "SELECT * FROM category WHERE id <> 0");
     $categoryArr = array();
     while ($row = mysqli_fetch_assoc($kq)) {

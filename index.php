@@ -63,7 +63,7 @@ ob_start();
 					echo "<link rel='stylesheet' href='/faion/css/admin/product.css'>";
 					break;
 				case "orders":
-					// echo "<link rel='stylesheet' href='/faion/css/admin/order.css'>";
+					echo "<link rel='stylesheet' href='/faion/css/admin/order.css'>";
 					break;
 				case "customers":
 					// echo "<link rel='stylesheet' href='/faion/css/admin/customer.css'>";
@@ -142,7 +142,7 @@ function changeMoney($moneyIn)
 function displayCategoryOption($id)
 {
 	$db = new Database();
-	mysqli_query($db->getConnection(), "set names 'utf-8'");
+	// mysqli_query($db->getConnection(), "set names 'utf-8'");
 	$kq = mysqli_query($db->getConnection(), "SELECT * FROM category");
 	$categoryArr = array();
 	while ($row = mysqli_fetch_assoc($kq)) {
@@ -192,7 +192,7 @@ function displayCategoryOption($id)
 function getProductList()
 {
 	$db = new Database();
-	mysqli_query($db->getConnection(), "set names 'utf-8'");
+	// mysqli_query($db->getConnection(), "set names 'utf-8'");
 	$kq = mysqli_query($db->getConnection(), "SELECT * FROM product");
 	$productArr = array();
 	while ($row = mysqli_fetch_assoc($kq)) {
@@ -217,7 +217,7 @@ function getProductList()
 
 function getCategoryList() {
 	$db = new Database();
-	mysqli_query($db->getConnection(), "set names 'utf-8'");
+	// mysqli_query($db->getConnection(), "set names 'utf-8'");
 	$kq = mysqli_query($db->getConnection(), "SELECT * FROM category");
 	$list = array();
 	while ($row = mysqli_fetch_assoc($kq)) {

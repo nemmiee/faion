@@ -50,7 +50,7 @@ if (!preg_match($adminRegEx, $uri)) {
             case "orders":
                 echo "<div class='right-content-container' style='height: 700px;'>
                 <div id=\"top-sub-header\"></div>";
-                //include ('../faion/admin/orderAdmin.php');
+                include ('../faion/admin/orderAdmin.php');
                 break;
             case "customers":
                 echo "<div class='right-content-container' style='height: 700px;'>
