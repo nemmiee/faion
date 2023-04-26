@@ -10,10 +10,11 @@ class Product {
     private $quantity;
     private $sold;
     private $status;
+    private $feature;
     private $createdAt;
 
     function __construct($id, $categoryId, $name, $description, $price, $image, 
-                        $discount, $quantity, $sold, $status, $createdAt) {
+                        $discount, $quantity, $sold, $status, $feature, $createdAt) {
         $this->id = $id;
         $this->categoryId = $categoryId;
         $this->name = $name;
@@ -24,6 +25,7 @@ class Product {
         $this->quantity = $quantity;
         $this->sold = $sold;
         $this->status = $status;
+        $this->feature = $feature;
         $this->createdAt = $createdAt;
     }
 
@@ -105,7 +107,15 @@ class Product {
 
     function getStatus() {
         return $this->status;
-    }    
+    }  
+    
+    function setFeature($feature) {
+        $this->feature = $feature;
+    }
+
+    function getFeature() {
+        return $this->feature;
+    }  
 
     function setCreatedAt($createdAt) {
         $this->createdAt = $createdAt;

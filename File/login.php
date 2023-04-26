@@ -14,13 +14,13 @@ include('../faion/template/sidebar.php');
                 <img src="/faion/img/Logo/Faion_icon.png" alt="">
             </div>
             <div class="userbox">
-                <form id="create-customer" name="signup" method="post" action="" onsubmit="return checkLoginForm(event)">
+                <form id="create-customer" name="signup" method="post">
                     <div id="tenDNlogin" class="userbox-inner">
                         <input type="text" placeholder="Tên đăng nhập" id="username" name="username" class="input-box" value="<?php
                                                                                                                                 if (isset($_POST['username'])) {
                                                                                                                                     echo $_POST['username'];
                                                                                                                                 }
-                                                                                                                                ?>">
+                                                                                                                                ?>" autofocus>
                     </div>
                     <div id="passwordlogin" class="userbox-inner">
                         <input type="password" placeholder="Mật khẩu" id="Passwordlogin" name="password" class="input-box" value="<?php
@@ -32,7 +32,7 @@ include('../faion/template/sidebar.php');
                     </div>
                     <div id="loginerror">Sai tài khoản hoặc mật khẩu</div>
                     <div id="signin-btn-container">
-                        <button type="submit" id="signin-btn" name="login">Đăng Nhập</button>
+                        <button type="submit" id="signin-btn">Đăng Nhập</button>
                     </div>
                 </form>
                 <div id="login-inner">
@@ -112,42 +112,49 @@ include('../faion/template/sidebar.php');
 
     // Xem mật khẩu khi ấn vào con mắt
     const viewPass = document.getElementById('viewPass');
-    viewPass.addEventListener('click', function (e) {
-		e.preventDefault();
-		var password = document.getElementById("Passwordlogin");
-		if (password.type == 'password') {
-			password.type = 'text';
-			viewPass.innerHTML = '<i class="fa-solid fa-eye"></i>';
-		}
-		else {
-			password.type = 'password';
-			viewPass.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
-		}
-	}); 
-</script>
+    viewPass.addEventListener('click', function(e) {
+        e.preventDefault();
+        var password = document.getElementById("Passwordlogin");
+        if (password.type == 'password') {
+            password.type = 'text';
+            viewPass.innerHTML = '<i class="fa-solid fa-eye"></i>';
+        } else {
+            password.type = 'password';
+            viewPass.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
+        }
+    });
 
-<?php
-if (isset($_POST['login']) && !empty($_POST['username']) && !empty($_POST['password'])) {
-    $db = new Database();
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    //"SELECT tk.MaTK, kh.HoTen FROM taikhoan tk, khachhang kh WHERE tk.TenDN = '" . $_POST["txtTenDangNhap"] . "' and tk.MatKhau = '" . $_POST["txtPass"] . "'  AND tk.TenDN = kh.maKH"
-    // $result = mysqli_query($db->getConnection(), "SELECT * FROM taikhoan WHERE TenDN='" . $_POST["txtTenDangNhap"] . "' and MatKhau = '" . $_POST["txtPass"] . "'");
-    //$result = mysqli_query($db->getConnection(), "SELECT tk.MaTK, kh.HoTen, tk.Quyen FROM taikhoan tk, khachhang kh WHERE tk.TenDN = '" . $_POST["txtTenDangNhap"] . "' and tk.MatKhau = '" . $_POST["txtPass"] . "'  AND tk.TenDN = kh.maKH");
-    $result = mysqli_query($db->getConnection(), "SELECT ac.id, ct.name, ac.role FROM account ac, customer ct WHERE ac.id = ct.id and ac.username = '" . $_POST['username'] . "' and ac.password = '" . $_POST['password'] . "'");
-    $row = mysqli_fetch_array($result);
-    if (is_array($row)) {
-        $_SESSION["id"] = $row['id'];
-        $_SESSION["name"] = $row['name'];
-        $_SESSION["role"] = $row['role'];
-    } else {
-        $message = "Tên đăng nhập hoặc mật khẩu không hợp lệ!";
-        echo "<script>
-        alertMessage(\"fail\", \"" . $message . "\");
-        </script>";
-    }
-}
-if (isset($_SESSION["id"]) && isset($_SESSION["name"])) {
-    header("Location:/faion/index.php/");
-}
-?>
+
+    document.getElementById("signin-btn").addEventListener("click", function(event) {
+        event.preventDefault();
+        var username = document.getElementById("username");
+        var password = document.getElementById("Passwordlogin");
+        if (username.value == "" || username.value == undefined || username.value == NaN) {
+            event.preventDefault();
+            alertMessage("fail", "Mời nhập tên đăng nhập!");
+            //username.focus();
+            return false;
+        } else if (password.value == "" || password.value == undefined || password.value == NaN) {
+            event.preventDefault();
+            alertMessage("fail", "Mời nhập mật khẩu!");
+            //password.focus();
+            return false;
+        }
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/faion/action/actionLogin.php", true);
+        xhr.onreadystatechange = function() {
+            if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+                //console.log(this.responseText);
+                if (this.responseText == "success")
+                    window.location = "/faion/index.php/";
+                else if (this.responseText == "fail")
+                    alertMessage('fail', "Tên đăng nhập hoặc mật khẩu không hợp lệ!");
+                else
+                    alertMessage('fail', "Tài khoản này đã bị khóa!");
+            }
+        };
+        var form = document.getElementById("create-customer");
+        var formData = new FormData(form);
+        xhr.send(formData);
+    });
+</script>

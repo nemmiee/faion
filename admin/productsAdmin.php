@@ -1,3 +1,21 @@
+<div id="top-sub-header">    
+    <div class="sort-container">
+        <label for="sort">Sắp xếp theo</label>
+        <select id="sort">
+            <option value="default" selected>Ngày thêm</option>
+            <option value="priceUp">Giá thấp đến cao</option>
+            <option value="priceDown">Giá cao đến thấp</option>
+            <option value="quantityUp">Số lượng tăng dần</option>
+            <option value="quantityDown">Số lượng giảm dần</option>
+        </select>
+    </div>
+    <div class="sort-container">
+        <label for="categoryFilter">Lọc theo thể loại</label>
+        <select id="categoryFilter">
+            <?php displayCategoryFilterOption();?>
+        </select>
+    </div>
+</div>
 <div class="left">
     <div class="table-container">
         <table class="table" cellspacing="0">
@@ -11,8 +29,8 @@
                     <th class="trash">&nbsp;</th>
                 </tr>
             </thead>
-            <tbody id="product-info">
-                <?php displayProductTable() ?>
+            <tbody id="product-info"> <!-- Hiển thị các hàng thông tin sản phẩm -->
+                <?php displayProductTable(); ?>
             </tbody>
         </table>
     </div>
@@ -32,7 +50,7 @@
                     <th class="trash">&nbsp;</th>
                 </tr>
             </thead>
-            <tbody id="product-info">
+            <tbody id="product-info"> <!-- Hiển thị các hàng tên thể loại -->
                 <?php displayCategoryTable(); ?>
             </tbody>
         </table>
@@ -42,74 +60,72 @@
     </div>
 </div>
 
+<script>
+    var sort = document.getElementById("sort");
+    var category = document.getElementById("categoryFilter");
+    sort.addEventListener("change", function() {
+        var request = "sortBy=" + sort.value;
+        var xml = new XMLHttpRequest();
+        xml.open("POST", "/faion/action/actionSortProductAdmin.php", true);
+        xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xml.onreadystatechange = function() {
+            if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+                category.value = "date";
+                document.querySelectorAll("#product-info")[0].innerHTML = this.responseText;
+            }
+        };
+        xml.send(request);
+    });
 
+    category.addEventListener("click", function() {
+        var request = "category=" + category.value;
+        var xml = new XMLHttpRequest();
+        xml.open("POST", "/faion/action/actionSortProductAdmin.php", true);
+        xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xml.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                sort.value = "default";
+                document.querySelectorAll("#product-info")[0].innerHTML = this.responseText;
+            }
+        }
+        xml.send(request);
+    });
+</script>
 
 <?php
+// Hàm hiển thị các dòng thông tin product trong table
 function displayProductTable()
 {
-    $db = new Database();
-    mysqli_query($db->getConnection(), "set names 'utf-8'");
-    $kq = mysqli_query($db->getConnection(), "SELECT * FROM product");
-    $productArr = array();
-    while ($row = mysqli_fetch_assoc($kq)) {
-        $product = new Product(
-            $row['id'],
-            $row['category_id'],
-            $row['name'],
-            $row['description'],
-            $row['price'],
-            $row['image'],
-            $row['discount'],
-            $row['quantity'],
-            $row['sold'],
-            $row['status'],
-            $row['created_at']
-        );
-        $productArr[] = $product;
-    }
-    sort($productArr);
+    $productArr = getProductList();
     for ($i = 0; $i < count($productArr); $i++) {
         echo "
         <tr>
-            <th class=\"checkbox\"><input type=\"checkbox\" class=\"checkbox-check\" value=\"" . $productArr[$i]->getId() . "\"></th>
-            <td class=\"name\"><a href=\"/faion/index.php/admin/products?choice=product&id=" . $productArr[$i]->getId() . "\">" . $productArr[$i]->getName() . "</a></td>
+            <th class=\"checkbox\">
+                <input type=\"checkbox\" class=\"checkbox-check\" value=\""
+            . $productArr[$i]->getId() . "\">
+            </th>
+            <td class=\"name\">
+                <a href=\"/faion/index.php/admin/products?choice=product&id="
+            . $productArr[$i]->getId() . "\">" . $productArr[$i]->getName() .
+            "</a>
+            </td>
             <td class=\"price\">" . changeMoney($productArr[$i]->getPrice()) . "₫</td>
             <td class=\"p-quantity\">" . $productArr[$i]->getQuantity() . "</td>
-            <td class=\"date\">" . getDateCreated($productArr[$i]->getCreatedAt()) . "</td>
-            <td class=\"trash\"><i class=\"fa-solid fa-trash-can fa-fw fa-lg\" onclick=\"displayDelete('product', 'single', " . $productArr[$i]->getId() . ")\"></i></td>
+            <td class=\"date\">" . getDMYdate(getDateCreated($productArr[$i]->getCreatedAt())) . "</td>
+            <td class=\"trash\">
+                <i class=\"fa-solid fa-trash-can fa-fw fa-lg\" 
+                onclick=\"displayDelete('product', 'single', " . $productArr[$i]->getId() . ")\">
+                </i>
+            </td>
         </tr>";
     }
-    $db->disconnect();
 }
 
-function displayCategoryTable()
-{
-    $db = new Database();
-    mysqli_query($db->getConnection(), "set names 'utf-8'");
-    $kq = mysqli_query($db->getConnection(), "SELECT * FROM category WHERE id <> 0");
-    $categoryArr = array();
-    while ($row = mysqli_fetch_assoc($kq)) {
-        $category = new Category(
-            $row['id'],
-            $row['name']
-        );
-        $categoryArr[] = $category;
+function displayCategoryFilterOption() {
+    echo "<option value=\"date\" selected>Mặc định</option>";  
+    echo "<option value=\"default\">Default</option>";                
+    $categoryList = getCategoryList();
+    for ($i = 1; $i < count($categoryList); $i++) {
+        echo "<option value=\"" . $categoryList[$i]->getId() . "\">" . $categoryList[$i]->getName() . "</option>";
     }
-    sort($categoryArr);
-    for ($i = 0; $i < count($categoryArr); $i++) {
-        echo "
-        <tr>            
-            <td class=\"name\"><a href=\"/faion/index.php/admin/products?choice=category&id=" . $categoryArr[$i]->getId() . "\">" . $categoryArr[$i]->getName() . "</a></td>
-            <td class=\"trash\"><i class=\"fa-solid fa-trash-can fa-fw fa-lg\" onclick=\"displayDelete('category', 'single', " . $categoryArr[$i]->getId() . ")\"></i></td>
-        </tr>";
-    }
-    $db->disconnect();
 }
-
-function getDateCreated($date)
-{
-    $date = explode(" ", $date);
-    return $date[0];
-}
-
-?>

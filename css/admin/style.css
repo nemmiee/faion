@@ -89,19 +89,38 @@
 #admin-sidebar-container .sidebar-list a li:hover {
 	background-color: #F2F7FF;
 	transition: .25s;
-
 }
 
 #admin-sidebar-container .sidebar-list a li.active {	
 	background-color: #F4F9FD;
 }
 
-#admin-sidebar-container .sidebar-list a li i {
+#admin-sidebar-container .sidebar-list li i {
 	margin-right: 15px;
 }
 
-#admin-sidebar-container .sidebar-list a li .sidebar-item {
+#admin-sidebar-container .sidebar-list li .sidebar-item {
 	color: #606263;
+}
+
+/* Darkmode */
+#admin-sidebar-container .sidebar-list #darkmode-container {
+    width: 100%;
+    height: 50px;
+    padding: 10px 20px;
+    display: flex;
+    background-color: #FFFFFF;
+    align-items: center;
+    cursor: pointer;
+}
+
+#admin-sidebar-container .sidebar-list #darkmode-container:hover {
+	background-color: #F2F7FF;
+	transition: .25s;
+}
+
+#admin-sidebar-container .sidebar-list #darkmode-container.active {
+	background-color: #F4F9FD;
 }
 
 #main div.right-content-container {
@@ -113,9 +132,26 @@
 /* ---------------------- TOP SUB HEADER ------------------ */
 #top-sub-header {
     width: 100%;
-    height: 100px;
-    background-color: red;
+    height: auto;
+    background-color: #EDEDED;
     float: left;
+    padding: 13px 20px;    
+}
+
+#top-sub-header .sort-container {
+    width: auto;
+    height: auto;
+    float: right;
+    margin-right: 15px;
+}
+
+#top-sub-header .sort-container label {
+    margin-right: 5px;
+}
+
+#top-sub-header .sort-container select {
+    cursor: pointer;
+    padding: 5px 10px;
 }
 
 /* ----------------------------------------------------- */
@@ -194,7 +230,7 @@
     width: 100%;
     padding: 20px 20px;
     margin-top: 5px;
-    font-size: 16px;
+    font-size: 17px;
     outline: none;
     border: 3px solid #666666;
 }
@@ -229,7 +265,7 @@
 }
 
 /* ------------------- DELETE PRODUCT CONTAINER ------------------ */
-#delete-container {
+#confirm-container {
     width: 100%;
     height: 100%;
     position: fixed;    
@@ -240,13 +276,13 @@
     display: none;
 }
 
-#delete-container.active {
+#confirm-container.active {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#delete-container .container {
+#confirm-container .container {
     width: 40%;
     height: auto;
     padding: 40px 20px 20px;
@@ -259,7 +295,7 @@
     animation-duration: 1s;
 }
 
-#delete-container div.container > form .delete-product-icon {
+#confirm-container div.container > form .confirm-icon-container {
     display: flex;
     justify-content: center;
     width: 100%;
@@ -267,7 +303,7 @@
     padding-bottom: 20px;
 }
 
-#delete-container div.container > form .delete-product-icon .alert-icon {
+#confirm-container div.container > form .confirm-icon-container .alert-icon {
     border: 3px solid #FACEA8;
     border-radius: 50%;
     width: 80px;
@@ -277,11 +313,11 @@
     align-items: center;
 }
 
-#delete-container div.container > form .delete-product-icon .alert-icon i {
+#confirm-container div.container > form .confirm-icon-container .alert-icon i {
     font-size: 40px;
 }
 
-#delete-container div.container > form .message {
+#confirm-container div.container > form .message {
     width: 100%;
     text-align: center;
     height: auto;
@@ -289,7 +325,7 @@
     padding-top: 5px;
 }
 
-#delete-container div.container > form .btn-container {
+#confirm-container div.container > form .btn-container {
     width: 100%;
     height: auto;
     display: flex;
@@ -297,20 +333,20 @@
     padding: 30px 0 40px;    
 }
 
-#delete-container div.container > form .btn-container input[type='text'] {
+#confirm-container div.container > form .btn-container input[type='text'] {
     display: none;
 }
 
-#delete-container div.container > form .btn-container .left,
-#delete-container div.container > form .btn-container .right {
+#confirm-container div.container > form .btn-container .left,
+#confirm-container div.container > form .btn-container .right {
     width: 40%;
     padding: 0 10px;
     display: flex;
     justify-content: center;
 }
 
-#delete-container div.container > form .btn-container .left input,
-#delete-container div.container > form .btn-container .right input {
+#confirm-container div.container > form .btn-container .left input,
+#confirm-container div.container > form .btn-container .right input {
     width: 100px;
     height: 50px;
     background-color: #0099FF;
@@ -322,8 +358,8 @@
     cursor: pointer;
 }
 
-#delete-container div.container > form .btn-container .left input:hover,
-#delete-container div.container > form .btn-container .right input:hover {
+#confirm-container div.container > form .btn-container .left input:hover,
+#confirm-container div.container > form .btn-container .right input:hover {
     background-color: #3085D6;
     transition: .8s;
 }

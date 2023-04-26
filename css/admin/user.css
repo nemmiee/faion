@@ -1,0 +1,154 @@
+#main div.right-content-container div.content {
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 30px 0px;
+}
+
+#main div.right-content-container div.content .table-container {    
+    width: 90%;
+    height: 450px;
+    overflow-y: scroll;
+}
+
+#main div.right-content-container div.content .table-container table.table {
+    width: 100%;
+    height: 100%;
+    border: none;
+    table-layout: fixed;
+}
+
+#main div.right-content-container div.content .table-container::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+#main div.right-content-container div.content .table-container::-webkit-scrollbar {
+    width: 6px;
+    background-color: #F5F5F5;
+}
+
+#main div.right-content-container div.content .table-container::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #99FFFF;
+}
+
+#main div.right-content-container div.content .table-container table.table thead tr th {
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: #27AE60;
+    padding: 30px;
+}
+
+#main div.right-content-container div.content .table-container table.table input.account-checkbox {
+    accent-color: #27AE60;
+    width: 17px;
+    height: 17px;
+    color: white;
+    cursor: pointer;
+}
+
+#main div.right-content-container div.content .table-container table.table tr .checkbox {
+    width: 40px;
+    text-align: center;
+}
+
+#main div.right-content-container div.content .table-container table.table tr th.username {
+    width: 190px;
+}
+
+#main div.right-content-container div.content .table-container table.table tr td.username > a {
+    color: #606263;
+}
+
+#main div.right-content-container div.content .table-container table.table tr td.username > a:hover {
+    color: black;
+    transition: .2s;
+}
+
+#main div.right-content-container div.content .table-container table.table tr .email {
+    width: 280px;
+}
+
+#main div.right-content-container div.content .table-container table.table tr .role {
+    width: 170px;
+}
+
+#main div.right-content-container div.content .table-container table.table tr .lock {
+    width: 60px;
+    text-align: center;
+}
+
+#main div.right-content-container div.content .table-container table.table tr .lock i {
+    cursor: pointer;
+}
+
+#main div.right-content-container div.content .table-container table.table tr .lock i:hover {
+    color: black;
+    transition: .25s;
+}
+
+#main div.right-content-container div.content .table-container table.table tr td {
+    color: #606263;
+}
+
+#main div.right-content-container div.content .table-container table.table thead tr th,
+#main div.right-content-container div.content .table-container table.table tbody tr th,
+#main div.right-content-container div.content .table-container table.table tr td {    
+    padding: 15px 10px;
+    text-align: start;
+    height: 40px;
+    border-bottom: 3px solid #F6F7F9;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+#main div.right-content-container div.content .table-container table.table tbody#user-info tr {
+    background-color: white;
+}
+
+#main div.right-content-container div.content .table-container table.table tbody#user-info tr:hover {    
+    background-color: #DDDDDD;
+    transition: .25s;
+}
+
+div.content > div.button-container {
+    width: 90%;
+    height: 50px;
+    margin-top: 15px;
+    color: white;
+    font-size: 20px;
+    border: solid #27AE60;
+    background-color: #27AE60;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.content > div.button-container .btn {
+    width: 100%;
+    background-color: inherit;
+    height: 100%;
+    outline: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+div.content > div.button-container:hover {
+    background-color: white;
+}
+
+div.content > div.button-container:hover .btn {    
+    color: #27AE60;
+    transition: .2s;
+}

@@ -1,7 +1,16 @@
 <?php
+if (isset($_SESSION['firstLogin'])) {
+    // Hiển thị alert thông báo đăng nhập thành công
+    echo "<script src=\"/faion/js/script.js\"></script>";
+    echo "<script> alertMessage('success', 'Đăng nhập thành công'); </script>";
+    unset($_SESSION['firstLogin']);
+}
+
 /* Slider */
-include('../FAION/template/slider.php');
+include('../faion/template/slider.php');
+include('../faion/file/featureProducts.php');
 ?>
+
 <main>
     <div id="product-search-content">
         <div id="product-search">
@@ -50,7 +59,7 @@ include('../FAION/template/slider.php');
     </div>
     <div id="main-content">
         <div class="main-content-inner">
-            <a href="/file/products.html?shirt&0">
+            <a href="/faion/index.php/products?category=shirt&page=1">
                 <div class="content-img-container">
                     <img src="/FAION/img/slider/shirt.jpg" alt="">
                 </div>
@@ -58,7 +67,7 @@ include('../FAION/template/slider.php');
             </a>
         </div>
         <div class="main-content-inner">
-            <a href="/file/products.html?hoodie&0">
+            <a href="/faion/index.php/products?category=hoodie&page=1">
                 <div class="content-img-container">
                     <img src="/FAION/img/slider/hoodie.jpg" alt="">
                 </div>
@@ -66,7 +75,7 @@ include('../FAION/template/slider.php');
             </a>
         </div>
         <div class="main-content-inner">
-            <a href="/file/products.html?sweater&0">
+            <a href="/faion/index.php/products?category=sweater&page=1">
                 <div class="content-img-container">
                     <img src="/FAION/img/slider/sweater.jpg" alt="">
                 </div>
@@ -74,7 +83,7 @@ include('../FAION/template/slider.php');
             </a>
         </div>
         <div class="main-content-inner">
-            <a href="/file/products.html?jacket&0">
+            <a href="/faion/index.php/products?category=jacket&page=1">
                 <div class="content-img-container">
                     <img src="/FAION/img/slider/jacket.jpg" alt="">
                 </div>
@@ -94,5 +103,5 @@ include('../FAION/template/slider.php');
                 </a>
             </div>
         </div>
-    </div>    
+    </div>
 </main>

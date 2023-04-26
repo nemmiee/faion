@@ -1,0 +1,87 @@
+#feature-product-container {
+    width: 100%;
+    height: auto;
+    font-family: Arial, Helvetica, sans-serif;
+    position: relative;
+}
+
+#feature-product-container .title {
+    width: 100%;
+    height: auto;
+    padding: 20px 40px 10px;
+    font-size: 20px;
+    border-bottom: 1px solid rgba(0,0,0,.05);
+    color: red;
+    font-weight: bold;
+}
+
+#feature-product-container div.slide-container {
+    width: 100%;
+    height: auto;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+#feature-product-container div.slide-container ul.slide {
+    width: 100%;
+    min-width: 1000px;
+    height: auto;
+    display: none;
+    padding: 20px 40px;
+    /* display: flex; */
+    flex-direction: row;
+}
+
+#feature-product-container div.slide-container ul.slide li.card {
+    width: 20%;
+    height: auto;
+    padding: 5px;
+}
+
+#feature-product-container div.slide-container ul.slide li.card .top {
+    background-color: white;
+}
+
+#feature-product-container div.slide-container ul.slide li.card .top img {
+    width: 100%;
+    height: 200px;
+}
+
+#feature-product-container div.slide-container ul.slide li.card .bot {
+    max-width: 250px;
+    max-height: 25px;
+    font-size: 15px;
+    text-align: center;
+    padding: 0 5px 5px;
+    color: #555;
+    overflow: hidden;
+    background-color: white;
+}
+
+#feature-product-container div.prev,
+#feature-product-container div.next {
+    position: absolute;
+    top: 50%;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+}
+
+#feature-product-container div.prev {
+    left: 20px;
+}
+
+#feature-product-container div.next {
+    right: 20px;
+}
+
+#feature-product-container div.prev:hover,
+#feature-product-container div.next:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: .2s;
+}

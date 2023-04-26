@@ -49,7 +49,7 @@ function alertMessage(type, message) {
         break;
     }
     button.focus();
-    setTimeout(closeAlert, 3000);
+    setTimeout(closeAlert, 2000);
 }
 
 function closeAlert() {
