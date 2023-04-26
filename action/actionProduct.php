@@ -19,6 +19,7 @@ if (isset($_POST['add-product-submit'])) {
         $category = $_POST['category'];
         $price = $_POST['price'];
         $status = $_POST['status'];
+        $feature = $_POST['feature'];
         $quantity = $_POST['quantity'];
 
         if (isset($_FILES['image']) && $_FILES['image']['name'] != "") {
@@ -80,13 +81,16 @@ if (isset($_POST['add-product-submit'])) {
         }
         if (isset($_POST['description']) && $_POST['description'] != "") {
             $description = $_POST['description'];
+            //$description = htmlentities($description, ENT_COMPAT, 'UTF-8');
+            //$description = nl2br($description);
         } else {
             $description = NULL;
         }
         $db = new Database();
-        
-        $query = "INSERT INTO product (category_id, name, description, price, image, discount, quantity, sold, status, created_at) 
-                            VALUES ('$category', '$name', '$description', '$price', '$image', NULL, '$quantity', 0, '$status', '$date')";
+
+        $query = "INSERT INTO product (category_id, name, description, price, image, discount, quantity, sold, status, feature, created_at) 
+                            VALUES ('$category', '$name', '$description', '$price', '$image', NULL, '$quantity', 0, '$status', '$feature', '$date')";
+
         if ($db->insert_update_delete($query)) {
             $db->disconnect();
             echo "<script>
@@ -109,20 +113,15 @@ if (isset($_POST['add-product-submit'])) {
         }
     }
     $id = $productList[$pos]->getId();
-    $name = "";
-    $category = "";
-    $price = 0;
-    $status = 1;
-    $quantity = 0;
-    $description = "";
-    $image = "";
-
 
     $name = $_POST['name'];
     $category = $_POST['category'];
     $price = $_POST['price'];
     $status = $_POST['status'];
     $quantity = $_POST['quantity'];
+    $feature = $_POST['feature'];
+    $description = "";
+    $image = "";
 
     $url = explode("/", $productList[$pos]->getImage());
     $url = $url[count($url) - 1];
@@ -177,14 +176,20 @@ if (isset($_POST['add-product-submit'])) {
     } else {
         $image = $productList[$pos]->getImage();
     }
-    if (isset($_POST['description']) && $_POST['description'] != "") {
+    if (isset($_POST['description'])) {
         $description = $_POST['description'];
+        //$description = htmlentities($description, ENT_COMPAT, 'UTF-8');
+        //$description = nl2br($description);
     } else {
         $description = $productList[$pos]->getDescription();
+        //$description = htmlentities($description, ENT_COMPAT, 'UTF-8');
+        //$description = nl2br($description);
     }
+
     $db = new Database(); 
+
     $query = "UPDATE product SET name = '$name', description = '$description', category_id = '$category', 
-    price = '$price', image = '$image', quantity = '$quantity', status = '$status' WHERE id = '$id'";
+    price = '$price', image = '$image', quantity = '$quantity', status = '$status', feature = '$feature' WHERE id = '$id'";
     if ($db->insert_update_delete($query)) {
         $db->disconnect();
         echo "<script>
@@ -213,7 +218,7 @@ if (isset($_POST['add-product-submit'])) {
     $name = $_POST['name'];
     $sql = "INSERT INTO category (name) VALUES ('$name')";
     $db = new Database();
-    
+
     if ($db->insert_update_delete($sql)) {
         $db->disconnect();
         echo "<script>
@@ -308,7 +313,7 @@ function getProductList()
     include('../../faion/connection/Database.php');
     include('../../faion/object/Product.php');
     $db = new Database();
-    
+
     $kq = mysqli_query($db->getConnection(), "SELECT * FROM product");
     $productArr = array();
     while ($row = mysqli_fetch_assoc($kq)) {
@@ -323,6 +328,7 @@ function getProductList()
             $row['quantity'],
             $row['sold'],
             $row['status'],
+            $row['feature'],
             $row['created_at']
         );
         $productArr[] = $product;
@@ -336,7 +342,7 @@ function getCategoryList()
     include('../../faion/connection/Database.php');
     include('../../faion/object/Category.php');
     $db = new Database();
-    
+
     $kq = mysqli_query($db->getConnection(), "SELECT * FROM category");
     $list = array();
     while ($row = mysqli_fetch_assoc($kq)) {

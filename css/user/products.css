@@ -16,7 +16,7 @@ body {
     clear: both;
     height: auto;
     z-index: 1;
-    
+    position: relative;
 }
 
 .shop-page-title-container.darkmode {
@@ -86,8 +86,7 @@ element.style {
     clear: both;
     width: 100%;
     padding: 5px 0 15px;
-    background-color: white;
-    
+    background-color: white;    
 }
 
 #menu-container.darkmode {
@@ -193,12 +192,24 @@ element.style {
 }
 
 /* ----------------------- Content ------------------------ */
-.maincontent {
+#maincontent {
     width: 100%;
     padding: 20px 20px 10px;
     height: auto;
     background: white;
-    
+    position: relative;
+}
+
+#maincontent #loading {
+    position: absolute;
+    top: -180px;
+    left: 50%;    
+    z-index: 20;
+}
+
+#maincontent #loading img {
+    width: 40px;
+    height: 40px;
 }
 
 #maincontent.darkmode {

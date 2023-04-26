@@ -10,30 +10,41 @@ ob_start();
 <head>
 	<title>Faion - Fashion For Life</title>
 	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" href="../faion/img/Logo/Faion_icon.png" type="image/x-icon">
+	<link rel="icon" href="/faion/img/Logo/Faion_icon.png" type="image/x-icon">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 	<link rel='stylesheet prefetch' href='https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css'>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="/faion/css/user/style.css">
+	<script defer src="/faion/js/script.js"></script>
+
 	<?php
+	include('../faion/action/actionFunction.php');
 	$uri = $_SERVER['REQUEST_URI'];
 	$temp = explode("/", $uri);
-	$page = $temp[count($temp) - 2];
+	$page = $temp[count($temp) - 2]; // Lấy tên của trang hiện tại trên URL
+	// Regex kiểm tra URL của trang đó có sử dụng truy vấn không
 	$productRegEx = "/products?[a-zA-Z0-9=&]{1,}/";
+	$customerRegEx = "/customers?[a-zA-Z0-9=&]{1,}/";
+	$userRegEx = "/users?[a-zA-Z0-9=&]{1,}/";
+	// Kiểm tra có chuỗi admin trên URL
 	$adminRegEx = '/\badmin\b/';
-	if (!preg_match($adminRegEx, $uri)) {
+	if (!preg_match($adminRegEx, $uri)) { // Giao diện khi chưa vào trang admin
+		//echo "<script async src=\"/faion/js/script.js\"></script>";
 		if (preg_match($productRegEx, $temp[count($temp) - 1])) {
 			if (isset($_GET['category']) && isset($_GET['page'])) {
-				// Trang hiển thị trang sản phẩm
+				// Trang hiển thị sản phẩm
 				echo "<link rel='stylesheet' href='/faion/css/user/products.css'>";
 				echo "<script src='/faion/js/product_js.js' defer></script>";
 			} else {
 				// Trang thông tin chi tiết sản phẩm
 				echo "<link rel='stylesheet' href='/faion/css/user/productInfo.css'>";
+				echo "<link rel='stylesheet' href='/faion/css/user/featureProducts.css'>";
 			}
 		} else {
 			switch ($page) {
 				case "index.php":
 					echo "<link rel='stylesheet' href='/faion/css/user/main.css'>";
+					echo "<link rel='stylesheet' href='/faion/css/user/featureProducts.css'>";
 					echo "<script src='/faion/js/main.js' defer></script>";
 					break;
 				case "sizeguide":
@@ -51,13 +62,31 @@ ob_start();
 				case "cart":
 
 					break;
+				case "info":
+					echo "<link rel='stylesheet' href='/faion/css/user/userInfo.css'>";
+					echo "<link rel='stylesheet' href='/faion/css/admin/style.css'>";
+					echo "<link rel='stylesheet' href='/faion/css/admin/customerDetail.css'>";
+					break;
+				case "account":
+					echo "<link rel='stylesheet' href='/faion/css/user/userInfo.css'>";
+					echo "<link rel='stylesheet' href='/faion/css/admin/style.css'>";
+					echo "<link rel='stylesheet' href='/faion/css/admin/userDetail.css'>";
+					break;
 			}
 		}
-	} else {
+	} else { // Giao diện khi vào trang admin
+		//echo "<script src=\"/faion/js/script.js\" defer></script>";
 		echo "<link rel='stylesheet' href='/faion/css/admin/style.css'>";
 		if (preg_match($productRegEx, $temp[count($temp) - 1])) {
+			// CSS của trang admin productDetail
 			echo "<link rel='stylesheet' href='/faion/css/admin/productDetail.css'>";
-		} else {
+		} else if (preg_match($customerRegEx, $temp[count($temp) - 1])) {
+			// CSS của trang admin customerDetail
+			echo "<link rel='stylesheet' href='/faion/css/admin/customerDetail.css'>";
+		} else if (preg_match($userRegEx, $temp[count($temp) - 1])) {
+			// CSS của trang admin userDetail
+			echo "<link rel='stylesheet' href='/faion/css/admin/userDetail.css'>";
+		} else { // 
 			switch ($page) {
 				case "products":
 					echo "<link rel='stylesheet' href='/faion/css/admin/product.css'>";
@@ -66,10 +95,10 @@ ob_start();
 					echo "<link rel='stylesheet' href='/faion/css/admin/order.css'>";
 					break;
 				case "customers":
-					// echo "<link rel='stylesheet' href='/faion/css/admin/customer.css'>";
+					echo "<link rel='stylesheet' href='/faion/css/admin/customer.css'>";
 					break;
 				case "users":
-					// echo "<link rel='stylesheet' href='/faion/css/admin/user.css'>";
+					echo "<link rel='stylesheet' href='/faion/css/admin/user.css'>";
 					break;
 				case "theme":
 					// echo "<link rel='stylesheet' href='/faion/css/admin/theme.css'>";
@@ -94,10 +123,8 @@ ob_start();
 			</div>
 		</div>
 	</div>
-	<?php
-	include('../faion/object/Product.php');
-	include('../faion/object/Category.php');
 
+	<?php
 	/* Header */
 	include('../faion/template/header.php');
 	/* Sidebar */
@@ -108,125 +135,8 @@ ob_start();
 	include('../faion/template/footer.php');
 	?>
 
-	<script src="/faion/js/script.js"></script>
 	<script src="/faion/js/find.js"></script>
 </body>
 
-<?php
-function changeMoney($moneyIn)
-{
-	$arr = array();
-	$arr = str_split($moneyIn, 1);
-	$count = 0;
-	$temp = "";
-	for ($i = count($arr) - 1; $i >= 0; $i--) {
-		++$count;
-		if ($count % 3 == 0 && $i > 0) {
-			$temp .= $arr[$i];
-			$temp .= ".";
-			continue;
-		}
-		$temp .= $arr[$i];
-	}
-	// Dao nguoc chuoi
-	$moneyOut = "";
-	$count = 0;
-	$arr = str_split($temp, 1);
-	for ($i = count($arr) - 1; $i >= 0; --$i) {
-		$moneyOut .= $arr[$i];
-		$count++;
-	}
-	return $moneyOut;
-}
-
-function displayCategoryOption($id)
-{
-	$db = new Database();
-	// mysqli_query($db->getConnection(), "set names 'utf-8'");
-	$kq = mysqli_query($db->getConnection(), "SELECT * FROM category");
-	$categoryArr = array();
-	while ($row = mysqli_fetch_assoc($kq)) {
-		$category = new Category(
-			$row['id'],
-			$row['name']
-		);
-		$categoryArr[] = $category;
-	}
-	sort($categoryArr);
-
-	if ($id == null || $id == "") {
-		for ($i = 0; $i < count($categoryArr); $i++) {
-			if ($categoryArr[$i]->getId() != 0) {
-				echo "
-				<option value=\"" . $categoryArr[$i]->getId() . "\" class=\"category-option\">"
-					. $categoryArr[$i]->getName() . "</option>";
-			}
-		}
-	} else {
-		// Trường hợp category của sản phẩm khác Default
-		if ($id != 0) {
-			for ($i = 0; $i < count($categoryArr); $i++) {
-				if ($categoryArr[$i]->getId() != 0) {
-					if ($id == $categoryArr[$i]->getId()) {
-						echo "<option value=\"" . $categoryArr[$i]->getId() . "\" class=\"category-option\" selected>" . $categoryArr[$i]->getName() . "</option>";
-					} else {
-						echo "<option value=\"" . $categoryArr[$i]->getId() . "\" class=\"category-option\">" . $categoryArr[$i]->getName() . "</option>";
-					}
-				}
-			}
-		} // Trường hợp category của sản phẩm là Default
-		else {
-			for ($i = 0; $i < count($categoryArr); $i++) {
-				if ($id == $categoryArr[$i]->getId()) {
-					echo "<option value=\"" . $categoryArr[$i]->getId() . "\" class=\"category-option\" selected>" . $categoryArr[$i]->getName() . "</option>";
-				} else {
-					echo "<option value=\"" . $categoryArr[$i]->getId() . "\" class=\"category-option\">" . $categoryArr[$i]->getName() . "</option>";
-				}
-			}
-		}
-	}
-	$db->disconnect();
-}
-
-
-function getProductList()
-{
-	$db = new Database();
-	// mysqli_query($db->getConnection(), "set names 'utf-8'");
-	$kq = mysqli_query($db->getConnection(), "SELECT * FROM product");
-	$productArr = array();
-	while ($row = mysqli_fetch_assoc($kq)) {
-		$product = new Product(
-			$row['id'],
-			$row['category_id'],
-			$row['name'],
-			$row['description'],
-			$row['price'],
-			$row['image'],
-			$row['discount'],
-			$row['quantity'],
-			$row['sold'],
-			$row['status'],
-			$row['created_at']
-		);
-		$productArr[] = $product;
-	}
-	sort($productArr);
-	return $productArr;
-}
-
-function getCategoryList() {
-	$db = new Database();
-	// mysqli_query($db->getConnection(), "set names 'utf-8'");
-	$kq = mysqli_query($db->getConnection(), "SELECT * FROM category");
-	$list = array();
-	while ($row = mysqli_fetch_assoc($kq)) {
-		$category = new Category($row['id'], $row['name']);
-		$list[] = $category;
-	}
-	sort($list);
-	return $list;
-}
-?>
 
 </html>

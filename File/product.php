@@ -85,19 +85,91 @@ include('../faion/template/sidebar.php');
     </div>
     <!-- Content -->
     <div class="content-container" id="maincontent">
-        <div id="products">
-            <?php
-            showProducts(12, 8);
-            ?>
-        </div>
-        <!-- Product Detail Information -->
+        <!-- <div id="loading"></div> -->
+        <div id="products"><?php showProducts(12, 8); ?></div>
         <div id="page"></div>
     </div>
 </main>
 
+<script>
+    // $(document).ready(function() {
+    //     function load() {            
+    //         var url = document.location.href;
+    //         url = url.split("?")[1];
+    //         var category = url.split("&")[0];
+    //         var page = url.split("&")[1];
+    //         category = category.split("=")[1];
+    //         page = page.split("=")[1];
+    //         phantrang(category, page);
+    //     }
+
+    //     load();
+    //     function phantrang(category, page) {
+    //         $("#loading").html("<img src='/faion/img/default/loading.gif'/>").fadeIn("fast");
+    //         $.ajax({
+    //             type: "get",
+    //             url: "/faion/action/actionPageDivide.php",
+    //             data: {
+    //                 category: category,
+    //                 page: page
+    //             },
+    //             success: function(data) {
+    //                 $("#loading").fadeOut("fast");
+    //                 $("#maincontent").append(data);
+    //             }
+    //         });
+    //     }
+    // });
+
+    // $(document).ready(function() {
+    //     function load() {            
+    //         phantrang("all", 1);
+    //     }
+
+    //     load();
+    //     function phantrang(category, page) {
+    //         $("#loading").html("<img src='/faion/img/default/loading.gif'/>").fadeIn("fast");
+    //         $.ajax({
+    //             type: "get",
+    //             url: "/faion/action/actionPageDivide.php",
+    //             data: {
+    //                 category: category,
+    //                 page: page
+    //             },
+    //             success: function(data) {
+    //                 $("#loading").fadeOut("fast");
+    //                 $("#maincontent").append(data);
+    //             }
+    //         });
+    //     }
+    //     $("#maincontent a button.page-number").on("click", function() {
+    //         var temp = $(this).val();
+    //         var category = temp.split("-")[0];
+    //         var page = temp.split("-")[1];
+    //         phantrang(category, page);
+    //     });
+    // });
+
+
+    function pageDivideAjax(category, page) {
+        var request = "category=" + category + "&page=" + page;
+        var url = '/faion/index.php/products?' + request;
+        var xml = new XMLHttpRequest();
+        xml.open("GET", "/faion/action/actionPageDivide.php?" + request, true);
+        xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xml.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("maincontent").innerHTML = this.responseText;
+                history.pushState(null, '', url);
+            }
+        };
+        xml.send();
+    }
+</script>
+
 <?php
 function showProducts($main, $sub)
-{    
+{
     $db = new Database();
     $productList = getProductList();
 
@@ -117,15 +189,14 @@ function showProducts($main, $sub)
             }
         }
         $pageAmount = ceil(count($productList) / $main);
-        $pageNumberLink = "'";
+        $pageNumberLink = '"';
         for ($i = 1; $i <= $pageAmount; $i++) {
             $position = $i;
-            $pageNumberLink .= "<a href=\"/faion/index.php/products?category=all&page=" . $position
-                . "\"><button class=\"page-number\">" . $i . "</button></a>";
+            $pageNumberLink .= '<a><button class=\"page-number\" onclick=\"pageDivideAjax(\'' . $category . '\',' . $position . ')\">' . $i . '</button></a>';
         }
-        $pageNumberLink .= "'";
-        echo "<script>window.onload = function () {document.getElementById(\"page\").innerHTML = " . $pageNumberLink . ";
-            document.getElementsByClassName(\"page-number\")[" . $_GET['page'] - 1 . "].classList.add(\"active\"); }; </script>";
+        $pageNumberLink .= '"';
+        echo "<script>window.onload = function () {document.getElementById(\"page\").innerHTML = " . $pageNumberLink . "
+            document.getElementsByClassName(\"page-number\")[" . $_GET['page'] - 1 . "].classList.add(\"active\");} </script>";
     } else {
         $categoryArr = array();
         $kq = mysqli_query($db->getConnection(), "SELECT * FROM category WHERE id <> 0");
@@ -149,7 +220,7 @@ function showProducts($main, $sub)
                         break;
                     }
                 }
-            }            
+            }
             if ($flag == 1) {
                 break;
             }
@@ -163,13 +234,12 @@ function showProducts($main, $sub)
             }
         }
         $pageAmount = ceil(count($tempArr) / $sub);
-        $pageNumberLink = "'";
+        $pageNumberLink = '"';
         for ($i = 1; $i <= $pageAmount; $i++) {
             $position = $i;
-            $pageNumberLink .= "<a href=\"/faion/index.php/products?category=" . $category . "&page=" . $position
-                . "\"><button class=\"page-number\">" . $i . "</button></a>";
+            $pageNumberLink .= '<a><button class=\"page-number\" onclick=\"pageDivideAjax(\'' . $category . '\',' . $position . ')\">' . $i . '</button></a>';
         }
-        $pageNumberLink .= "'";
+        $pageNumberLink .= '"';
         echo "<script>window.onload = function () {document.getElementById(\"page\").innerHTML = " . $pageNumberLink . ";
             document.getElementsByClassName(\"page-number\")[" . $_GET['page'] - 1 . "].classList.add(\"active\"); }; </script>";
     }

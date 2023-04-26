@@ -8,37 +8,58 @@
                 <form id="sign-up-form" name="sign-up-form" method="post" action="">
                     <div class="input-control">
                         <label for="fullname">Họ và tên:</label>
-                        <input type="text" placeholder="Họ và tên" id="fullname" name="fullname" class="input-box" value="">
+                        <input type="text" placeholder="Họ và tên" id="fullname" name="fullname" class="input-box" value="<?php
+                                                                                                                            if (isset($_POST['fullname']) && $_POST['fullname'] != "")
+                                                                                                                                echo $_POST['fullname'];
+                                                                                                                            ?>">
                         <div class="error"></div>
                     </div>
                     <div class="input-control">
                         <label for="address">Địa chỉ:</label>
-                        <input type="text" placeholder="Địa chỉ" id="address" name="address" class="input-box" value="">
+                        <input type="text" placeholder="Địa chỉ" id="address" name="address" class="input-box" value="<?php
+                                                                                                                        if (isset($_POST['address']) && $_POST['address'] != "")
+                                                                                                                            echo $_POST['address'];
+                                                                                                                        ?>">
                         <div class="error"></div>
                     </div>
                     <div class="input-control">
                         <label for="phonenum">Số điện thoại:</label>
-                        <input type="text" placeholder="Số điện thoại" id="phonenum" name="phonenum" class="input-box" value="">
+                        <input type="text" placeholder="Số điện thoại" id="phonenum" name="phonenum" class="input-box" value="<?php
+                                                                                                                                if (isset($_POST['phonenum']) && $_POST['phonenum'] != "")
+                                                                                                                                    echo $_POST['phonenum'];
+                                                                                                                                ?>">
                         <div class="error"></div>
                     </div>
                     <div class="input-control">
                         <label for="email">Email:</label>
-                        <input type="text" placeholder="Email" id="email" name="email" class="input-box">
+                        <input type="text" placeholder="Email" id="email" name="email" class="input-box" value="<?php
+                                                                                                                if (isset($_POST['email']) && $_POST['email'] != "")
+                                                                                                                    echo $_POST['email'];
+                                                                                                                ?>">
                         <div class="error"></div>
                     </div>
                     <div class="input-control">
                         <label for="username">Tên đăng nhập:</label>
-                        <input type="text" placeholder="Tên đăng nhập" id="username" name="username" class="input-box" value="">
+                        <input type="text" placeholder="Tên đăng nhập" id="username" name="username" class="input-box" value="<?php
+                                                                                                                                if (isset($_POST['username']) && $_POST['username'] != "")
+                                                                                                                                    echo $_POST['username'];
+                                                                                                                                ?>">
                         <div class="error"></div>
                     </div>
                     <div class="input-control">
                         <label for="password">Mật khẩu:</label>
-                        <input type="password" placeholder="Mật khẩu" id="password" name="password" class="input-box" value="">
+                        <input type="password" placeholder="Mật khẩu" id="password" name="password" class="input-box" value="<?php
+                                                                                                                                if (isset($_POST['password']) && $_POST['password'] != "")
+                                                                                                                                    echo $_POST['password'];
+                                                                                                                                ?>">
                         <div class="error"></div>
                     </div>
                     <div class="input-control">
                         <label for="confirmPassword">Nhập lại mật khẩu:</label>
-                        <input type="password" placeholder="Nhập lại mật khẩu" id="confirmPassword" name="confirmPassword" class="input-box" value="">
+                        <input type="password" placeholder="Nhập lại mật khẩu" id="confirmPassword" name="confirmPassword" class="input-box" value="<?php
+                                                                                                                                                    if (isset($_POST['confirmPassword']) && $_POST['confirmPassword'] != "")
+                                                                                                                                                        echo $_POST['confirmPassword'];
+                                                                                                                                                    ?>">
                         <div class="error"></div>
                     </div>
                     <div id="signup-btn-container">
@@ -85,7 +106,7 @@
             return false;
         } else if (address.value == "" || address.value == undefined || address.value == NaN) {
             //alertMessage("fail", "Mời nhập địa chỉ!");
-             alert("Mời nhập địa chỉ");
+            alert("Mời nhập địa chỉ");
             address.focus();
             e.preventDefault();
             return false;
@@ -103,7 +124,7 @@
             return false;
         } else if (email.value == "" || email.value == undefined || email.value == NaN) {
             //alertMessage("fail", "Mời nhập email");
-             alert("Mời nhập email");
+            alert("Mời nhập email");
             email.focus();
             e.preventDefault();
             return false;
@@ -186,15 +207,42 @@ if (
     $password = $_POST['password'];
     $date = date("Y-m-d");
 
-    $accountQuery = "INSERT INTO account (id, username, password, role) VALUES (" . createAccountId() . ", '$username', '$password', 1)";
-    $customerQuery = "INSERT INTO customer (id, name, email, address, phone_number, created_at) VALUES (" . createAccountId() . ", '$fullname', '$email', '$address', '$phoneNum', '$date')";
-    if ($db->insert_update_delete($customerQuery) && $db->insert_update_delete($accountQuery)) {
-        echo "<script>
-            alert(\"Đăng ký thành công\");
-            window.location = '/faion/index.php/login/'; 
-        </script>";
+    $customerList = getCustomerList();
+    $isExistEmail = false;
+    $isExistPhoneNum = false;
+    for ($i = 0; $i < count($customerList); $i++) {
+        if ($customerList[$i]->getEmail() == $email) {
+            $isExistEmail = true;
+        }
+        if ($customerList[$i]->getPhoneNum() == $phoneNum) {
+            $isExistPhoneNum = true;
+        }
+    }
+
+    if ($isExistPhoneNum && !$isExistEmail) {
+        echo "<script>alert(\"Số điện thoại này đã được sử dụng.\");
+                document.getElementById(\"phonenum\").focus();
+            </script>";
+    } else if (!$isExistPhoneNum && $isExistEmail) {
+        echo "<script>alert(\"Email này đã được sử dụng.\");
+                document.getElementById(\"email\").focus();
+            </script>";
+    } else if ($isExistEmail && $isExistPhoneNum) {
+        echo "<script>alert(\"Số điện thoại và email này đã được sử dụng.\"); 
+                    document.getElementById(\"phonenum\").focus();
+                </script>";
     } else {
-        echo "<script>alertMessage(\"fail\", \"Đăng ký không thành công\"); </script>";
+        $accountQuery = "INSERT INTO account (id, username, password, status, role) VALUES (" . createAccountId() . ", '$username', '$password', 1, 3)";
+        $customerQuery = "INSERT INTO customer (id, name, email, address, phone_number, created_at) VALUES (" . createAccountId() . ", '$fullname', '$email', '$address', '$phoneNum', '$date')";
+        if ($db->insert_update_delete($customerQuery) && $db->insert_update_delete($accountQuery)) {
+            echo "
+            <script>
+                alert(\"Đăng ký thành công\");
+                window.location = '/faion/index.php/login/'; 
+            </script>";
+        } else {
+            echo "<script>alertMessage(\"fail\", \"Đăng ký không thành công\"); </script>";
+        }
     }
 }
 

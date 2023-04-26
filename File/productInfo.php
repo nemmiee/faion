@@ -14,7 +14,7 @@
                     <?php
                     // Hiển thị tên sản phẩm trên breadcrumb
                     $kq = mysqli_query($db->getConnection(), "SELECT * FROM product WHERE id=" . $_GET['info']);
-                    $product = mysqli_fetch_array($kq);
+                    $product = mysqli_fetch_assoc($kq);
                     echo $product['name'];
                     ?>
                 </span>
@@ -117,8 +117,9 @@
                 </form>
                 <div class="description-container"><b>Mô tả sản phẩm:</b><br><br>
                     <?php
-                    if (!is_null($product['description']))
-                        echo $product['description'];
+                    if ($product['description'] != NULL || $product['description'] != "")
+                        echo displayDescription($product['description']);
+                        //echo $product['description'];
                     else
                         echo "Sản phẩm này không có mô tả.";
                     ?>
@@ -126,6 +127,9 @@
             </div>
         </div>
     </div>
+    <?php
+    include ('../faion/file/featureProducts.php');
+    ?>
 </main>
 
 <script>
@@ -154,11 +158,11 @@
 
     function isNotLogin(e) {
         e.preventDefault();
-        alertMessage("fail", "Bạn cần phải đăng nhập để thêm sản phẩm vào giỏ hàng");
+        alertMessage("warning", "Bạn cần phải đăng nhập để thêm sản phẩm vào giỏ hàng");
     }
 
     function checkAddToCartForm(e) {
-        var quantityRegEx = /[0-9]{1,}/;
+        var quantityRegEx = /^[0-9]+$/;
         var size = document.getElementsByName("size");
         var color = document.getElementsByName("color");
         var quantity = document.getElementById("pQuantity");
@@ -176,23 +180,23 @@
         }
         if (sizePos == -1) {
             e.preventDefault();
-            alertMessage("fail", "Bạn chưa chọn size");
+            alertMessage("warning", "Bạn chưa chọn size");
             return false;
         } else if (colorPos == -1) {
             e.preventDefault();
-            alertMessage("fail", "Bạn chưa chọn màu");
+            alertMessage("warning", "Bạn chưa chọn màu");
             return false;
         } else if (quantity.value <= 0) {
             e.preventDefault();
-            alertMessage("fail", "Số lượng sản phẩm phải lớn hơn 0");
+            alertMessage("warning", "Số lượng sản phẩm phải lớn hơn 0");
             return false;
         } else if (quantity.value == null || quantity.value == undefined) {
             e.preventDefault();
-            alertMessage("fail", "Bạn chưa chọn số lượng sản phẩm");
+            alertMessage("warning", "Bạn chưa chọn số lượng sản phẩm");
             return false;
         } else if (!quantityRegEx.test(quantity.value)) {
             e.preventDefault();
-            alertMessage("fail", "Số lượng sản phẩm không phải là số");
+            alertMessage("warning", "Số lượng sản phẩm không phải là số");
             return false;
         }
     }
