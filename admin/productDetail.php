@@ -5,7 +5,10 @@ if ($_GET['choice'] == "product") {
     <div class=\"content-container\">
     <div class=\"content\">
         <form action=\"/faion/action/actionProduct.php\" method=\"post\" id=\"addProductForm\" enctype=\"multipart/form-data\" onsubmit=\"return checkNewProduct(event)\">
-            <div class=\"title\">Thêm sản phẩm</div>
+            <div class=\"title\">
+                <div class=\"left\">Thêm sản phẩm</div>
+                <div class=\"right\"></div>
+            </div>
             <div class=\"top\">
                 <div class=\"left\">
                     <div class=\"name-container\">
@@ -13,8 +16,11 @@ if ($_GET['choice'] == "product") {
                         <input type=\"text\" name=\"name\" id=\"pname\" value=\"\">
                     </div>
                     <div class=\"description-container\">
-                        <label for=\"pdescription\">Mô tả:</label>
-                        <textarea name=\"description\" id=\"pdescription\" cols=\"50\" rows=\"10\" value=\"\"></textarea>
+                        <div id=\"descriptLabel\">
+                            <label for=\"pdescription\">Mô tả:</label>
+                            <div class=\"note\">\\t: 1 tab, \\2s: 2 khoảng trắng, \\4s: 4 khoảng trắng, \\n: xuống dòng</div>
+                        </div>
+                        <textarea name=\"description\" id=\"pdescription\" cols=\"50\" rows=\"13\" value=\"\"></textarea>
                     </div>
                     <div class=\"category-container\">
                         <label for=\"pcategory\">Loại áo:</label>
@@ -46,6 +52,13 @@ if ($_GET['choice'] == "product") {
                         <input type=\"file\" name=\"image\" id=\"imageInput\" style=\"display: none;\" onchange=\"previewImage();\">
                         <input type=\"button\" value=\"THÊM ẢNH\" onclick=\"document.getElementById('imageInput').click();\">
                     </div>
+                    <div class=\"feature-container\">
+                        <label for=\"pfeature\">Sản phẩm nổi bật:</label>
+                        <select name=\"feature\" id=\"pfeature\">
+                            <option value=\"0\" selected>Không</option>
+                            <option value=\"1\">Có</option>
+                        </select>
+                    </div>
                 </div>
             </div>
             <div class=\"bottom\">
@@ -56,11 +69,12 @@ if ($_GET['choice'] == "product") {
 </div>
 </div>";
     } else {
+        $id = $_GET['id'];
         $arr = array();
         $arr = getProductList();
 
         for ($i = 0; $i < count($arr); $i++) {
-            if ($arr[$i]->getId() == $_GET['id']) {
+            if ($arr[$i]->getId() == $id) {
                 $product = $arr[$i];
                 break;
             }
@@ -69,7 +83,14 @@ if ($_GET['choice'] == "product") {
             <div class=\"content-container\">
             <div class=\"content\">
                 <form action=\"/faion/action/actionProduct.php\" method=\"post\" id=\"addProductForm\" enctype=\"multipart/form-data\" onsubmit=\"return checkProduct(event)\">
-                    <div class=\"title\">Chỉnh sửa sản phẩm</div>
+                    <div class=\"title\">
+                        <div class=\"left\">Chỉnh sửa sản phẩm</div>
+                        <div class=\"right\">
+                        <a href=\"/faion/index.php/products?info=$id\">
+                            <i class=\"fa-solid fa-shirt\"></i>Đến trang chi tiết sản phẩm
+                        </a>
+                        </div>
+                    </div>
                     <div class=\"top\">
                         <div class=\"left\">
                             <div class=\"name-container\">
@@ -77,8 +98,11 @@ if ($_GET['choice'] == "product") {
                                 <input type=\"text\" name=\"name\" id=\"pname\" value=\"" . $product->getName() . "\">
                             </div>
                             <div class=\"description-container\">
-                                <label for=\"pdescription\">Mô tả:</label>
-                                <textarea name=\"description\" id=\"pdescription\" cols=\"50\" rows=\"10\">" . $product->getDescription() . "</textarea>
+                                <div id=\"descriptLabel\">
+                                    <label for=\"pdescription\">Mô tả:</label>
+                                    <div class=\"note\">\\t: 1 tab, \\2s: 2 khoảng trắng, \\4s: 4 khoảng trắng, \\n: xuống dòng</div>
+                                </div>
+                                <textarea name=\"description\" id=\"pdescription\" cols=\"50\" rows=\"13\">" . $product->getDescription() . "</textarea>
                             </div>
                             <div class=\"category-container\">
                                 <label for=\"pcategory\">Loại áo:</label>
@@ -111,8 +135,19 @@ if ($_GET['choice'] == "product") {
                                 <img src=\"/faion/img/products/" . getImageName($product->getImage()) . "\" alt=\"Có lẽ là ảnh về một cái áo\" id=\"pimage\">
                             </div>
                             <div class=\"change-image-container\">
-                            <input type=\"file\" name=\"image\" id=\"imageInput\" style=\"display: none;\" onchange=\"previewImage();\">
-                            <input type=\"button\" value=\"ĐỔI ẢNH\" onclick=\"document.getElementById('imageInput').click();\">
+                                <input type=\"file\" name=\"image\" id=\"imageInput\" style=\"display: none;\" onchange=\"previewImage();\">
+                                <input type=\"button\" value=\"ĐỔI ẢNH\" onclick=\"document.getElementById('imageInput').click();\">
+                            </div>
+                            <div class=\"feature-container\">
+                                <label for=\"pfeature\">Sản phẩm nổi bật:</label>
+                                <select name=\"feature\" id=\"pfeature\">
+                                    <option value=\"1\" ";
+            if ($product->getFeature() == 1) echo "selected";
+            echo ">Có</option>
+                                        <option value=\"0\" ";
+            if ($product->getFeature() == 0) echo "selected";
+            echo ">Không</option>
+                                </select>
                             </div>
                         </div>
                     </div>

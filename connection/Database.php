@@ -36,7 +36,6 @@ class Database
 
     public function executeQuery($query)
     {
-        mysqli_query($this->connection, "set names 'utf8'");
         // Thực thi câu truy vấn
         if (!($data = mysqli_query($this->connection, $query))) {
             echo "Khong the thuc thi cau truy van";

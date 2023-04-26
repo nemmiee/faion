@@ -194,6 +194,10 @@ html {
     color: orangered;
 }
 
+#flex_header-title .user.info {
+    padding-right: 15px;
+}
+
 #flex_header-title .user i.active {
     color: red;
 }
@@ -414,7 +418,7 @@ html {
 }
 
 #header-cart {
-    margin-right: 10px;
+    margin-right: 7px;
 }
 
 #header-cart i.active {
@@ -1116,7 +1120,7 @@ html {
     }
 
     #sidebar {
-        overflow-y: auto;
+        overflow-y: scroll;
         position: relative;
         background-color: #222222;
         position: fixed;
@@ -1127,6 +1131,11 @@ html {
         height: 100%;
         animation-name: sidebarAppear;
         animation-duration: .8s;
+    }
+
+    #sidebar::-webkit-scrollbar {
+        display: none;
+        visibility: hidden;
     }
 
     #turnoff-container {
