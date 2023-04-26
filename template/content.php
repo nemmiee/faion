@@ -62,9 +62,11 @@ if (!preg_match($adminRegEx, $uri)) {
                 include('../faion/admin/productsAdmin.php');
                 break;
             case "orders":
-                echo "<div class='right-content-container' style='height: 700px;'>";
-                // echo "<div id=\"top-sub-header\"></div>";
-                //include ('../faion/admin/orderAdmin.php');
+
+                echo "<div class='right-content-container' style='height: 700px;'>
+                <div id=\"top-sub-header\"></div>";
+                include ('../faion/admin/orderAdmin.php');
+
                 break;
             case "customers":
                 echo "<div class='right-content-container' style='height: auto;'>";

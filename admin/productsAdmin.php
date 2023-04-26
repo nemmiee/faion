@@ -96,7 +96,9 @@
 // Hàm hiển thị các dòng thông tin product trong table
 function displayProductTable()
 {
+
     $productArr = getProductList();
+
     for ($i = 0; $i < count($productArr); $i++) {
         echo "
         <tr>
@@ -121,11 +123,13 @@ function displayProductTable()
     }
 }
 
+
 function displayCategoryFilterOption() {
     echo "<option value=\"date\" selected>Mặc định</option>";  
     echo "<option value=\"default\">Default</option>";                
     $categoryList = getCategoryList();
     for ($i = 1; $i < count($categoryList); $i++) {
         echo "<option value=\"" . $categoryList[$i]->getId() . "\">" . $categoryList[$i]->getName() . "</option>";
+
     }
 }

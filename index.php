@@ -92,7 +92,7 @@ ob_start();
 					echo "<link rel='stylesheet' href='/faion/css/admin/product.css'>";
 					break;
 				case "orders":
-					// echo "<link rel='stylesheet' href='/faion/css/admin/order.css'>";
+					echo "<link rel='stylesheet' href='/faion/css/admin/order.css'>";
 					break;
 				case "customers":
 					echo "<link rel='stylesheet' href='/faion/css/admin/customer.css'>";
@@ -137,5 +137,6 @@ ob_start();
 
 	<script src="/faion/js/find.js"></script>
 </body>
+
 
 </html>

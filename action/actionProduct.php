@@ -87,8 +87,10 @@ if (isset($_POST['add-product-submit'])) {
             $description = NULL;
         }
         $db = new Database();
+
         $query = "INSERT INTO product (category_id, name, description, price, image, discount, quantity, sold, status, feature, created_at) 
                             VALUES ('$category', '$name', '$description', '$price', '$image', NULL, '$quantity', 0, '$status', '$feature', '$date')";
+
         if ($db->insert_update_delete($query)) {
             $db->disconnect();
             echo "<script>
@@ -183,8 +185,9 @@ if (isset($_POST['add-product-submit'])) {
         //$description = htmlentities($description, ENT_COMPAT, 'UTF-8');
         //$description = nl2br($description);
     }
-    $db = new Database();
-    
+
+    $db = new Database(); 
+
     $query = "UPDATE product SET name = '$name', description = '$description', category_id = '$category', 
     price = '$price', image = '$image', quantity = '$quantity', status = '$status', feature = '$feature' WHERE id = '$id'";
     if ($db->insert_update_delete($query)) {
@@ -215,6 +218,7 @@ if (isset($_POST['add-product-submit'])) {
     $name = $_POST['name'];
     $sql = "INSERT INTO category (name) VALUES ('$name')";
     $db = new Database();
+
     if ($db->insert_update_delete($sql)) {
         $db->disconnect();
         echo "<script>
@@ -309,6 +313,7 @@ function getProductList()
     include('../../faion/connection/Database.php');
     include('../../faion/object/Product.php');
     $db = new Database();
+
     $kq = mysqli_query($db->getConnection(), "SELECT * FROM product");
     $productArr = array();
     while ($row = mysqli_fetch_assoc($kq)) {
@@ -337,6 +342,7 @@ function getCategoryList()
     include('../../faion/connection/Database.php');
     include('../../faion/object/Category.php');
     $db = new Database();
+
     $kq = mysqli_query($db->getConnection(), "SELECT * FROM category");
     $list = array();
     while ($row = mysqli_fetch_assoc($kq)) {
