@@ -5,8 +5,8 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
     include('../../faion/connection/Database.php');
     $db = new Database();
 
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    $username = trim($_POST['username']);
+    $password = trim($_POST['password']);
 
     $result = mysqli_query($db->getConnection(), "SELECT ac.id, ct.name, ac.role, ac.status 
     FROM account ac, customer ct WHERE ac.id = ct.id and ac.username = '" . $username

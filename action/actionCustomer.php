@@ -10,10 +10,10 @@ if (isset($_POST['customer-change-submit'])) {
         }
     }
 
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $address = $_POST['address'];
-    $phone = $_POST['phoneNum'];
+    $name = trim($_POST['name']);
+    $email = trim($_POST['email']);
+    $address = trim($_POST['address']);
+    $phone = trim($_POST['phoneNum']);
 
     $count = 0;
     if ($_POST['name'] != $customerList[$pos]->getName()) {
@@ -69,6 +69,7 @@ if (isset($_POST['customer-change-submit'])) {
         die;
     }
 } else {
+    // User tự đổi thông tin cá nhân của mình
     $id = $_POST['id'];
     $pos = -1;
     $customerList = getCustomerList();
@@ -79,10 +80,10 @@ if (isset($_POST['customer-change-submit'])) {
         }
     }
 
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $address = $_POST['address'];
-    $phone = $_POST['phoneNum'];
+    $name = trim($_POST['name']);
+    $email = trim($_POST['email']);
+    $address = trim($_POST['address']);
+    $phone = trim($_POST['phoneNum']);
 
     $count = 0;
     if ($_POST['name'] != $customerList[$pos]->getName()) {

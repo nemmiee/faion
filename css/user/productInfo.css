@@ -8,10 +8,6 @@
 
 }
 
-.shop-page-title-container.darkmode {
-    background-color: #2D333B;
-}
-
 .shop-page-title-inner {
     padding: 15px 30px;
 }
@@ -22,18 +18,10 @@
     color: black;
 }
 
-.shop-page-title-container.darkmode .page-title {
-    color: #BB86FC;
-}
-
 .breadcrumb {
     font-size: large;
     color: #666666;
     font-weight: 600;
-}
-
-.shop-page-title-container.darkmode .breadcrumb {
-    color: #BBBBBB;
 }
 
 .breadcrumb {
@@ -42,10 +30,6 @@
 
 .breadcrumb .back-home-page a {
     color: black;
-}
-
-.shop-page-title-container.darkmode .breadcrumb a {
-    color: white;
 }
 
 .breadcrumb .breadcrumb-inner-title a {
@@ -168,11 +152,11 @@ element.style {
     border: 1px solid #E8E8E8;
     width: auto;
     height: 25px;
-    margin-right: 5px;
+    margin: 0 3px;
 }
 
 #main .right .sold {
-    padding: 5px 0;
+    padding: 5px;
 }
 
 #main .right .price {

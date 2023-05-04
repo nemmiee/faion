@@ -17,9 +17,7 @@ include('../../faion/object/PageDivide.php');   //include file phantrang.class.p
 if (isset($_GET['category']) && isset($_GET['page'])) {
     
     $category = $_GET['category'];
-    //settype($category, "string");
     $page = $_GET['page'];   //lấy giá trị ajax gửi qua
-    //settype($page, "int");
     $phantrang = new PageDivide($category, $page);   //tạo đối tượng phân trang
     $dulieu = $phantrang->select_product();    //lấy thông tin sản phẩm
     $link = $phantrang->divideButton();  //lấy các link phân trang

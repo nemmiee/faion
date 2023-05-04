@@ -32,21 +32,21 @@ function alertMessage(type, message) {
             alertIcon.style.border = "3px solid #FACEA8";
             typeMessage.innerText = "Warning!"
             msg.innerText = message;
-        break;
+            break;
         case "info":
             alert.classList.add("active");
             alertIcon.innerHTML = "<i class=\"fa-solid fa-info\" style=\"color: #3FC3EE;\"></i>";
             alertIcon.style.border = "3px solid #9DE0F6";
             typeMessage.innerText = "Info!"
             msg.innerText = message;
-        break;
-        case "question": 
+            break;
+        case "question":
             alert.classList.add("active");
             alertIcon.innerHTML = "<i class=\"fa-solid fa-question\" style=\"color: #87ADBD;\"></i>";
             alertIcon.style.border = "3px solid #C9DAE1";
             typeMessage.innerText = "Question!"
             msg.innerText = message;
-        break;
+            break;
     }
     button.focus();
     setTimeout(closeAlert, 2000);
@@ -238,7 +238,6 @@ function changeTheme() {
         }
         else if (path == "signup") {
             document.getElementById("mainContent-theme").classList.toggle("darkmode");
-
         }
         else {
 
@@ -247,3 +246,87 @@ function changeTheme() {
     localStorage.setItem("theme", theme);
 }
 
+
+let headerInnerSearchBtn = document.getElementById("header-inner-search-btn");
+headerInnerSearchBtn.addEventListener("click", function (event) {
+    var keyword = document.getElementById("keyword").value.trim();
+    if (keyword == "" || keyword == undefined) {
+        event.preventDefault();
+    } else {
+        sessionStorage.setItem("firstSearch", "on");
+        var url = new URL("/faion/index.php/search?", window.location.href);
+        url.searchParams.append("keyword", keyword);
+        url.searchParams.append("page", 1);
+        url.searchParams.append("category", "all");
+        event.preventDefault();
+        window.location.replace(url);
+    }
+});
+
+function changeMoneyToNum(money) {
+    var arr = money.split(".");
+    var num = '';
+    for (var i = 0; i < arr.length; i++) {
+        num += arr[i];
+    }
+    return num;
+}
+
+if (sessionStorage.getItem("firstSearch") == "on") {
+    sessionStorage.setItem("firstSearch", "off");
+    var url = window.location.search;
+    var keyword = url.split("?")[1];
+    keyword = keyword.split("&")[0];
+    keyword = keyword.split("=")[1];
+    var request = "keyword=" + keyword + "&page=1&category=all";
+    var url = '/faion/index.php/search?' + request;
+    var xml = new XMLHttpRequest();
+    xml.open("GET", "/faion/action/searchProduct.php?" + request, true);
+    xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xml.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("maincontent").innerHTML = this.responseText;
+            history.pushState(null, '', url);
+        }
+    };
+    xml.send();
+}
+
+function pageDivideAjax(category, page, keyword, minPrice, maxPrice) {
+    console.log(keyword);
+    if (keyword != null) {
+        var request = "keyword=" + keyword + "&page=" + page +
+            "&category=" + category;
+        if (minPrice != null && maxPrice != null)
+            request += "&minPrice=" + minPrice + "&maxPrice=" + maxPrice;
+        else if (minPrice != null && maxPrice == null)
+            request += "&minPrice=" + minPrice;
+        else if (minPrice == null && maxPrice != null)
+            request += "&maxPrice=" + maxPrice;
+
+        var url = '/faion/index.php/search?' + request;
+        var xml = new XMLHttpRequest();
+        xml.open("GET", "/faion/action/searchProduct.php?" + request, true);
+        xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xml.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("maincontent").innerHTML = this.responseText;
+                history.pushState(null, '', url);
+            }
+        };
+        xml.send();
+    } else {
+        var request = "category=" + category + "&page=" + page;
+        var url = '/faion/index.php/products?' + request;
+        var xml = new XMLHttpRequest();
+        xml.open("GET", "/faion/action/actionPageDivide.php?" + request, true);
+        xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xml.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("maincontent").innerHTML = this.responseText;
+                history.pushState(null, '', url);
+            }
+        };
+        xml.send();
+    }
+}

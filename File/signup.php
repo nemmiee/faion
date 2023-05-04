@@ -82,7 +82,7 @@
         var fullnameRegEx = /[0-9@#$%^&*]{1,}/;
         //var usernameRegEx = /KH[a-zA-Z]{7}[0-9]{5}/;
         var emailRegEx = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-        var phoneRegEx = /0[0-9]{8,9}/;
+        var phoneRegEx = /^0[0-9]{8,9}$/;
 
         var fullname = document.getElementById("fullname");
         var username = document.getElementById("username");
@@ -92,69 +92,58 @@
         var password = document.getElementById("password");
         var confirmPassword = document.getElementById("confirmPassword");
 
-        if (fullname.value == "" || fullname.value == undefined || fullname.value == NaN) {
-            //alertMessage("fail", "Mời nhập họ và tên!");
+        if (fullname.value.trim() == "" || fullname.value.trim() == undefined || fullname.value.trim() == NaN) {
             alert("Mời nhập họ và tên");
             fullname.focus();
             e.preventDefault();
             return false;
-        } else if (fullnameRegEx.test(fullname.value) == true && fullname.value != "") {
-            //alertMessage("fail", "Họ và tên không hợp lệ!");
+        } else if (fullnameRegEx.test(fullname.value.trim()) == true && fullname.value.trim() != "") {
             alert("Họ và tên không hợp lệ");
             fullname.focus();
             e.preventDefault();
             return false;
-        } else if (address.value == "" || address.value == undefined || address.value == NaN) {
-            //alertMessage("fail", "Mời nhập địa chỉ!");
+        } else if (address.value.trim() == "" || address.value.trim() == undefined || address.value.trim() == NaN) {
             alert("Mời nhập địa chỉ");
             address.focus();
             e.preventDefault();
             return false;
-        } else if (phoneNum.value == "" || phoneNum.value == undefined || phoneNum.value == NaN) {
-            //alertMessage("fail", "Mời nhập số điện thoại!");
+        } else if (phoneNum.value.trim() == "" || phoneNum.value.trim() == undefined || phoneNum.value.trim() == NaN) {
             alert("Mời nhập số điện thoại");
             phoneNum.focus();
             e.preventDefault();
             return false;
-        } else if (!phoneRegEx.test(phoneNum.value) && phoneNum.value != "") {
-            //alertMessage("fail", "Số điện thoại không đúng định dạng!");
-            alert("Số điện thoại không đúng");
+        } else if (!phoneRegEx.test(phoneNum.value.trim()) && phoneNum.value.trim() != "") {
+            alert("Số điện thoại không đúng định dạng");
             phoneNum.focus();
             e.preventDefault();
             return false;
-        } else if (email.value == "" || email.value == undefined || email.value == NaN) {
-            //alertMessage("fail", "Mời nhập email");
+        } else if (email.value.trim() == "" || email.value.trim() == undefined || email.value.trim() == NaN) {
             alert("Mời nhập email");
             email.focus();
             e.preventDefault();
             return false;
-        } else if (!emailRegEx.test(email.value) && email.value != "") {
-            //alertMessage("fail", "Email không đúng!");
+        } else if (!emailRegEx.test(email.value.trim()) && email.value.trim() != "") {
             alert("Email không đúng");
             email.focus();
             e.preventDefault();
             return false;
-        } else if (username.value == "" || username.value == undefined || username.value == NaN) {
-            //alertMessage("fail", "Mời nhập tên đăng nhập!");
+        } else if (username.value.trim() == "" || username.value.trim() == undefined || username.value.trim() == NaN) {
             alert("Mời nhập tên đăng nhập");
             username.focus();
             e.preventDefault();
             return false;
-        } else if (password.value == "" || password.value == undefined || password.value == NaN) {
-            //alertMessage("fail", "Mời nhập mật khẩu!");
+        } else if (password.value.trim() == "" || password.value.trim() == undefined || password.value.trim() == NaN) {
             alert("Mời nhập mật khẩu");
             password.focus();
             e.preventDefault();
             return false;
-        } else if (confirmPassword.value == "" || confirmPassword.value == undefined || confirmPassword == NaN) {
-            //alertMessage("fail", "Mời nhập xác nhận mật khẩu!");
+        } else if (confirmPassword.value.trim() == "" || confirmPassword.value.trim() == undefined || confirmPassword.value.trim() == NaN) {
             alert("Mời nhập xác nhận mật khẩu");
             confirmPassword.focus();
             e.preventDefault();
             return false;
-        } else if (confirmPassword.value != password.value && confirmPassword.value != "" && password.value != "") {
-            //alertMessage("fail", "Mật khẩu bạn vừa nhập không trùng khớp!");
-            alert("Mật khẩu bạn vừa nhập không trùng khớp");
+        } else if (confirmPassword.value.trim() != password.value.trim() && confirmPassword.value.trim() != "" && password.value.trim() != "") {
+            alert("Mật khẩu nhập lại không trùng khớp");
             confirmPassword.focus();
             e.preventDefault();
             return false;
@@ -166,11 +155,10 @@
 function createAccountId()
 {
     $db = new Database();
-    mysqli_query($db->getConnection(), "set names 'utf8'");
     $kq = mysqli_query($db->getConnection(), "SELECT id FROM account");
     $arr = array();
     $id = 0;
-    while ($row = mysqli_fetch_array($kq)) {
+    while ($row = mysqli_fetch_assoc($kq)) {
         $arr[] = $row['id'];
     }
     if (count($arr) == 0) {
@@ -199,12 +187,12 @@ if (
     isset($_POST['fullname']) && isset($_POST['address']) && isset($_POST['phonenum'])
     && isset($_POST['email']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['confirmPassword'])
 ) {
-    $fullname = $_POST['fullname'];
-    $address = $_POST['address'];
-    $phoneNum = $_POST['phonenum'];
-    $email = $_POST['email'];
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    $fullname = trim($_POST['fullname']);
+    $address = trim($_POST['address']);
+    $phoneNum = trim($_POST['phonenum']);
+    $email = trim($_POST['email']);
+    $username = trim($_POST['username']);
+    $password = trim($_POST['password']);
     $date = date("Y-m-d");
 
     $customerList = getCustomerList();

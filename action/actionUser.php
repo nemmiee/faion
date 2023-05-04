@@ -11,8 +11,8 @@ if (isset($_POST['user-change-submit'])) {
         }
     }
 
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    $username = trim($_POST['username']);
+    $password = trim($_POST['password']);
     $role = $_POST['role'];
     $status = $_POST['status'];
 
@@ -110,6 +110,7 @@ if (isset($_POST['user-change-submit'])) {
             window.location = '/faion/index.php/admin/users/'; 
         </script>";
 } else if (isset($_POST['user-account-change-submit']) && $_POST['id'] != "") {
+    // User tự đổi mật khẩu
     $id = $_POST['id'];
     $pos = -1;
     $accountList = getAccountList();
@@ -120,8 +121,8 @@ if (isset($_POST['user-change-submit'])) {
         }
     }
 
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    $username = trim($_POST['username']);
+    $password = trim($_POST['password']);
 
     $count = 0;
     if ($username != $accountList[$pos]->getUsername()) {

@@ -50,6 +50,8 @@
                 <div class="rate">4.5</div>
                 <div class="divide"></div>
                 <div class="sold"><?php echo $product['sold']; ?> Đã bán</div>
+                <div class="divide"></div>
+                <div class="sold"><?php echo $product['quantity']; ?> sản phẩm có sẵn</div>
             </div>
             <div class="price"><?php echo changeMoney($product['price']); ?>₫</div>
             <div class="bottom-info">
@@ -103,7 +105,7 @@
                     </div>
                     <div class="quantity-container">
                         <button class="quantity" onclick="quantityDown(event)"> − </button>
-                        <input type="text" name="quantity" id="pQuantity" value="1">
+                        <input type="text" name="quantity" id="pQuantity" value="1" onkeyup="checkQuantity(<?php echo $_GET['info']; ?>, this.value)">
                         <button class="quantity" onclick="quantityUp(event)"> + </button>
                     </div>
                     <div class="addToCart-container">
@@ -119,7 +121,7 @@
                     <?php
                     if ($product['description'] != NULL || $product['description'] != "")
                         echo displayDescription($product['description']);
-                        //echo $product['description'];
+                    //echo $product['description'];
                     else
                         echo "Sản phẩm này không có mô tả.";
                     ?>
@@ -128,11 +130,25 @@
         </div>
     </div>
     <?php
-    include ('../faion/file/featureProducts.php');
+    include('../faion/file/featureProducts.php');
     ?>
 </main>
 
 <script>
+    var pQuantity = document.getElementById("pQuantity");
+
+    function checkQuantity(id, value) {
+        var xml = new XMLHttpRequest();
+        var request = "/faion/action/checkProductQuantity.php?id=" + id + "&quantity=" + value;
+        xml.open("GET", request, true);
+        xml.onload = function() {
+            pQuantity.value = this.responseText;
+            pQuantity.innerText = this.responseText;
+        }
+        xml.send();
+    }
+
+
     function sizeChoose() {
         var arr = document.getElementsByClassName('size-container')[0].getElementsByClassName('pSize');
         var label = document.querySelectorAll('.sizeLabel');
@@ -201,4 +217,3 @@
         }
     }
 </script>
-

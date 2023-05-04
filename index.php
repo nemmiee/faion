@@ -40,6 +40,8 @@ ob_start();
 				echo "<link rel='stylesheet' href='/faion/css/user/productInfo.css'>";
 				echo "<link rel='stylesheet' href='/faion/css/user/featureProducts.css'>";
 			}
+		} if (preg_match("/search?/", $temp[count($temp) - 1])) {
+				echo "<link rel='stylesheet' href='/faion/css/user/search.css'>";
 		} else {
 			switch ($page) {
 				case "index.php":
@@ -99,9 +101,6 @@ ob_start();
 					break;
 				case "users":
 					echo "<link rel='stylesheet' href='/faion/css/admin/user.css'>";
-					break;
-				case "theme":
-					// echo "<link rel='stylesheet' href='/faion/css/admin/theme.css'>";
 					break;
 			}
 		}

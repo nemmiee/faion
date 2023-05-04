@@ -47,12 +47,12 @@ include('../faion/template/sidebar.php');
     function checkLoginForm(e) {
         var username = document.getElementById("username");
         var password = document.getElementById("Passwordlogin");
-        if (username.value == "" || username.value == undefined || username.value == NaN) {
+        if (username.value.trim() == "" || username.value.trim() == undefined || username.value.trim() == NaN) {
             e.preventDefault();
             alertMessage("fail", "Mời nhập tên đăng nhập!");
             //username.focus();
             return false;
-        } else if (password.value == "" || password.value == undefined || password.value == NaN) {
+        } else if (password.value.trim() == "" || password.value.trim() == undefined || password.value.trim() == NaN) {
             e.preventDefault();
             alertMessage("fail", "Mời nhập mật khẩu!", "Passwordlogin");
             //password.focus();
@@ -129,12 +129,12 @@ include('../faion/template/sidebar.php');
         event.preventDefault();
         var username = document.getElementById("username");
         var password = document.getElementById("Passwordlogin");
-        if (username.value == "" || username.value == undefined || username.value == NaN) {
+        if (username.value.trim() == "" || username.value.trim() == undefined || username.value.trim() == NaN) {
             event.preventDefault();
             alertMessage("fail", "Mời nhập tên đăng nhập!");
             //username.focus();
             return false;
-        } else if (password.value == "" || password.value == undefined || password.value == NaN) {
+        } else if (password.value.trim() == "" || password.value.trim() == undefined || password.value.trim() == NaN) {
             event.preventDefault();
             alertMessage("fail", "Mời nhập mật khẩu!");
             //password.focus();
@@ -144,7 +144,6 @@ include('../faion/template/sidebar.php');
         xhr.open("POST", "/faion/action/actionLogin.php", true);
         xhr.onreadystatechange = function() {
             if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-                //console.log(this.responseText);
                 if (this.responseText == "success")
                     window.location = "/faion/index.php/";
                 else if (this.responseText == "fail")

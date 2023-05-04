@@ -97,26 +97,22 @@ for ($i = 0; $i < count($customerList); $i++) {
         var password = document.getElementById("password");
         var confirmPassword = document.getElementById("confirm-password");
 
-        if (username.value == "" || username.value == undefined || username.value == NaN) {
-            //alertMessage("fail", "Mời nhập tên đăng nhập!");
+        if (username.value.trim() == "" || username.value.trim() == undefined || username.value.trim() == NaN) {
             alert("Mời nhập tên đăng nhập");
             username.focus();
             e.preventDefault();
             return false;
-        } else if (password.value == "" || password.value == undefined || password.value == NaN) {
-            //alertMessage("fail", "Mời nhập mật khẩu!");
+        } else if (password.value.trim() == "" || password.value.trim() == undefined || password.value.trim() == NaN) {
             alert("Mời nhập mật khẩu");
             password.focus();
             e.preventDefault();
             return false;
-        } else if (confirmPassword.value == "" || confirmPassword.value == undefined || confirmPassword == NaN) {
-            //alertMessage("fail", "Mời nhập xác nhận mật khẩu!");
+        } else if (confirmPassword.value.trim() == "" || confirmPassword.value.trim() == undefined || confirmPassword.trim() == NaN) {
             alert("Mời nhập xác nhận mật khẩu");
             confirmPassword.focus();
             e.preventDefault();
             return false;
-        } else if (confirmPassword.value != password.value && confirmPassword.value != "" && password.value != "") {
-            //alertMessage("fail", "Mật khẩu bạn vừa nhập không trùng khớp!");
+        } else if (confirmPassword.value.trim() != password.value.trim() && confirmPassword.value.trim() != "" && password.value.trim() != "") {
             alert("Mật khẩu bạn vừa nhập không trùng khớp");
             confirmPassword.focus();
             e.preventDefault();

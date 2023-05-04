@@ -1,13 +1,3 @@
-/* #--------------------# */
-/* |                    | */
-/* | CSS TRANG SẢN PHẨM | */
-/* |                    | */
-/* #--------------------# */
-
-body {
-    background-color: whitesmoke;
-}
-
 /* ------------------- Shop Page Breadcrumb -------------------- */
 .shop-page-title-container {
     display: block;
@@ -26,7 +16,8 @@ body {
 .page-title {
     width: 100%;
     padding-bottom: 10px;
-    color: black;   
+    color: black;
+    
 }
 
 .breadcrumb {
@@ -38,7 +29,8 @@ body {
 
 .breadcrumb a {
     color: black;
-    font-size: large;   
+    font-size: large;
+    
 }
 
 .divider {
@@ -51,7 +43,7 @@ element.style {
     color: white;
 }
 
-/* ----------------------- Content ------------------------ */
+/* ------------------------- MAIN ------------------------ */
 #main {
     font-family: sans-serif;
     width: 100%;
@@ -67,29 +59,8 @@ element.style {
     display: block;
     clear: both;
     width: 100%;
-    padding: 5px 0 15px;
+    padding: 30px 0 10px;
     background-color: white;    
-}
-
-#menu-items.fixed1 {
-    z-index: 3;
-    width: 100%;
-    position: fixed;
-    top: 0px;
-    padding-bottom: 10px;
-    box-shadow: 0 3px 5px rgb(0, 0, 0, 0.4);
-    background-color: white;
-}
-
-#menu-items.fixed {
-    z-index: 3;
-    box-shadow: 0 3px 5px rgb(0, 0, 0, 0.4);
-    padding-bottom: 10px;
-    width: 100%;
-    background-color: white;
-    text-align: center;
-    position: fixed;
-    top: 80px;
 }
 
 #nav_left-menu {
@@ -114,38 +85,83 @@ element.style {
     border-radius: 10px;
 }
 
-#menu-items {
+#main .search-container {
+    width: 100%; 
+    height: auto;
+    padding: 20px;
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
     justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    /* background-color: rgb(0, 0, 0, 0.01); */
+    background-color: white;
 }
 
-#menu-items a {
-    font-weight: 600;
-    font-size: 16px;
-    color: black;
+#main .search-container .inner {
+    padding: 0 10px;
 }
 
-#menu-container #menu-items a:hover,
-#menu-container #menu-items a:hover .menu-value,
-#menu-container #menu-items .menu-value.active {
-    transition: .3s;
-    border-bottom: 3px solid #FF3366;
-    color: #FF3366;
-}
-
-.menu-value {
+#main .search-container .inner label {
     display: block;
-    width: 100%;
-    padding: 10px 10px 0;
-    background-color: transparent;
-    font-size: 20px;
-    cursor: pointer;
-    text-align: left;
+    font-size: 17px;
 }
 
-/* ----------------------- Content ------------------------ */
+#main .search-container .inner input[type='text'] {
+    padding: 10px 15px;
+    border-radius: 5px;
+    outline: none;
+    border: solid lightblue;
+    margin-top: 5px;
+    font-size: 16px;
+}
+
+#main .search-container .inner .price input[type='text'] {
+    width: 150px;
+}
+
+#main .search-container .inner .price #from {
+    margin-right: 15px;
+}
+
+#main .search-container .inner select {
+    cursor: pointer;
+    border: solid lightblue;
+    padding: 10px 15px;
+    margin-top: 5px;
+    border-radius: 5px;
+    width: auto;
+    font-size: 16px;
+}
+
+#main .search-container .inner select:focus {
+    border-color: #4094F8;
+}
+
+#main .search-container .inner #pname {
+    width: 300px;
+}
+
+#main .search-container .inner input[type='text']:focus {
+    border-color: #4094F8;
+}
+
+#main .search-container .inner input[type='button'] {
+    background-color: #4094F8;
+    color: white;
+    padding: 10px 20px;
+    height: 42px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 25px;
+}
+
+#main .search-container .inner input[type='button']:hover {
+    background-color: dodgerblue;
+    transition: .2s;
+}
+
 #maincontent {
     width: 100%;
     padding: 20px 20px 10px;
@@ -271,6 +287,23 @@ element.style {
     position: fixed;
     top: 0;
     width: 100%;
+}
+
+#products div.no-product {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F7F7F7;
+    padding: 50px 0;
+}
+
+#products div.no-product > img {
+    max-width: 200px;
+    max-height: 200px;
+    object-fit: contain;
+    z-index: 5;
 }
 
 /* ----------------------- Page Number --------------------------- */

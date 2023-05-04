@@ -13,6 +13,8 @@ if (!preg_match($adminRegEx, $uri)) {
         } else {
             include('../faion/file/productInfo.php');
         }
+    } else if (preg_match("/search?/", $temp[count($temp) - 1])) {
+        include ('../faion/file/search.php');
     } else {
         switch ($page) {
             case "index.php":
@@ -62,26 +64,16 @@ if (!preg_match($adminRegEx, $uri)) {
                 include('../faion/admin/productsAdmin.php');
                 break;
             case "orders":
-
-                echo "<div class='right-content-container' style='height: 700px;'>
-                <div id=\"top-sub-header\"></div>";
+                echo "<div class='right-content-container' style='height: auto;'>";
                 include ('../faion/admin/orderAdmin.php');
-
                 break;
             case "customers":
                 echo "<div class='right-content-container' style='height: auto;'>";
-                // echo "<div id=\"top-sub-header\"></div>";
                 include('../faion/admin/customerAdmin.php');
                 break;
             case "users":
                 echo "<div class='right-content-container' style='height: auto;'>";
-                // echo "<div id=\"top-sub-header\"></div>";
                 include('../faion/admin/userAdmin.php');
-                break;
-            case "theme":
-                echo "<div class='right-content-container' style='height: 700px;'>";
-                // echo "<div id=\"top-sub-header\"></div>";
-                //include ('../faion/admin/themeAdmin.php');
                 break;
         }
         echo "</div>

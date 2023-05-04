@@ -37,12 +37,6 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == 0) {
                         <span class="sidebar-item">Người dùng</span>
                     </li>
                 </a>
-                <a href="/faion/index.php/admin/theme/">
-                    <li class="<?php echo addHeaderActive("theme"); ?>">
-                        <i class="fa-solid fa-palette fa-fw fa-lg" style="color: #F4A5B5;"></i>
-                        <span class="sidebar-item">Giao diện</span>
-                    </li>
-                </a>
             </ul>
         </div>
     </div>
@@ -140,15 +134,9 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == 0) {
                         <span class="sidebar-item">Tài khoản</span>
                     </li>
                 </a>
-                <li id="darkmode-container" onclick="changeTheme()">
-                    <i id="darkmode-btn" class="fa-solid fa-circle-half-stroke fa-fw fa-lg"></i>
-                    <span class="sidebar-item">Darkmode</span>
-                </li>
             </ul>
         </div>
     </div>
-
-
 <?php
 }
 ?>

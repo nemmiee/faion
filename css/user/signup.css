@@ -13,10 +13,6 @@
     position: relative;
 }
 
-#mainDKContent-theme.darkmode {
-    background-color: #1C2128;
-}
-
 .heading-account {
     padding-left: 1px;
     float: left;
@@ -40,13 +36,6 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     /* text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5); */
-}
-
-#mainDKContent-theme.darkmode .heading-account .header-page {
-    text-decoration: underline #BB86FC;
-    background: linear-gradient(to right, #BB86FC, #BB86FC);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
 }
 
 .content-account {
@@ -129,17 +118,6 @@
     margin-top: 15px;
 }
 
-#mainDKContent-theme.darkmode #signup-btn {
-    border: none;
-    background-color: #FF3366;
-}
-
-#mainDKContent-theme.darkmode #signup-btn:hover {
-    background-color: white;
-    color: #FF3366;
-    transition: .2s;
-}
-
 #signup-btn:hover {
     color: black;
     background-color: white;
@@ -151,14 +129,6 @@
     font-size: 18px;
     font-weight: bold;
     color: black;
-}
-
-#mainDKContent-theme.darkmode .sign-in-link a {
-    color: white;
-}
-
-#mainDKContent-theme.darkmode .sign-in-link a:hover {
-    color: red;
 }
 
 .sign-in-link a:hover {

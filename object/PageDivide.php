@@ -168,15 +168,23 @@ class PageDivide extends ProductDAL
     public $currentPage; // Trang hiện tại
     public $page; // Lấy page bên file actionPageDivide.php đưa vào
     public $category;
+    public $keyword;
+    public $minPrice;
+    public $maxPrice;
+    public $sql;
 
-    public function __construct($category = NULL, $page = NULL)
+    public function __construct($category = NULL, $page = NULL, $keyword = NULL, $minPrice = NULL, $maxPrice = NULL)
     {
         parent::__construct();
-        if ($category != NULL && $page != NULL) {
-            $this->category = $category;
-            $this->page = $page;
-            $this->getPage(); 
-        } 
+
+        $this->category = $category;
+        $this->page = $page;
+        $this->keyword = $keyword;
+        if ($this->keyword != NULL)
+            $this->allLimit = 8;
+        $this->minPrice = $minPrice;
+        $this->maxPrice = $maxPrice;        
+        $this->getPage();
     }
 
     public function getPage()
@@ -202,59 +210,149 @@ class PageDivide extends ProductDAL
 
     public function totalRow()
     {
-        if ($this->category == "all") {
-            $sql = "SELECT * FROM product";
-            ProductDAL::select($sql);
-            if (ProductDAL::select_count() > 0) {
-                $this->total = ceil(ProductDAL::select_count() / $this->allLimit);
-                return $this->total;
+        if ($this->keyword != NULL) {
+            $price = "";
+            if ($this->minPrice != NULL && $this->maxPrice != NULL) {
+                $price = "AND price BETWEEN $this->minPrice AND $this->maxPrice";
+            } else if ($this->minPrice != NULL && $this->maxPrice == NULL) {
+                $price = "AND price >= $this->minPrice";
+            } else if ($this->minPrice == NULL && $this->maxPrice != NULL) {
+                $price = "AND price <= $this->maxPrice";
+            } else {
+                $price = "";
+            }
+
+            if ($this->category == "all") {
+                $sql = "SELECT * FROM product WHERE LOWER(name) LIKE LOWER('%$this->keyword%') " . $price;
+                ProductDAL::select($sql);
+                if (ProductDAL::select_count() > 0) {
+                    $this->total = ceil(ProductDAL::select_count() / $this->allLimit);
+                    return $this->total;
+                }
+            } else {
+                $sql = "SELECT * FROM product WHERE category_id = " . getCategoryId($this->category) . " AND 
+                LOWER(name) LIKE LOWER('%$this->keyword%') " . $price;
+                ProductDAL::select($sql);
+                if (ProductDAL::select_count() > 0) {
+                    $this->total = ceil(ProductDAL::select_count() / $this->limit);
+                    return $this->total;
+                }
             }
         } else {
-            $sql = "SELECT * FROM product WHERE category_id = " . getCategoryId($this->category);
-            ProductDAL::select($sql);
-            if (ProductDAL::select_count() > 0) {
-                $this->total = ceil(ProductDAL::select_count() / $this->limit);
-                return $this->total;
+            if ($this->category == "all") {
+                $sql = "SELECT * FROM product";
+                ProductDAL::select($sql);
+                if (ProductDAL::select_count() > 0) {
+                    $this->total = ceil(ProductDAL::select_count() / $this->allLimit);
+                    return $this->total;
+                }
+            } else {
+                $sql = "SELECT * FROM product WHERE category_id = " . getCategoryId($this->category);
+                ProductDAL::select($sql);
+                if (ProductDAL::select_count() > 0) {
+                    $this->total = ceil(ProductDAL::select_count() / $this->limit);
+                    return $this->total;
+                }
             }
         }
     }
     public function select_product()
     {
-        if ($this->category == "all") {
-            $sql = "SELECT * FROM product LIMIT $this->start, $this->allLimit";
-            ProductDAL::select($sql);
-            $str = "";
-            while ($row = mysqli_fetch_assoc(ProductDAL::getResultQuery())) {
-                $str .= "<div class=\"card\"><a href=\"/faion/index.php/products?info=" . $row['id'] . "\">";
-                $str .= "<div class=\"image-container\"><img src=\"" . $row['image'] . "\" alt=\"Image\"></div>";
-                $str .= "<div class=\"container\"><h4>" . $row['name'] . "</h4>";
-                $str .= "<h5>Giá: " . changeMoney($row['price']) . "₫</h5></div>";
-                $str .= "<div class=\"addToCart-container\"><button class=\"addToCart-btn\">Mua ngay</button></div></a></div>";
+        if ($this->keyword != NULL) {
+            $price = "";
+            if ($this->minPrice != NULL && $this->maxPrice != NULL) {
+                $price = "AND price BETWEEN $this->minPrice AND $this->maxPrice";
+            } else if ($this->minPrice != NULL && $this->maxPrice == NULL) {
+                $price = "AND price >= $this->minPrice";
+            } else if ($this->minPrice == NULL && $this->maxPrice != NULL) {
+                $price = "AND price <= $this->maxPrice";
+            } else {
+                $price = "";
             }
-            return $str;
+            if ($this->category == "all") {
+                $sql = "SELECT * FROM product WHERE LOWER(name) LIKE LOWER('%$this->keyword%') $price 
+                LIMIT $this->start, $this->allLimit";
+                ProductDAL::select($sql);
+                $str = "";
+                while ($row = mysqli_fetch_assoc(ProductDAL::getResultQuery())) {
+                    $str .= "<div class=\"card\"><a href=\"/faion/index.php/products?info=" . $row['id'] . "\">";
+                    $str .= "<div class=\"image-container\"><img src=\"" . $row['image'] . "\" alt=\"Image\"></div>";
+                    $str .= "<div class=\"container\"><h4>" . $row['name'] . "</h4>";
+                    $str .= "<h5>Giá: " . changeMoney($row['price']) . "₫</h5></div>";
+                    $str .= "<div class=\"addToCart-container\"><button class=\"addToCart-btn\">Mua ngay</button></div></a></div>";
+                }
+                return $str;
+            } else {
+                $sql = "SELECT * FROM product WHERE category_id = " . getCategoryId($this->category) . " 
+                AND LOWER(name) LIKE LOWER('%$this->keyword%') $price LIMIT $this->start, $this->limit";
+                ProductDAL::select($sql);
+                $str = "";
+                while ($row = mysqli_fetch_assoc(ProductDAL::getResultQuery())) {
+                    $str .= "<div class=\"card\"><a href=\"/faion/index.php/products?info=" . $row['id'] . "\">";
+                    $str .= "<div class=\"image-container\"><img src=\"" . $row['image'] . "\" alt=\"Image\"></div>";
+                    $str .= "<div class=\"container\"><h4>" . $row['name'] . "</h4>";
+                    $str .= "<h5>Giá: " . changeMoney($row['price']) . "₫</h5></div>";
+                    $str .= "<div class=\"addToCart-container\"><button class=\"addToCart-btn\">Mua ngay</button></div></a></div>";
+                }
+                return $str;
+            }
         } else {
-            $sql = "SELECT * FROM product WHERE category_id = " . getCategoryId($this->category) . " LIMIT $this->start, $this->limit";
-            ProductDAL::select($sql);
-            $str = "";
-            while ($row = mysqli_fetch_assoc(ProductDAL::getResultQuery())) {
-                $str .= "<div class=\"card\"><a href=\"/faion/index.php/products?info=" . $row['id'] . "\">";
-                $str .= "<div class=\"image-container\"><img src=\"" . $row['image'] . "\" alt=\"Image\"></div>";
-                $str .= "<div class=\"container\"><h4>" . $row['name'] . "</h4>";
-                $str .= "<h5>Giá: " . changeMoney($row['price']) . "₫</h5></div>";
-                $str .= "<div class=\"addToCart-container\"><button class=\"addToCart-btn\">Mua ngay</button></div></a></div>";
+            if ($this->category == "all") {
+                $sql = "SELECT * FROM product LIMIT $this->start, $this->allLimit";
+                ProductDAL::select($sql);
+                $str = "";
+                while ($row = mysqli_fetch_assoc(ProductDAL::getResultQuery())) {
+                    $str .= "<div class=\"card\"><a href=\"/faion/index.php/products?info=" . $row['id'] . "\">";
+                    $str .= "<div class=\"image-container\"><img src=\"" . $row['image'] . "\" alt=\"Image\"></div>";
+                    $str .= "<div class=\"container\"><h4>" . $row['name'] . "</h4>";
+                    $str .= "<h5>Giá: " . changeMoney($row['price']) . "₫</h5></div>";
+                    $str .= "<div class=\"addToCart-container\"><button class=\"addToCart-btn\">Mua ngay</button></div></a></div>";
+                }
+                return $str;
+            } else {
+                $sql = "SELECT * FROM product WHERE category_id = " . getCategoryId($this->category) . " LIMIT $this->start, $this->limit";
+                ProductDAL::select($sql);
+                $str = "";
+                while ($row = mysqli_fetch_assoc(ProductDAL::getResultQuery())) {
+                    $str .= "<div class=\"card\"><a href=\"/faion/index.php/products?info=" . $row['id'] . "\">";
+                    $str .= "<div class=\"image-container\"><img src=\"" . $row['image'] . "\" alt=\"Image\"></div>";
+                    $str .= "<div class=\"container\"><h4>" . $row['name'] . "</h4>";
+                    $str .= "<h5>Giá: " . changeMoney($row['price']) . "₫</h5></div>";
+                    $str .= "<div class=\"addToCart-container\"><button class=\"addToCart-btn\">Mua ngay</button></div></a></div>";
+                }
+                return $str;
             }
-            return $str;
         }
     }
 
     public function divideButton()
     {
         $link = '';
-        for ($i = 1; $i <= $this->totalRow(); $i++) {
-            if ($i == $this->currentPage) {
-                $link .= '<a><button class="page-number active" onclick="pageDivideAjax(\'' . $this->category . '\',' . $this->currentPage . ')">' . $i . '</button></a>';
-            } else {
-                $link .= '<a><button class="page-number" onclick="pageDivideAjax(\'' . $this->category . '\',' . $i . ')">' . $i . '</button></a>';
+        if ($this->keyword != NULL) {
+            $min = $max = "";
+            if ($this->minPrice != NULL)
+                $min = ", $this->minPrice";
+            else
+                $min = ", null";
+            if ($this->maxPrice != NULL)
+                $max = ", $this->maxPrice";
+            else
+                $max = ", null";
+
+            for ($i = 1; $i <= $this->totalRow(); $i++) {
+                if ($i == $this->currentPage) {
+                    $link .= '<a><button class="page-number active" onclick="pageDivideAjax(\'' . $this->category . '\', ' . $this->currentPage . ', \'' . $this->keyword . '\'' . $min . $max . ')">' . $i . '</button></a>';
+                } else {
+                    $link .= '<a><button class="page-number" onclick="pageDivideAjax(\'' . $this->category . '\', ' . $i . ', \'' . $this->keyword . '\'' . $min . $max . ')">' . $i . '</button></a>';
+                }
+            }
+        } else {
+            for ($i = 1; $i <= $this->totalRow(); $i++) {
+                if ($i == $this->currentPage) {
+                    $link .= '<a><button class="page-number active" onclick="pageDivideAjax(\'' . $this->category . '\', ' . $this->currentPage . ', null, null, null)">' . $i . '</button></a>';
+                } else {
+                    $link .= '<a><button class="page-number" onclick="pageDivideAjax(\'' . $this->category . '\', ' . $i . ', null, null, null)">' . $i . '</button></a>';
+                }
             }
         }
         return $link;
@@ -269,7 +367,7 @@ function getCategoryId($name)
     else {
         $categoryList = getCategoryList();
         for ($i = 0; $i < count($categoryList); $i++) {
-            if (trim(strtolower($categoryList[$i]->getName())) == $name) {
+            if (trim(strtolower($categoryList[$i]->getName())) == strtolower($name)) {
                 return $categoryList[$i]->getId();
             }
         }
@@ -278,15 +376,15 @@ function getCategoryId($name)
 
 function getCategoryList()
 {
-    include_once ('../../faion/connection/Database.php');
-	$db = new Database();
-	$kq = mysqli_query($db->getConnection(), "SELECT * FROM category");
-	$list = array();
-	while ($row = mysqli_fetch_assoc($kq)) {
-		$category = new Category($row['id'], $row['name']);
-		$list[] = $category;
-	}
-	return $list;
+    include_once('../../faion/connection/Database.php');
+    $db = new Database();
+    $kq = mysqli_query($db->getConnection(), "SELECT * FROM category");
+    $list = array();
+    while ($row = mysqli_fetch_assoc($kq)) {
+        $category = new Category($row['id'], $row['name']);
+        $list[] = $category;
+    }
+    return $list;
 }
 
 function changeMoney($moneyIn)

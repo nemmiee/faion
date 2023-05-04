@@ -15,10 +15,6 @@
     
 }
 
-.shop-page-title-container.darkmode {
-    background-color: #2D333B;
-}
-
 .shop-page-title-inner {
     padding: 15px 30px;
 }
@@ -30,10 +26,6 @@
     
 }
 
-.shop-page-title-container.darkmode .page-title {
-    color: #BB86FC;
-}
-
 .breadcrumb {
     font-size: large;
     color: #666666;
@@ -41,17 +33,9 @@
     
 }
 
-.shop-page-title-container.darkmode .breadcrumb {
-    color: #BBBBBB;
-}
-
 .breadcrumb a {
     color: black;
     font-size: large;
-}
-
-.shop-page-title-container.darkmode .breadcrumb a {
-    color: white;
 }
 
 .divider {
@@ -65,10 +49,6 @@
     width: 100%;
     position: relative;
     display: table;
-}
-
-#main.darkmode {
-    background-color: #1C2128;
 }
 
 .left-menu-container {
@@ -89,10 +69,6 @@
     flex-grow: 1;
 }
 
-#main.darkmode #shop-sidebar {
-    background-color: #22272E;
-}
-
 .shop-sidebar-title {
     padding-bottom: 15px;
     font-size: 20px;
@@ -102,11 +78,6 @@
     text-align: center;
     display: block;
     border-bottom: solid black;
-}
-
-#main.darkmode #shop-sidebar .shop-sidebar-title {
-    color: #BB86FC;
-    border-bottom: solid #ADBAC7;
 }
 
 #menu-items {
@@ -135,14 +106,6 @@
     background-color: transparent;
     font-size: 17px;
     text-align: left;
-}
-
-#main.darkmode .menu-value a {
-    color: #ADBAC7;
-}
-
-#main.darkmode .menu-value a:hover {
-    color: white;
 }
 
 /* ------------------------- Main ------------------------- */

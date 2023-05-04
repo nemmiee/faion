@@ -83,6 +83,7 @@ include('../faion/template/sidebar.php');
             </ul>
         </div>
     </div>
+
     <!-- Content -->
     <div class="content-container" id="maincontent">
         <!-- <div id="loading"></div> -->
@@ -151,20 +152,35 @@ include('../faion/template/sidebar.php');
     // });
 
 
-    function pageDivideAjax(category, page) {
-        var request = "category=" + category + "&page=" + page;
-        var url = '/faion/index.php/products?' + request;
-        var xml = new XMLHttpRequest();
-        xml.open("GET", "/faion/action/actionPageDivide.php?" + request, true);
-        xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xml.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("maincontent").innerHTML = this.responseText;
-                history.pushState(null, '', url);
-            }
-        };
-        xml.send();
-    }
+    // function pageDivideAjax(category, page, keyword, minPrice, maxPrice) {
+    //     var request = "";
+    //     console.log(keyword);
+    //     if (keyword != null) {
+    //         request += "keyword=" + keyword + "&page=" + page +
+    //             "category=" + category;
+    //         if (minPrice != null && maxPrice != null)
+    //             request += "&minPrice=" + minPrice + "&maxPrice=" + maxPrice;
+    //         else if (minPrice != null && maxPrice == null)
+    //             request += "&minPrice=" + minPrice;
+    //         else if (minPrice == null && maxPrice != null)
+    //             request += "&maxPrice=" + maxPrice;
+    //     } else {
+    //         request += "category=" + category + "&page=" + page;
+    //     }
+
+    //     var url = '/faion/index.php/products?' + request;
+    //     var xml = new XMLHttpRequest();
+    //     xml.open("GET", "/faion/action/actionPageDivide.php?" + request, true);
+    //     xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    //     xml.onreadystatechange = function() {
+    //         if (this.readyState == 4 && this.status == 200) {
+    //             document.getElementById("maincontent").innerHTML = url;
+    //             // document.getElementById("maincontent").innerHTML = this.responseText;
+    //             // history.pushState(null, '', url);
+    //         }
+    //     };
+    //     xml.send();
+    // }
 </script>
 
 <?php

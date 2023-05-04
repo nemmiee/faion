@@ -15,12 +15,12 @@ if (isset($_POST['add-product-submit'])) {
     ) {
         $productList = array();
         $productList = getProductList();
-        $name = $_POST['name'];
-        $category = $_POST['category'];
-        $price = $_POST['price'];
-        $status = $_POST['status'];
-        $feature = $_POST['feature'];
-        $quantity = $_POST['quantity'];
+        $name = trim($_POST['name']);
+        $category = trim($_POST['category']);
+        $price = trim($_POST['price']);
+        $status = trim($_POST['status']);
+        $feature = trim($_POST['feature']);
+        $quantity = trim($_POST['quantity']);
 
         if (isset($_FILES['image']) && $_FILES['image']['name'] != "") {
             //Thư mục bạn lưu file upload
@@ -81,8 +81,6 @@ if (isset($_POST['add-product-submit'])) {
         }
         if (isset($_POST['description']) && $_POST['description'] != "") {
             $description = $_POST['description'];
-            //$description = htmlentities($description, ENT_COMPAT, 'UTF-8');
-            //$description = nl2br($description);
         } else {
             $description = NULL;
         }
@@ -114,12 +112,12 @@ if (isset($_POST['add-product-submit'])) {
     }
     $id = $productList[$pos]->getId();
 
-    $name = $_POST['name'];
-    $category = $_POST['category'];
-    $price = $_POST['price'];
-    $status = $_POST['status'];
-    $quantity = $_POST['quantity'];
-    $feature = $_POST['feature'];
+    $name = trim($_POST['quantity']);
+    $category = trim($_POST['category']);
+    $price = trim($_POST['price']);
+    $status = trim($_POST['status']);
+    $quantity = trim($_POST['quantity']);
+    $feature = trim($_POST['feature']);
     $description = "";
     $image = "";
 
@@ -178,15 +176,11 @@ if (isset($_POST['add-product-submit'])) {
     }
     if (isset($_POST['description'])) {
         $description = $_POST['description'];
-        //$description = htmlentities($description, ENT_COMPAT, 'UTF-8');
-        //$description = nl2br($description);
     } else {
         $description = $productList[$pos]->getDescription();
-        //$description = htmlentities($description, ENT_COMPAT, 'UTF-8');
-        //$description = nl2br($description);
     }
 
-    $db = new Database(); 
+    $db = new Database();
 
     $query = "UPDATE product SET name = '$name', description = '$description', category_id = '$category', 
     price = '$price', image = '$image', quantity = '$quantity', status = '$status', feature = '$feature' WHERE id = '$id'";
@@ -209,13 +203,15 @@ if (isset($_POST['add-product-submit'])) {
     $categoryList = getCategoryList();
     for ($i = 0; $i < count($categoryList); $i++) {
         if ($categoryList[$i]->getName() == $_POST['name']) {
-            echo "<script> alert(\"Đã tồn tại tên thể loại.\");
-            window.location = '/faion/index.php/admin/products/'
+            echo "
+            <script> 
+                alert(\"Đã tồn tại tên thể loại.\");
+                window.location = '/faion/index.php/admin/products/';
             </script>";
             die;
         }
     }
-    $name = $_POST['name'];
+    $name = trim($_POST['name']);
     $sql = "INSERT INTO category (name) VALUES ('$name')";
     $db = new Database();
 
@@ -242,20 +238,22 @@ if (isset($_POST['add-product-submit'])) {
     }
     if (!preg_match($regEx, $id)) {
         $sql = "DELETE FROM product WHERE id='$id'";
-        //include('../../faion/connection/Database.php');
         $db = new Database();
         if ($db->insert_update_delete($sql)) {
             unlink($url);
             $db->disconnect();
-            echo "<script>
-            alert(\"Xóa sản phẩm thành công.\");
-            window.location = '/faion/index.php/admin/products/'; 
-        </script>";
+            echo "
+            <script>
+                alert(\"Xóa sản phẩm thành công.\");
+                window.location = '/faion/index.php/admin/products/'; 
+            </script>";
         } else {
             $db->disconnect();
-            echo "<script>
-        alert(\"Xóa sản phẩm thất bại.\");
-        window.location = '/faion/index.php/admin/products/';</script>";
+            echo "
+            <script>
+                alert(\"Xóa sản phẩm thất bại.\");
+                window.location = '/faion/index.php/admin/products/';
+            </script>";
         }
     } else {
         $arr = explode("-", $id);
@@ -274,16 +272,18 @@ if (isset($_POST['add-product-submit'])) {
         if (!$isError) {
             unlink($url);
             $db->disconnect();
-            echo "<script>
-                    alert(\"Xóa sản phẩm thành công.\");
-                    window.location = '/faion/index.php/admin/products/'; 
-                </script>";
+            echo "
+            <script>
+                alert(\"Xóa sản phẩm thành công.\");
+                window.location = '/faion/index.php/admin/products/'; 
+            </script>";
         } else {
             $db->disconnect();
-            echo "<script>
-                    alert(\"Đã xóa '$count' trong tổng số " . count($arr) . " được chọn.\");
-                    window.location = '/faion/index.php/admin/products/';
-                </script>";
+            echo "
+            <script>
+                alert(\"Đã xóa '$count' trong tổng số " . count($arr) . " được chọn.\");
+                window.location = '/faion/index.php/admin/products/';
+            </script>";
         }
     }
 } else if (isset($_POST['delete-category-submit']) && $_POST['categoryId'] != "") {
@@ -295,16 +295,19 @@ if (isset($_POST['add-product-submit'])) {
     if ($db->insert_update_delete($insertSQL)) {
         if ($db->insert_update_delete($sql)) {
             $db->disconnect();
-            echo "<script>
-                    alert(\"Xóa thể loại thành công.\");
-                    window.location = '/faion/index.php/admin/products/'; 
-                </script>";
+            echo "
+            <script>
+                alert(\"Xóa thể loại thành công.\");
+                window.location = '/faion/index.php/admin/products/'; 
+            </script>";
         }
     } else {
         $db->disconnect();
-        echo "<script>
-        alert(\"Xóa thể loại thất bại.\");
-        window.location = '/faion/index.php/admin/products/';</script>";
+        echo "
+        <script>
+            alert(\"Xóa thể loại thất bại.\");
+            window.location = '/faion/index.php/admin/products/';
+        </script>";
     }
 }
 

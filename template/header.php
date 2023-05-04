@@ -44,11 +44,23 @@
                             <i class=\"fa-solid fa-right-from-bracket\"></i></a></li></div>";
                         echo "                
                             <div class=\"search\">
-                                <div id=\"header-search\" onclick=\"opensearch()\">
+                                <div id=\"header-search\" onclick=\"document.getElementById('search-container').classList.toggle('active');\">
                                     <button id=\"header-search-btn\">
                                         <i class=\"fa-solid fa-magnifying-glass fa-lg header-icon\"></i>
                                     </button>
                                 </div>
+                            </div>                        
+                            <div id=\"search-container\">
+                                <form method=\"get\">
+                                    <div class=\"inner-search\">
+                                        <input type=\"text\" id=\"keyword\" name=\"keyword\" placeholder=\"Tìm kiếm...\" value=\"";
+                                        if (isset($_GET['keyword']) && !empty($_GET['keyword'])) echo $_GET['keyword'];
+                                        echo "\">                                    
+                                        <button type=\"submit\" id=\"header-inner-search-btn\">
+                                            <i class=\"fa-solid fa-magnifying-glass fa-lg\"></i>
+                                        </button>
+                                    </div>
+                                </form>
                             </div>";
                         // Cart
                         echo "
@@ -89,11 +101,23 @@
                             </div>";
                         echo "                
                             <div class=\"search\">
-                                <div id=\"header-search\" onclick=\"opensearch()\">
+                                <div id=\"header-search\" onclick=\"document.getElementById('search-container').classList.toggle('active');\">
                                     <button id=\"header-search-btn\">
                                         <i class=\"fa-solid fa-magnifying-glass fa-lg header-icon\"></i>
                                     </button>
                                 </div>
+                            </div>                        
+                            <div id=\"search-container\">
+                                <form method=\"get\">
+                                    <div class=\"inner-search\">
+                                        <input type=\"text\" id=\"keyword\" name=\"keyword\" placeholder=\"Tìm kiếm...\" value=\"";
+                                        if (isset($_GET['keyword']) && !empty($_GET['keyword'])) echo $_GET['keyword'];
+                                        echo "\">                                    
+                                        <button type=\"submit\" id=\"header-inner-search-btn\">
+                                            <i class=\"fa-solid fa-magnifying-glass fa-lg\"></i>
+                                        </button>
+                                    </div>
+                                </form>
                             </div>";
                         // Cart
                         echo "
@@ -112,11 +136,23 @@
                         </div>";
                     echo "                
                         <div class=\"search\">
-                            <div id=\"header-search\" onclick=\"opensearch()\">
+                            <div id=\"header-search\" onclick=\"document.getElementById('search-container').classList.toggle('active');\">
                                 <button id=\"header-search-btn\">
                                     <i class=\"fa-solid fa-magnifying-glass fa-lg header-icon\"></i>
                                 </button>
                             </div>
+                        </div>                        
+                        <div id=\"search-container\">
+                            <form method=\"get\">
+                                <div class=\"inner-search\">
+                                    <input type=\"text\" id=\"keyword\" name=\"keyword\" placeholder=\"Tìm kiếm...\" value=\"";
+                                    if (isset($_GET['keyword']) && !empty($_GET['keyword'])) echo $_GET['keyword'];
+                                    echo "\">                                    
+                                    <button type=\"submit\" id=\"header-inner-search-btn\">
+                                        <i class=\"fa-solid fa-magnifying-glass fa-lg\"></i>
+                                    </button>
+                                </div>
+                            </form>
                         </div>";
                     // Cart
                     echo "
