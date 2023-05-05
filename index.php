@@ -74,6 +74,12 @@ ob_start();
 					echo "<link rel='stylesheet' href='/faion/css/admin/style.css'>";
 					echo "<link rel='stylesheet' href='/faion/css/admin/userDetail.css'>";
 					break;
+				case "orders":
+					echo "<link rel='stylesheet' href='/faion/css/user/userInfo.css'>";
+					echo "<link rel='stylesheet' href='/faion/css/admin/style.css'>";
+					echo "<link rel='stylesheet' href='/faion/css/admin/userDetail.css'>";
+					echo "<link rel='stylesheet' href='/faion/css/admin/order.css'>";
+					break;
 			}
 		}
 	} else { // Giao diện khi vào trang admin

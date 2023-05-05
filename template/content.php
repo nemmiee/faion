@@ -38,6 +38,9 @@ if (!preg_match($adminRegEx, $uri)) {
             case "account":
                 include('../faion/file/userInfo.php');
                 break;
+            case "orders":
+                include('../faion/file/userInfo.php');
+                break;
             case "cart":
                 echo "Cart";
                 break;

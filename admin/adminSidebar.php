@@ -134,6 +134,12 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == 0) {
                         <span class="sidebar-item">Tài khoản</span>
                     </li>
                 </a>
+                <a href="/faion/index.php/user/orders/">
+                    <li class="<?php echo addHeaderActive("orders"); ?>">
+                        <i class="fa-solid fa-list fa-fw fa-lg" style="color: #FB6340;"></i>
+                        <span class="sidebar-item">Xem đơn hàng</span>
+                    </li>
+                </a>
             </ul>
         </div>
     </div>

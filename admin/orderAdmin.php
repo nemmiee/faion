@@ -1,10 +1,3 @@
-<head>
-    <script>
-        function thanhToan($i) {
-            var result = "<?php ?>"
-        }
-    </script>
-</head>
 <div class="left">
     <div class="table-container">
         <table class="table" cellspacing="0">
