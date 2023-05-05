@@ -3,7 +3,7 @@ session_start();
 include('../../faion/connection/Database.php');
 if(!empty($_GET['id'])){
     $id = $_GET['id'];
-    $date = date('Y-m-d H:i:s');
+    $date = date('y-m-d H:i:s');
     $conn = new Database();
     $sql = "update `order`  od
     set status=1, completed_at='".$date."'
@@ -13,5 +13,5 @@ if(!empty($_GET['id'])){
 }else{
     $_SESSION['message'] = "false";
 }
-echo $date;
+header('Location:/faion/index.php/admin/orders/');
 ?>
