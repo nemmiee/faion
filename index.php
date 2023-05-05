@@ -133,8 +133,7 @@ ob_start();
 	/* Footer */
 	include('../faion/template/footer.php');
 	?>
-
-	<script src="/faion/js/find.js"></script>
+	
 </body>
 
 

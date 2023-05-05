@@ -44,7 +44,7 @@
                             <i class=\"fa-solid fa-right-from-bracket\"></i></a></li></div>";
                         echo "                
                             <div class=\"search\">
-                                <div id=\"header-search\" onclick=\"document.getElementById('search-container').classList.toggle('active');\">
+                                <div id=\"header-search\" onclick=\"openHeaderSearch()\">
                                     <button id=\"header-search-btn\">
                                         <i class=\"fa-solid fa-magnifying-glass fa-lg header-icon\"></i>
                                     </button>
@@ -101,7 +101,7 @@
                             </div>";
                         echo "                
                             <div class=\"search\">
-                                <div id=\"header-search\" onclick=\"document.getElementById('search-container').classList.toggle('active');\">
+                                <div id=\"header-search\" onclick=\"openHeaderSearch()\">
                                     <button id=\"header-search-btn\">
                                         <i class=\"fa-solid fa-magnifying-glass fa-lg header-icon\"></i>
                                     </button>
@@ -136,7 +136,7 @@
                         </div>";
                     echo "                
                         <div class=\"search\">
-                            <div id=\"header-search\" onclick=\"document.getElementById('search-container').classList.toggle('active');\">
+                            <div id=\"header-search\" onclick=\"openHeaderSearch()\">
                                 <button id=\"header-search-btn\">
                                     <i class=\"fa-solid fa-magnifying-glass fa-lg header-icon\"></i>
                                 </button>
