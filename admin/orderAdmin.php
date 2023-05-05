@@ -132,13 +132,16 @@ function getOrderDetail($id)
     }
 }
 
-    if(isset($_GET['message'])){
-        if($_GET['message']){
+    if(isset($_SESSION["message"])){
+        if($_SESSION['message']=="true"){
         echo "<script type='text/javascript'>alert('Đã thanh toán');</script>";
+        unset($_SESSION['message']);
     }
     else{
         echo "<script type='text/javascript'>alert('Chưa chọn hóa đơn cần xử lý');</script>";
+        unset($_SESSION['message']);
     }
 }
+
 
 ?>

@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('../../faion/connection/Database.php');
 if(!empty($_GET['id'])){
     $id = $_GET['id'];
@@ -8,9 +9,9 @@ if(!empty($_GET['id'])){
     set status=1, completed_at=".$date."
     where od.id =".$id;
     $conn->insert_update_delete($sql);  
-    header('Location:/faion/index.php/admin/orders/orders?message=1');
+    $_SESSION['message'] = "true";
 }else{
-    header('Location:/faion/index.php/admin/orders/orders?message=0');
+    $_SESSION['message'] = "false";
 }
-
+header('Location:/faion/index.php/admin/orders/');
 ?>
