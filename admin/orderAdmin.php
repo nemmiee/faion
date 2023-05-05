@@ -1,10 +1,3 @@
-<head>
-    <script>
-        function thanhToan($i) {
-            var result = "<?php ?>"
-        }
-    </script>
-</head>
 <div class="left">
     <div class="table-container">
         <table class="table" cellspacing="0">
@@ -41,7 +34,8 @@
     </div>
     <div class="button-container">
         <form method="get" action="/faion/action/actionOrder.php">
-            <input type="hidden" value='<?php echo $_GET['id'] ?>' name="orderId">
+            <input type="hidden" value='<?php if (isset($_GET['id'])){echo $_GET['id'];
+            }  ?>' name="id">
             <button type="submit" class="delete-btn">Đánh dấu đã thanh toán</button>
         </form>
     </div>
@@ -131,6 +125,16 @@ function getOrderDetail($id)
     }
 }
 
+    if(isset($_SESSION["message"])){
+        if($_SESSION['message']=="true"){
+        echo "<script type='text/javascript'>alert('Đã thanh toán');</script>";
+        unset($_SESSION['message']);
+    }
+    else{
+        echo "<script type='text/javascript'>alert('Chưa chọn hóa đơn cần xử lý');</script>";
+        unset($_SESSION['message']);
+    }
+}
 
 
 ?>

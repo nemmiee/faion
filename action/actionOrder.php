@@ -1,16 +1,17 @@
 <?php
+session_start();
 include('../../faion/connection/Database.php');
-$id = $_GET['orderId'];
-echo $id;
-if(!isset($id)){
-    echo "<script type='text/javascript'>alert('Chưa chọn hóa đơn cần xử lý');</script>";
-}else{
+if(!empty($_GET['id'])){
+    $id = $_GET['id'];
+    $date = date('y-m-d H:i:s');
     $conn = new Database();
     $sql = "update `order`  od
-    set status = 1
+    set status=1, completed_at='".$date."'
     where od.id =".$id;
-    $conn->insert_update_delete($sql);
-    echo "<script type='text/javascript'>alert('Đã thanh toán');</script>";
-    header('Location:/faion/index.php/admin/orders/');
+    $conn->insert_update_delete($sql);  
+    $_SESSION['message'] = "true";
+}else{
+    $_SESSION['message'] = "false";
 }
+header('Location:/faion/index.php/admin/orders/');
 ?>
