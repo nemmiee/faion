@@ -41,7 +41,8 @@
     </div>
     <div class="button-container">
         <form method="get" action="/faion/action/actionOrder.php">
-            <input type="hidden" value='<?php echo $_GET['id'] ?>' name="orderId">
+            <input type="hidden" value='<?php if (isset($_GET['id'])){echo $_GET['id'];
+            }  ?>' name="id">
             <button type="submit" class="delete-btn">Đánh dấu đã thanh toán</button>
         </form>
     </div>
@@ -131,6 +132,13 @@ function getOrderDetail($id)
     }
 }
 
-
+    if(isset($_GET['message'])){
+        if($_GET['message']){
+        echo "<script type='text/javascript'>alert('Đã thanh toán');</script>";
+    }
+    else{
+        echo "<script type='text/javascript'>alert('Chưa chọn hóa đơn cần xử lý');</script>";
+    }
+}
 
 ?>
