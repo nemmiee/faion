@@ -34,13 +34,12 @@ ob_start();
 			if (isset($_GET['category']) && isset($_GET['page'])) {
 				// Trang hiển thị sản phẩm
 				echo "<link rel='stylesheet' href='/faion/css/user/products.css'>";
-				echo "<script src='/faion/js/product_js.js' defer></script>";
 			} else {
 				// Trang thông tin chi tiết sản phẩm
 				echo "<link rel='stylesheet' href='/faion/css/user/productInfo.css'>";
 				echo "<link rel='stylesheet' href='/faion/css/user/featureProducts.css'>";
 			}
-		} if (preg_match("/search?/", $temp[count($temp) - 1])) {
+		} else if (preg_match("/search?/", $temp[count($temp) - 1])) {
 				echo "<link rel='stylesheet' href='/faion/css/user/search.css'>";
 		} else {
 			switch ($page) {

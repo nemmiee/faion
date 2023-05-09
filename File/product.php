@@ -14,42 +14,7 @@
     </div>
 </div>
 
-<?php
-include('../faion/template/sidebar.php');
-?>
-
 <main id="main">
-    <div id="product-search-content">
-        <div id="product-search">
-            <div class="product-search-text">
-                <input type="search" name="search-area" id="search" value="" placeholder="Tìm kiếm nè...." onkeyup="search_product();">
-                <div id="button-search" onclick="Search(0)">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </div>
-                <div id="filter" onclick="Show_choose()">
-                    <i class="fa-solid fa-filter fa-lg"></i>
-                    <div id="filter_choose">
-                        <ul>
-                            <li value="cheap" onclick="cheap()">Rẻ Nhất</li>
-                            <li value="exp" onclick="expensive()">Cao nhất</li>
-                            <li value="U500" onclick="U500()"><span>
-                                    < </span> 500.000đ</li>
-                            <li value="H500" onclick="H500()"><span> >= </span> 500.000đ</li>
-                            <li value="all" onclick="ALL()">Tất cả</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="xmark" onclick="clock()">
-                    <i class="fa-solid fa-xmark fa-lg"></i>
-                </div>
-            </div>
-            <div id="product-search-result">
-            </div>
-            <div id="Numpage">
-            </div>
-        </div>
-    </div>
-
     <!-- Menu -->
     <div id="menu-container">
         <div id="shop-sidebar">

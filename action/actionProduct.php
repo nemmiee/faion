@@ -168,7 +168,7 @@ if (isset($_POST['add-product-submit'])) {
                 $image = $target_file;
             } else {
                 echo "<script>alertMessage('fail', 'Đã xảy ra lỗi trong quá trình upload file!');</script>";
-                $image = "/faion/img/products/no-image.png";
+                $image = "/faion/img/default/no-image.png";
             }
         }
     } else {
