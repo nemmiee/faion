@@ -62,7 +62,7 @@ ob_start();
 					echo "<link rel='stylesheet' href='/faion/css/user/signup.css'>";
 					break;
 				case "cart":
-
+					echo "<link rel='stylesheet' href='/faion/css/user/cart.css'>";
 					break;
 				case "info":
 					echo "<link rel='stylesheet' href='/faion/css/user/userInfo.css'>";

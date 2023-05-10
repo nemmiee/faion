@@ -55,7 +55,7 @@
             </div>
             <div class="price"><?php echo changeMoney($product['price']); ?>₫</div>
             <div class="bottom-info">
-                <form method="post" action="/faion/file/handle.php" <?php
+                <form method="post" action="/faion/action/actionCart.php" <?php
                                                                     if (!isset($_SESSION['id'])) {
                                                                         echo  "onsubmit=\"return isNotLogin(event)\"";
                                                                     } else
@@ -108,6 +108,8 @@
                         <input type="text" name="quantity" id="pQuantity" value="1" onkeyup="checkQuantity(<?php echo $_GET['info']; ?>, this.value)">
                         <button class="quantity" onclick="quantityUp(event)"> + </button>
                     </div>
+                    <input type='hidden' name='id' value= '<?php echo $_GET['info']?>'>
+                    <input type='hidden' name='add-cart' value= 'add'>
                     <div class="addToCart-container">
                         <button type="submit" name="addToCart" id="addToCartButton" value="<?php
                                                                                             echo $_GET['info'];

@@ -15,7 +15,6 @@ function setbill() {
         }
     }
 }
-
 function choose(a) {
     size = a;
     if (a === 'L') {

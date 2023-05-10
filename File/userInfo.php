@@ -129,13 +129,7 @@ for ($i = 0; $i < count($customerList); $i++) {
             </tbody>
         </table>
     </div>
-    <div class="button-container">
-        <form method="get" action="/faion/action/actionOrder.php">
-            <input type="hidden" value='<?php if (isset($_GET['id'])){echo $_GET['id'];
-            }  ?>' name="id">
-            <button type="submit" class="delete-btn">nút hủy đơn hàng nhưng chưa hủy được</button>
-        </form>
-    </div>
+   
 
 </div>
 
@@ -173,11 +167,11 @@ for ($i = 0; $i < count($customerList); $i++) {
 
         echo "
         <tr>
-            <td class=\"order-id\"><a href=\"/faion/index.php/admin/products?choice=order&id=" . $orderArr[$i]->getId() . "\">" . $orderArr[$i]->getId() . "</a></td>
+            <td class=\"order-id\">" . $orderArr[$i]->getId() . "</a></td>
             <td class=\"total\">" . changeMoney($orderArr[$i]->getTotal()) . "₫</td>
             <td class=\"status\">" . $status . "</td>
             <td class=\"date\">" . $orderArr[$i]->getCreatedDate() . "</td>
-            <td class=\"glasss\"><a href=\"/faion/index.php/admin/orders/orders?id=" . $orderArr[$i]->getId() . "\"><i class=\"fa-solid fa-magnifying-glass\" onclick=\"\"></i></a></td>
+            <td class=\"glasss\"><a href=\"/faion/index.php/user/orders/?id=" . $orderArr[$i]->getId() . "\"><i class=\"fa-solid fa-magnifying-glass\" onclick=\"\"></i></a></td>
         </tr>";
     }
     $db->disconnect();

@@ -246,7 +246,6 @@ function changeTheme() {
     localStorage.setItem("theme", theme);
 }
 
-
 let headerInnerSearchBtn = document.getElementById("header-inner-search-btn");
 headerInnerSearchBtn.addEventListener("click", function (event) {
     var keyword = document.getElementById("keyword").value.trim();
