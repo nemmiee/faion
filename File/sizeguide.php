@@ -15,10 +15,6 @@
     </div>
 </div>
 
-<?php
-include ('../faion/template/sidebar.php');
-?>
-
 <main>
     <div id="main">
         <!-- Left menu -->

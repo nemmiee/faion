@@ -2,7 +2,7 @@
     <div id="footer">
         <div id="top-footer">
             <div class="top-footer-menu">
-                <img id="top-footer-menu-img" src="/FAION/img/Logo/Faion_remove_background.png" alt="Faion">
+                <img id="top-footer-menu-img" src="/faion/img/Logo/Faion_remove_background.png" alt="Faion">
                 <p><i class="fa-solid fa-location-dot fa-fw top-footer-icon"></i>Địa chỉ: 273 An Dương Vương, P3,
                     Quận 5, TP.HCM</p>
                 <p><i class="fa-regular fa-envelope fa-fw top-footer-icon"></i>Email: <a href="mailto:nthnam.a1.c3tqcap@gmail.com">nthnam.a1.c3tqcap@gmail.com</a></p>
@@ -18,7 +18,7 @@
                 <?php
                 echo "<h3>Sản phẩm</h3>";
                 for ($i = 0; $i < count($categoryList); $i++) {
-                    echo "<a href='/FAION/index.php/products?category=" . strtolower($categoryList[$i]) . "&page=1'>" .  $categoryList[$i] . "</a>";
+                    echo "<a href='/faion/index.php/products?category=" . strtolower($categoryList[$i]) . "&page=1'>" .  $categoryList[$i] . "</a>";
                 } 
                 $db->disconnect();            
                 ?>

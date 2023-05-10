@@ -1,7 +1,3 @@
-<?php
-include('../faion/template/sidebar.php');
-?>
-
 <main>
     <div id="mainContent-theme">
         <div id="login-title-container">

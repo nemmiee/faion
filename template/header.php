@@ -44,7 +44,7 @@
                             <i class=\"fa-solid fa-right-from-bracket\"></i></a></li></div>";
                         echo "                
                             <div class=\"search\">
-                                <div id=\"header-search\" onclick=\"document.getElementById('search-container').classList.toggle('active');\">
+                                <div id=\"header-search\" onclick=\"openHeaderSearch()\">
                                     <button id=\"header-search-btn\">
                                         <i class=\"fa-solid fa-magnifying-glass fa-lg header-icon\"></i>
                                     </button>
@@ -54,8 +54,8 @@
                                 <form method=\"get\">
                                     <div class=\"inner-search\">
                                         <input type=\"text\" id=\"keyword\" name=\"keyword\" placeholder=\"Tìm kiếm...\" value=\"";
-                                        if (isset($_GET['keyword']) && !empty($_GET['keyword'])) echo $_GET['keyword'];
-                                        echo "\">                                    
+                        if (isset($_GET['keyword']) && !empty($_GET['keyword'])) echo $_GET['keyword'];
+                        echo "\">                                    
                                         <button type=\"submit\" id=\"header-inner-search-btn\">
                                             <i class=\"fa-solid fa-magnifying-glass fa-lg\"></i>
                                         </button>
@@ -72,12 +72,12 @@
                         echo "
                             <div class=\"user info\">
                                 <a href=\"/faion/index.php/user/info/\">
-                                    <i class=\"fa-solid fa-user fa-lg header-icon "; 
-                                    if (preg_match('/\binfo\b/', $uri))
-                                        echo addHeaderActive("info");
-                                    else 
-                                        echo addHeaderActive("account")
-                                    ; echo "\"
+                                    <i class=\"fa-solid fa-user fa-lg header-icon ";
+                        if (preg_match('/\binfo\b/', $uri))
+                            echo addHeaderActive("info");
+                        else
+                            echo addHeaderActive("account");
+                        echo "\"
                                     ></i>
                                 </a>
                             </div>";
@@ -101,7 +101,7 @@
                             </div>";
                         echo "                
                             <div class=\"search\">
-                                <div id=\"header-search\" onclick=\"document.getElementById('search-container').classList.toggle('active');\">
+                                <div id=\"header-search\" onclick=\"openHeaderSearch()\">
                                     <button id=\"header-search-btn\">
                                         <i class=\"fa-solid fa-magnifying-glass fa-lg header-icon\"></i>
                                     </button>
@@ -111,8 +111,8 @@
                                 <form method=\"get\">
                                     <div class=\"inner-search\">
                                         <input type=\"text\" id=\"keyword\" name=\"keyword\" placeholder=\"Tìm kiếm...\" value=\"";
-                                        if (isset($_GET['keyword']) && !empty($_GET['keyword'])) echo $_GET['keyword'];
-                                        echo "\">                                    
+                        if (isset($_GET['keyword']) && !empty($_GET['keyword'])) echo $_GET['keyword'];
+                        echo "\">                                    
                                         <button type=\"submit\" id=\"header-inner-search-btn\">
                                             <i class=\"fa-solid fa-magnifying-glass fa-lg\"></i>
                                         </button>
@@ -136,7 +136,7 @@
                         </div>";
                     echo "                
                         <div class=\"search\">
-                            <div id=\"header-search\" onclick=\"document.getElementById('search-container').classList.toggle('active');\">
+                            <div id=\"header-search\" onclick=\"openHeaderSearch()\">
                                 <button id=\"header-search-btn\">
                                     <i class=\"fa-solid fa-magnifying-glass fa-lg header-icon\"></i>
                                 </button>
@@ -146,8 +146,8 @@
                             <form method=\"get\">
                                 <div class=\"inner-search\">
                                     <input type=\"text\" id=\"keyword\" name=\"keyword\" placeholder=\"Tìm kiếm...\" value=\"";
-                                    if (isset($_GET['keyword']) && !empty($_GET['keyword'])) echo $_GET['keyword'];
-                                    echo "\">                                    
+                    if (isset($_GET['keyword']) && !empty($_GET['keyword'])) echo $_GET['keyword'];
+                    echo "\">                                    
                                     <button type=\"submit\" id=\"header-inner-search-btn\">
                                         <i class=\"fa-solid fa-magnifying-glass fa-lg\"></i>
                                     </button>
@@ -162,11 +162,6 @@
                             </a>
                         </div>";
                 }
-                // Darkmode
-                // echo "
-                // <div id=\"darkmode\">
-                //     <i id=\"darkmode-btn\" class=\"fa-solid fa-circle-half-stroke fa-lg\" onclick=\"changeTheme()\"></i>
-                // </div>";
             } else {
                 // Header nếu nhấn vào trang admin
                 echo "<a href=\"/faion/action/actionLogout.php\" class=\"admin-logout\">
@@ -181,7 +176,7 @@
                 <i class="fa-solid fa-bars fa-lg" id="hamburger-icon"></i>
             </div>
         </div>
-    </div>    
+    </div>
 </header>
 
 <?php
@@ -236,6 +231,10 @@ function addHeaderActive($name)
                     if ($name == "account")
                         return "active";
                     break;
+                case "orders":
+                    if ($name == "orders")
+                        return "active";
+                    break;
             }
             return "";
         }
@@ -265,10 +264,6 @@ function addHeaderActive($name)
                     break;
                 case "users":
                     if ($name == "users")
-                        return "active";
-                    break;
-                case "theme":
-                    if ($name == "theme")
                         return "active";
                     break;
             }

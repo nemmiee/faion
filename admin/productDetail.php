@@ -132,7 +132,7 @@ if ($_GET['choice'] == "product") {
                         </div>
                         <div class=\"right\">
                             <div class=\"image-container\">
-                                <img src=\"/faion/img/products/" . getImageName($product->getImage()) . "\" alt=\"Có lẽ là ảnh về một cái áo\" id=\"pimage\">
+                                <img src=\"/faion/img/" . getImageName($product->getImage()) . "\" alt=\"Có lẽ là ảnh về một cái áo\" id=\"pimage\">
                             </div>
                             <div class=\"change-image-container\">
                                 <input type=\"file\" name=\"image\" id=\"imageInput\" style=\"display: none;\" onchange=\"previewImage();\">
@@ -166,7 +166,7 @@ if ($_GET['choice'] == "product") {
 function getImageName($url)
 {
     $name = explode("/", $url);
-    $name = $name[count($name) - 1];
+    $name = "/" . $name[count($name) - 2] . "/" . $name[count($name) - 1];
     return $name;
 }
 ?>
@@ -225,7 +225,7 @@ function getImageName($url)
 
             reader.readAsDataURL(file); // Đọc dữ liệu dưới dạng URL dữ liệu
         } else {
-            previewImg.src = '/faion/img/products/no-image1.png'; // Reset hình ảnh nếu không có tệp tin được chọn
+            previewImg.src = '/faion/img/default/no-image.png'; // Reset hình ảnh nếu không có tệp tin được chọn
         }
     }
 

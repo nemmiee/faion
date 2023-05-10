@@ -119,133 +119,7 @@ window.addEventListener("scroll", function () {
     }
 });
 
-
-let currentTheme = localStorage.getItem("theme");
-if (currentTheme == "dark") {
-    let pos = window.location.pathname.lastIndexOf('/');
-    let path = window.location.pathname.substring(pos + 1);
-    path = path.split(".")[0];
-    document.getElementById("darkmode-btn").classList.toggle("fa-flip-horizontal");
-    // Header
-    document.getElementById("header").classList.toggle("darkmode");
-    // Footer
-    document.getElementById("footer").classList.toggle("darkmode");
-
-    if (path == "index") {
-        document.getElementById("content").classList.toggle("darkmode");
-        document.getElementById("top-shopnow-container").classList.toggle("darkmode");
-        document.getElementById("bottom-shopnow-container").classList.toggle("darkmode");
-        document.getElementById("main-content").classList.toggle("darkmode");
-    }
-    else if (path == "products") {
-        document.querySelector(".shop-page-title-container").classList.toggle("darkmode");
-        document.getElementById("menu-container").classList.toggle("darkmode");
-        document.getElementById("maincontent").classList.toggle("darkmode");
-    }
-    else if (path == "sizeguide") {
-        document.querySelector(".shop-page-title-container").classList.toggle("darkmode");
-        document.getElementById("main").classList.toggle("darkmode");
-    }
-    else if (path == "contact") {
-        document.querySelector(".shop-page-title-container").classList.toggle("darkmode");
-        document.getElementById("main").classList.toggle("darkmode");
-    }
-    else if (path == "login") {
-        document.getElementById("mainContent-theme").classList.toggle("darkmode");
-    }
-    else if (path == "signup") {
-        document.getElementById("mainContent-theme").classList.toggle("darkmode");
-
-    }
-    else {
-
-    }
-}
-
-function changeTheme() {
-    let theme;
-    if (!document.getElementById("header").classList.contains("darkmode")) {
-        theme = "dark";
-        document.getElementById("darkmode-btn").classList.toggle("fa-flip-horizontal");
-        document.getElementById("sidebar-darkmode-btn").classList.toggle("fa-flip-horizontal");
-        // Header
-        document.getElementById("header").classList.toggle("darkmode");
-        // Footer
-        document.getElementById("footer").classList.toggle("darkmode");
-
-        if (path == "index") {
-            document.getElementById("content").classList.toggle("darkmode");
-            document.getElementById("top-shopnow-container").classList.toggle("darkmode");
-            document.getElementById("bottom-shopnow-container").classList.toggle("darkmode");
-            document.getElementById("main-content").classList.toggle("darkmode");
-        }
-        else if (path == "products") {
-            document.querySelector(".shop-page-title-container").classList.toggle("darkmode");
-            document.getElementById("menu-container").classList.toggle("darkmode");
-            document.getElementById("maincontent").classList.toggle("darkmode");
-
-        }
-        else if (path == "sizecheck") {
-            document.querySelector(".shop-page-title-container").classList.toggle("darkmode");
-            document.getElementById("main").classList.toggle("darkmode");
-        }
-        else if (path == "contact") {
-            document.querySelector(".shop-page-title-container").classList.toggle("darkmode");
-            document.getElementById("main").classList.toggle("darkmode");
-        }
-        else if (path == "signin") {
-            document.getElementById("mainContent-theme").classList.toggle("darkmode");
-        }
-        else if (path == "signup") {
-            document.getElementById("mainContent-theme").classList.toggle("darkmode");
-
-        }
-        else {
-
-        }
-    }
-    else {
-        theme = "light";
-        document.getElementById("darkmode-btn").classList.toggle("fa-flip-horizontal");
-        document.getElementById("sidebar-darkmode-btn").classList.toggle("fa-flip-horizontal");
-        // Header
-        document.getElementById("header").classList.toggle("darkmode");
-        // Footer
-        document.getElementById("footer").classList.toggle("darkmode");
-
-        if (path == "index") {
-            document.getElementById("content").classList.toggle("darkmode");
-            document.getElementById("top-shopnow-container").classList.toggle("darkmode");
-            document.getElementById("bottom-shopnow-container").classList.toggle("darkmode");
-            document.getElementById("main-content").classList.toggle("darkmode");
-
-        }
-        else if (path == "products") {
-            document.querySelector(".shop-page-title-container").classList.toggle("darkmode");
-            document.getElementById("menu-container").classList.toggle("darkmode");
-            document.getElementById("maincontent").classList.toggle("darkmode");
-        }
-        else if (path == "sizecheck") {
-            document.querySelector(".shop-page-title-container").classList.toggle("darkmode");
-            document.getElementById("main").classList.toggle("darkmode");
-        }
-        else if (path == "contact") {
-            document.querySelector(".shop-page-title-container").classList.toggle("darkmode");
-            document.getElementById("main").classList.toggle("darkmode");
-        }
-        else if (path == "signin") {
-            document.getElementById("mainContent-theme").classList.toggle("darkmode");
-        }
-        else if (path == "signup") {
-            document.getElementById("mainContent-theme").classList.toggle("darkmode");
-        }
-        else {
-
-        }
-    }
-    localStorage.setItem("theme", theme);
-}
-
+// Nút search trên thanh header
 let headerInnerSearchBtn = document.getElementById("header-inner-search-btn");
 headerInnerSearchBtn.addEventListener("click", function (event) {
     var keyword = document.getElementById("keyword").value.trim();
@@ -291,9 +165,11 @@ if (sessionStorage.getItem("firstSearch") == "on") {
     xml.send();
 }
 
+// Phân trang ajax
 function pageDivideAjax(category, page, keyword, minPrice, maxPrice) {
     console.log(keyword);
     if (keyword != null) {
+        // Phân trang bên trang tìm kiếm
         var request = "keyword=" + keyword + "&page=" + page +
             "&category=" + category;
         if (minPrice != null && maxPrice != null)
@@ -315,6 +191,7 @@ function pageDivideAjax(category, page, keyword, minPrice, maxPrice) {
         };
         xml.send();
     } else {
+        // Phân trang bên trang sản phẩm
         var request = "category=" + category + "&page=" + page;
         var url = '/faion/index.php/products?' + request;
         var xml = new XMLHttpRequest();
@@ -328,4 +205,9 @@ function pageDivideAjax(category, page, keyword, minPrice, maxPrice) {
         };
         xml.send();
     }
+}
+
+function openHeaderSearch() {
+    document.getElementById('search-container').classList.toggle('active');
+    document.getElementById('keyword').focus();
 }

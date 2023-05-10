@@ -48,7 +48,7 @@ if (isset($_GET['id'])) {
                             <option value=\"2\"";
         if ($account->getRole() == 2) echo "selected";
         echo ">Nhân viên - Staff</option>
-                            <option value=\"2\"";
+                            <option value=\"3\"";
         if ($account->getRole() == 3) echo "selected";
         echo ">Người dùng - User</option>
                         </select>
