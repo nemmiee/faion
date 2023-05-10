@@ -152,7 +152,13 @@
 function showProducts($main, $sub)
 {
     $db = new Database();
-    $productList = getProductList();
+    $temp = getProductList();
+    $productList = array();
+    for ($i = 0; $i < count($temp); $i++) {
+        if ($temp[$i]->getStatus() == 1) {
+            $productList[] = $temp[$i];
+        }
+    }
 
     $uri = $_SERVER['REQUEST_URI'];
     $category = $_GET['category'];

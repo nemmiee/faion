@@ -223,14 +223,14 @@ class PageDivide extends ProductDAL
             }
 
             if ($this->category == "all") {
-                $sql = "SELECT * FROM product WHERE LOWER(name) LIKE LOWER('%$this->keyword%') " . $price;
+                $sql = "SELECT * FROM product WHERE status = 1 AND LOWER(name) LIKE LOWER('%$this->keyword%') " . $price;
                 ProductDAL::select($sql);
                 if (ProductDAL::select_count() > 0) {
                     $this->total = ceil(ProductDAL::select_count() / $this->allLimit);
                     return $this->total;
                 }
             } else {
-                $sql = "SELECT * FROM product WHERE category_id = " . getCategoryId($this->category) . " AND 
+                $sql = "SELECT * FROM product WHERE status = 1 AND category_id = " . getCategoryId($this->category) . " AND 
                 LOWER(name) LIKE LOWER('%$this->keyword%') " . $price;
                 ProductDAL::select($sql);
                 if (ProductDAL::select_count() > 0) {
@@ -240,14 +240,14 @@ class PageDivide extends ProductDAL
             }
         } else {
             if ($this->category == "all") {
-                $sql = "SELECT * FROM product";
+                $sql = "SELECT * FROM product WHERE status = 1";
                 ProductDAL::select($sql);
                 if (ProductDAL::select_count() > 0) {
                     $this->total = ceil(ProductDAL::select_count() / $this->allLimit);
                     return $this->total;
                 }
             } else {
-                $sql = "SELECT * FROM product WHERE category_id = " . getCategoryId($this->category);
+                $sql = "SELECT * FROM product WHERE status = 1 AND category_id = " . getCategoryId($this->category);
                 ProductDAL::select($sql);
                 if (ProductDAL::select_count() > 0) {
                     $this->total = ceil(ProductDAL::select_count() / $this->limit);
@@ -270,7 +270,7 @@ class PageDivide extends ProductDAL
                 $price = "";
             }
             if ($this->category == "all") {
-                $sql = "SELECT * FROM product WHERE LOWER(name) LIKE LOWER('%$this->keyword%') $price 
+                $sql = "SELECT * FROM product WHERE status = 1 AND LOWER(name) LIKE LOWER('%$this->keyword%') $price 
                 LIMIT $this->start, $this->allLimit";
                 ProductDAL::select($sql);
                 $str = "";
@@ -283,7 +283,7 @@ class PageDivide extends ProductDAL
                 }
                 return $str;
             } else {
-                $sql = "SELECT * FROM product WHERE category_id = " . getCategoryId($this->category) . " 
+                $sql = "SELECT * FROM product WHERE status = 1 AND category_id = " . getCategoryId($this->category) . " 
                 AND LOWER(name) LIKE LOWER('%$this->keyword%') $price LIMIT $this->start, $this->limit";
                 ProductDAL::select($sql);
                 $str = "";
@@ -298,7 +298,7 @@ class PageDivide extends ProductDAL
             }
         } else {
             if ($this->category == "all") {
-                $sql = "SELECT * FROM product LIMIT $this->start, $this->allLimit";
+                $sql = "SELECT * FROM product WHERE status = 1 LIMIT $this->start, $this->allLimit";
                 ProductDAL::select($sql);
                 $str = "";
                 while ($row = mysqli_fetch_assoc(ProductDAL::getResultQuery())) {
@@ -310,7 +310,7 @@ class PageDivide extends ProductDAL
                 }
                 return $str;
             } else {
-                $sql = "SELECT * FROM product WHERE category_id = " . getCategoryId($this->category) . " LIMIT $this->start, $this->limit";
+                $sql = "SELECT * FROM product WHERE status = 1 AND category_id = " . getCategoryId($this->category) . " LIMIT $this->start, $this->limit";
                 ProductDAL::select($sql);
                 $str = "";
                 while ($row = mysqli_fetch_assoc(ProductDAL::getResultQuery())) {

@@ -112,7 +112,7 @@ if (isset($_POST['add-product-submit'])) {
     }
     $id = $productList[$pos]->getId();
 
-    $name = trim($_POST['quantity']);
+    $name = trim($_POST['name']);
     $category = trim($_POST['category']);
     $price = trim($_POST['price']);
     $status = trim($_POST['status']);
