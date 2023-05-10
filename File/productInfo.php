@@ -163,7 +163,7 @@
     function checkAddToCartForm(e) {
         var quantityRegEx = /^[0-9]+$/;
         var size = document.getElementsByName("size");
-        var color = document.getElementsByName("color");
+        
         var quantity = document.getElementById("pQuantity");
         var sizePos = -1;
         for (var i = 0; i < size.length; i++) {
@@ -171,21 +171,13 @@
                 sizePos = i;
             }
         }
-        var colorPos = -1;
-        for (var i = 0; i < color.length; i++) {
-            if (color[i].checked === true) {
-                colorPos = i;
-            }
-        }
+      
         if (sizePos == -1) {
             e.preventDefault();
             alertMessage("warning", "Bạn chưa chọn size");
             return false;
-        } else if (colorPos == -1) {
-            e.preventDefault();
-            alertMessage("warning", "Bạn chưa chọn màu");
-            return false;
-        } else if (quantity.value <= 0) {
+        }    
+         else if (quantity.value <= 0) {
             e.preventDefault();
             alertMessage("warning", "Số lượng sản phẩm phải lớn hơn 0");
             return false;
