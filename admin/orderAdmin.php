@@ -111,8 +111,8 @@ function getOrderDetail($id)
         <td>" . $orderDetailArray[0]->getOrderId() . "</td>
         </tr>
         <tr style='background-color: lightgrey; color:black;font-weight:bold'>
-        <td></td>
         <td>Tên sản phẩm</td>
+        <td>Kích cỡ</td>
         <td>Số lượng</td>
         <td>Thành tiền</td>
         </tr>";
