@@ -51,7 +51,7 @@ if(isset($_POST['add-cart'])){
             }
         $_SESSION['cart'] = $cart;
     }
-    
+    header('Location:/faion/index.php/products?category=all&page=1');
 } 
 else if(isset($_POST['delete-cart'])){
 

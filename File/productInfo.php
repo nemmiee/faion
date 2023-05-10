@@ -84,25 +84,6 @@
                             </label>
                         </div>
                     </div>
-                    <div class="color-container">
-                        <h3>Chọn màu</h3>
-                        <label class="colorLabel">
-                            <input type="radio" name="color" id="colorRed" value="red" class="pColor">
-                            <div class="colorCheck" id="colorCheckRed"></div>
-                        </label>
-                        <label class="colorLabel">
-                            <input type="radio" name="color" id="colorBlue" value="blue" class="pColor">
-                            <div class="colorCheck" id="colorCheckBlue"></div>
-                        </label>
-                        <label class="colorLabel">
-                            <input type="radio" name="color" id="colorYellow" value="yellow" class="pColor">
-                            <div class="colorCheck" id="colorCheckYellow"></div>
-                        </label>
-                        <label class="colorLabel">
-                            <input type="radio" name="color" id="colorGreen" value="green" class="pColor">
-                            <div class="colorCheck" id="colorCheckGreen"></div>
-                        </label>
-                    </div>
                     <div class="quantity-container">
                         <button class="quantity" onclick="quantityDown(event)"> − </button>
                         <input type="text" name="quantity" id="pQuantity" value="1" onkeyup="checkQuantity(<?php echo $_GET['info']; ?>, this.value)">

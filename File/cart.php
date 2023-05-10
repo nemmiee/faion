@@ -105,7 +105,7 @@
 			<!--waitting-->
 		</div>
 		<div id="product_show"></div>
-		<div id="show_product"></div>
+		
 	</main>
 
 	<footer>
