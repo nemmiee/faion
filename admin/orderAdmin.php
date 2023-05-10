@@ -84,7 +84,7 @@ function getOrderDetail($id)
 {
     include('../faion/object/OrderDetail.php');
     $db = new Database();
-    $sql = 'select cs.name customer_name,od.id order_id , pr.id product_id,pr.name product_name,oi.quantity quantity,oi.price price from `order` od
+    $sql = 'select cs.name customer_name,od.id order_id , pr.id product_id,pr.name product_name,oi.quantity quantity,oi.price price,oi.size size from `order` od
         inner join customer cs on od.customer_id = cs.id
         inner join orderitem oi on od.id = oi.order_id
         inner join product pr on oi.product_id = pr.id
@@ -98,7 +98,8 @@ function getOrderDetail($id)
             $row['product_id'],
             $row['product_name'],
             $row['quantity'],
-            $row['price']
+            $row['price'],
+            $row['size']
         );
         $orderDetailArray[] = $orderDetail;
     }
@@ -117,8 +118,9 @@ function getOrderDetail($id)
         </tr>";
     for ($i = 0; $i < count($orderDetailArray); $i++) {
         echo "<tr>
-            <td></td>
+            
             <td>" . $orderDetailArray[$i]->getProductName() . "</td>
+            <td>".$orderDetailArray[$i]->getSize()."</td>
             <td>" . $orderDetailArray[$i]->getQuantity() . "</td>
             <td>" . $orderDetailArray[$i]->getprice() . "</td>
             </tr>";

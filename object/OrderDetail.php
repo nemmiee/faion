@@ -6,16 +6,29 @@ class orderDetail{
     private $productName;
     private $quantity;
     private $price;
-    function __construct($customerName, $orderId, $productId, $productName, $quantity, $price) {
+	private $size;
+    function __construct($customerName, $orderId, $productId, $productName, $quantity, $price, $size) {
         $this->customerName = $customerName;
         $this->orderId = $orderId;
         $this->productId = $productId;
         $this->productName = $productName;
         $this->quantity = $quantity;
         $this->price = $price;
+		$this->size = $size;
     
     }
 
+	/**
+	 * @return mixed
+	 */
+	public function getSize() {
+		return $this->size;
+	}
+	
+	/**
+	 * @param mixed $size
+	 * @return self
+	 */
 	/**
 	 * @return mixed
 	 */
@@ -112,4 +125,5 @@ class orderDetail{
 		return $this;
 	}
 }
+
 ?>
