@@ -35,7 +35,7 @@ body {
     float: left;
 }
 
-#sym {
+#sym .tr{
     padding: 19px 19px 19px 10px;
     background-color: white;
     min-width: 750px;
@@ -85,7 +85,6 @@ body {
     margin: 10px 0;
     display: flex;
     flex-wrap: nowrap;
-    background-color: white;
     padding: 19px 19px 19px 10px;
     justify-content: center;
     align-items: center;
@@ -457,3 +456,27 @@ body {
         display: block;
     }
 }
+#cart th{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: red;
+    color: white;
+  }
+  #cart {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #cart td, #cart th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  #cart .quantity{
+    text-align: center;
+  }
+  
+  #cart tr:nth-child(even){background-color: lightgrey;}
+  
+  #cart tr:hover {background-color: #ddd;}

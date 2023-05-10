@@ -15,6 +15,8 @@ if (!preg_match($adminRegEx, $uri)) {
         }
     } else if (preg_match("/search?/", $temp[count($temp) - 1])) {
         include ('../faion/file/search.php');
+    } else if (preg_match("/user\/orders?/", $temp[count($temp) - 1])) {
+        include ('../faion/file/userInfo.php');
     } else {
         switch ($page) {
             case "index.php":
@@ -42,7 +44,7 @@ if (!preg_match($adminRegEx, $uri)) {
                 include('../faion/file/userInfo.php');
                 break;
             case "cart":
-                echo "Cart";
+                include('../faion/file/cart.php');
                 break;
         }
     }
