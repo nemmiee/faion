@@ -36,7 +36,7 @@
         <form method="get" action="/faion/action/actionOrder.php">
             <input type="hidden" value='<?php if (isset($_GET['id'])){echo $_GET['id'];
             }  ?>' name="id">
-            <button type="submit" class="delete-btn">Đánh dấu đã thanh toán</button>
+            <button type="submit" class="delete-btn">Đánh dấu đã xử lý</button>
         </form>
     </div>
 
@@ -65,13 +65,13 @@ function displayOrder()
     }
     for ($i = 0; $i < count($orderArr); $i++) {
         if ($orderArr[$i]->getStatus())
-            $status = "Đã thanh toán";
+            $status = "Đã xử lý";
         else
-            $status = "Chưa thanh toán";
+            $status = "Chưa xử lý";
 
         echo "
         <tr>
-            <td class=\"order-id\"><a href=\"/faion/index.php/admin/products?choice=order&id=" . $orderArr[$i]->getId() . "\">" . $orderArr[$i]->getId() . "</a></td>
+            <td class=\"order-id\"><a>" . $orderArr[$i]->getId() . "</a></td>
             <td class=\"total\">" . changeMoney($orderArr[$i]->getTotal()) . "₫</td>
             <td class=\"status\">" . $status . "</td>
             <td class=\"date\">" . $orderArr[$i]->getCreatedDate() . "</td>
@@ -127,7 +127,7 @@ function getOrderDetail($id)
 
     if(isset($_SESSION["message"])){
         if($_SESSION['message']=="true"){
-        echo "<script type='text/javascript'>alert('Đã thanh toán');</script>";
+        echo "<script type='text/javascript'>alert('Xử lý thành công');</script>";
         unset($_SESSION['message']);
     }
     else{
