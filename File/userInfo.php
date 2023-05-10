@@ -161,9 +161,9 @@ for ($i = 0; $i < count($customerList); $i++) {
     }
     for ($i = 0; $i < count($orderArr); $i++) {
         if ($orderArr[$i]->getStatus())
-            $status = "Đã thanh toán";
+            $status = "Đã xử lý";
         else
-            $status = "Chưa thanh toán";
+            $status = "Chưa xử lý";
 
         echo "
         <tr>

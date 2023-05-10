@@ -106,7 +106,7 @@ else if(isset($_POST['confirm-cart'])){
     $conn->insert_update_delete($sql);
     echo $sql;
     foreach($cart as $key){
-        $sql = "INSERT INTO `orderitem` values('".($count+1)."','".$key['product_id']."','".$key['quantity']."','".$key['price']."',".$key['size']."')";
+        $sql = "INSERT INTO `orderitem` values('".($count+1)."','".$key['product_id']."','".$key['quantity']."','".$key['price']."','".$key['size']."')";
         $conn->insert_update_delete($sql);
         $sql = "UPDATE `product` SET quantity = quantity - ".$key['quantity'].",sold = sold+".$key['quantity']." WHERE id = ".$key['product_id']."";
         $conn->insert_update_delete($sql);
