@@ -16,10 +16,7 @@
 	<link rel="stylesheet" href="../css/cart.css">
 	<script src="../js/script.js" defer></script>
 	<script src="../js/cart.js" defer></script>
-	<script src="../js/account.js" defer></script>
-	<script src="../js/find.js" defer></script>
-	<script src="../js/product_js.js" defer></script>
-	<script src="/js/product_js.js"></script>
+	
 	<script type="text/javascript">
 					function changeTotal(){
     total = 0;
@@ -71,7 +68,7 @@
 				
 				<td>" . $key['name'] . "</a></td>
 				<td class=\"size\">" . $key['size'] . "</td>
-				<td style = \"text-align:center;\"><input class = \"quantity\" min=\"1\" max=\"10\" onchange=\"changeTotal();\" 
+				<td style = \"text-align:center;\"><input class = \"quantity\" min=\"1\" max=\"" . getQuantity($key['product_id']) . "\" onchange=\"changeTotal();\" 
 				style =\"text-align:center;width:30%;\"type=\"number\" value =\"" . $key['quantity'] . "\" name=\"quantity[]\"></td>
 				<td class=\"price\" style=\"text-align: center;\">" . $key['price'] . "</td>
 				<td><input type=\"submit\" name=\"delete\" class =\"button\" value=\"Xóa\">
@@ -81,6 +78,16 @@
 			";
 		}
 	}
+	
+	function getQuantity($id) {
+		$productList = getProductList();
+		for($i = 0; $i < count($productList); $i++) {
+			if ($productList[$i]->getId() == $id) {
+				return $productList[$i]->getQuantity();
+			}
+		}
+	}
+
 	?>
 </tbody>
 </table>
