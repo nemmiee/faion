@@ -47,12 +47,4 @@ class ProductDAL
     public function getResultQuery() {
         return $this->result_query;
     }
-
-    // public function fetch_array_table($result = NULL)
-    // {
-    //     if ($result == NULL)
-    //         if (is_resource($this->result_query))
-    //             return mysqli_fetch_assoc($this->result_query);
-    //     return NULL;
-    // }
 }
