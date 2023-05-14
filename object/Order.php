@@ -7,8 +7,8 @@ class Order{
     private $createdDate;
     private $canceledDate;
     private $completedDate;
-    function __construct($id, $custId, $total, $status, $createdDate, $canceledDate, 
-                        $completedDate) {
+	
+    function __construct($id, $custId, $total, $status, $createdDate, $canceledDate, $completedDate) {
         $this->id = $id;
         $this->custId = $custId;
         $this->total = $total;
@@ -16,7 +16,6 @@ class Order{
         $this->createdDate = $createdDate;
         $this->canceledDate = $canceledDate;
         $this->completedDate = $completedDate;
-    
     }
 
 	/**
@@ -131,4 +130,3 @@ class Order{
 		return $this;
 	}
 }
-?>

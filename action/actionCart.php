@@ -2,13 +2,10 @@
 include('../../faion/connection/Database.php');
 session_start();
 $conn = new Database;
-if(isset($_POST['add-cart'])){
-    
-    if(isset($_POST['id'])){
-        
+if(isset($_POST['add-cart'])){    
+    if(isset($_POST['id'])){        
         $id = intval($_POST['id']);
-        $quantity = intval($_POST['quantity']);
-        
+        $quantity = intval($_POST['quantity']);        
         $size = $_POST['size'];
         $sql = "SELECT * from product where id =".$id."";
         $result = mysqli_query($conn->getConnection(),$sql);
@@ -20,15 +17,13 @@ if(isset($_POST['add-cart'])){
                 'key'=>$key,
                 'product_id' =>$id,
                 'name' => $row[2],
-                'size' => $size,
-        
+                'size' => $size,        
                 'quantity' => $quantity,
                 'price' => (float)$row[4] 
             );
         }else{
             $cart = $_SESSION['cart'];
             if(array_key_exists($key,$cart)){
-
                 $cart[$key] = array(
                     'key'=>$key,
                     'product_id' =>$id,
@@ -37,46 +32,42 @@ if(isset($_POST['add-cart'])){
                     
                     'quantity' => (int)$cart[$key]['quantity']+$quantity,
                     'price' => (float)$row[4]);
-                }else{
-                
+                }else{              
                     $cart[$key] = array(
                         'key'=>$key,
                         'product_id' =>$id,
                         'name' => $row[2],
-                        'size' => $size,
-                        
+                        'size' => $size,                  
                         'quantity' => $quantity,
                         'price' => (float)$row[4]);
                 }
             }
         $_SESSION['cart'] = $cart;
     }
-    echo "<script>window.alert('Thêm sản phẩm vào giỏ hàng thành công')
-    window.location= '/faion/index.php/products?category=all&page=1'
+    echo "
+    <script>
+        window.alert('Thêm sản phẩm vào giỏ hàng thành công')
+        window.location= '/faion/index.php/products?category=all&page=1'
     </script>
     ";
-} 
-else if(isset($_POST['delete-cart'])){
-
+} else if(isset($_POST['delete-cart'])){
     unset($_SESSION['cart']);
     echo "deleted";
-    echo "<script>window.alert('Hủy giỏ hàng thành công')
-    window.location= '/faion/index.php/products?category=all&page=1'
-    </script>
-    ";
-
-}
-else if(isset($_POST['update-cart'])){
+    echo "
+    <script>
+        window.alert('Hủy giỏ hàng thành công')
+        window.location= '/faion/index.php/products?category=all&page=1'
+    </script>";
+} else if(isset($_POST['update-cart'])){
     $i = 0;
     $cart = $_SESSION['cart'];
     $quan = $_POST['quantity'];
-    foreach($cart as $key){
-       
+    foreach($cart as $key) {
         $key['quantity'] = $quan[$i];
         $i++;
         $cart[$key['key']] = $key;
     }
-    $_SESSION['cart']=$cart;
+    $_SESSION['cart'] = $cart;
     header('Location:/faion/index.php/cart/');
    
 // echo "updated";
@@ -130,4 +121,3 @@ else if(isset($_POST['delete'])){
     unset($_SESSION['cart'][$key]);
     header('Location:/faion/index.php/cart/');
 }
-?>

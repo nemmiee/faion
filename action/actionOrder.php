@@ -10,7 +10,7 @@ if(!empty($_GET['id'])){
     where od.id =".$id;
     $conn->insert_update_delete($sql);  
     $_SESSION['message'] = "true";
-}else{
+} else{
     $_SESSION['message'] = "false";
 }
 header('Location:/faion/index.php/admin/orders/');

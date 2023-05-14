@@ -75,8 +75,10 @@
                                     <i class=\"fa-solid fa-user fa-lg header-icon ";
                         if (preg_match('/\binfo\b/', $uri))
                             echo addHeaderActive("info");
-                        else
+                        else if (preg_match('/\baccount\b/', $uri))
                             echo addHeaderActive("account");
+                        else    
+                            echo addHeaderActive("orders");
                         echo "\"
                                     ></i>
                                 </a>

@@ -77,7 +77,7 @@
         xml.send(request);
     });
 
-    category.addEventListener("click", function() {
+    category.addEventListener("change", function() {
         var request = "category=" + category.value;
         var xml = new XMLHttpRequest();
         xml.open("POST", "/faion/action/actionSortProductAdmin.php", true);

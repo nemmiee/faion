@@ -1,3 +1,23 @@
+
+<div id="top-sub-header">    
+    <div class="sort-container">
+        <label for="sort">Sắp xếp theo</label>
+        <select id="sort">
+            <option value="default" selected>Cũ nhất</option>
+            <option value="new">Mới nhất</option>
+            <option value="priceUp">Tổng tiền tăng dần</option>
+            <option value="priceDown">Tổng tiền giảm dần</option>
+        </select>
+    </div>
+    <div class="sort-container">
+        <label for="order-status">Lọc theo trạng thái</label>
+        <select id="order-status">
+            <option value="default" selected>Mặc định</option>
+            <option value="none">Chưa xử lý</option>
+            <option value="done">Đã xử lý</option>
+        </select>
+    </div>
+</div>
 <div class="left">
     <div class="table-container">
         <table class="table" cellspacing="0">
@@ -34,19 +54,48 @@
     </div>
     <div class="button-container">
         <form method="get" action="/faion/action/actionOrder.php">
-            <input type="hidden" value='<?php if (isset($_GET['id'])){echo $_GET['id'];
-            }  ?>' name="id">
+            <input type="hidden" value='<?php if (isset($_GET['id'])){echo $_GET['id'];} ?>' name="id">
             <button type="submit" class="delete-btn">Đánh dấu đã xử lý</button>
         </form>
     </div>
 
 </div>
+
+<script>
+    var sort = document.getElementById("sort");
+    var orderStatus = document.getElementById("order-status");
+    sort.addEventListener("change", function() {
+        var request = "sortBy=" + sort.value;
+        var xml = new XMLHttpRequest();
+        xml.open("POST", "/faion/action/actionSortOrderAdmin.php", true);
+        xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xml.onreadystatechange = function() {
+            if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+                orderStatus.value = "default";
+                document.querySelectorAll("#product-info")[0].innerHTML = this.responseText;
+            }
+        };
+        xml.send(request);
+    });
+
+    orderStatus.addEventListener("change", function() {
+        var request = "status=" + orderStatus.value;
+        var xml = new XMLHttpRequest();
+        xml.open("POST", "/faion/action/actionSortOrderAdmin.php", true);
+        xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xml.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                sort.value = "default";
+                document.querySelectorAll("#product-info")[0].innerHTML = this.responseText;
+            }
+        }
+        xml.send(request);
+    });
+</script>
+
 <?php
-
-
 function displayOrder()
 {
-
     include('../faion/object/Order.php');
     $db = new Database();
     $kq = mysqli_query($db->getConnection(), "SELECT * FROM `order`");
@@ -80,6 +129,7 @@ function displayOrder()
     }
     $db->disconnect();
 }
+
 function getOrderDetail($id)
 {
     include('../faion/object/OrderDetail.php');
