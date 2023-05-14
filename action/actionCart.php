@@ -82,40 +82,48 @@ else if(isset($_POST['update-cart'])){
 // echo "updated";
 }
 else if(isset($_POST['confirm-cart'])){
-    $i = 0;
-    $cart = $_SESSION['cart'];
-    $quan = $_POST['quantity'];
-    foreach($cart as $key){
-       
-        $key['quantity'] = $quan[$i];
-        $i++;
-        $cart[$key['key']] = $key;
-    }
-    $_SESSION['cart']=$cart;
-    $date = date('y-m-d H:i:s');
-    $cart = $_SESSION['cart'];
-    $total = 0;
-    $sql = "SELECT count(1) from `order`";
-    $result = mysqli_query($conn->getConnection(),$sql);
-    $row = mysqli_fetch_row($result);
-    $count = $row[0];
-    foreach($cart as $key){
-        $total += $key['quantity']*$key['price'];
-    }
-    $sql = "INSERT INTO `order` values('".($count+1)."','".$_SESSION['id']."','$total','0','$date','','')";
-    $conn->insert_update_delete($sql);
-    echo $sql;
-    foreach($cart as $key){
-        $sql = "INSERT INTO `orderitem` values('".($count+1)."','".$key['product_id']."','".$key['quantity']."','".$key['price']."','".$key['size']."')";
+    if(isset($_SESSION['cart'])){
+
+        $i = 0;
+        $cart = $_SESSION['cart'];
+        $quan = $_POST['quantity'];
+        foreach($cart as $key){
+           
+            $key['quantity'] = $quan[$i];
+            $i++;
+            $cart[$key['key']] = $key;
+        }
+        $_SESSION['cart']=$cart;
+        $date = date('y-m-d H:i:s');
+        $cart = $_SESSION['cart'];
+        $total = 0;
+        $sql = "SELECT count(1) from `order`";
+        $result = mysqli_query($conn->getConnection(),$sql);
+        $row = mysqli_fetch_row($result);
+        $count = $row[0];
+        foreach($cart as $key){
+            $total += $key['quantity']*$key['price'];
+        }
+        $sql = "INSERT INTO `order` values('".($count+1)."','".$_SESSION['id']."','$total','0','$date','','')";
         $conn->insert_update_delete($sql);
-        $sql = "UPDATE `product` SET quantity = quantity - ".$key['quantity'].",sold = sold+".$key['quantity']." WHERE id = ".$key['product_id']."";
-        $conn->insert_update_delete($sql);
+        echo $sql;
+        foreach($cart as $key){
+            $sql = "INSERT INTO `orderitem` values('".($count+1)."','".$key['product_id']."','".$key['quantity']."','".$key['price']."','".$key['size']."')";
+            $conn->insert_update_delete($sql);
+            $sql = "UPDATE `product` SET quantity = quantity - ".$key['quantity'].",sold = sold+".$key['quantity']." WHERE id = ".$key['product_id']."";
+            $conn->insert_update_delete($sql);
+        }
+        echo "<script>window.alert('Đặt hàng thành công')
+        window.location= '/faion/index.php/cart/'
+        </script>
+        ";
+        unset($_SESSION['cart']);
+    }else{
+        echo "<script>window.alert('Bạn chưa chọn hàng cần mua')
+        window.location= '/faion/index.php/cart/'
+        </script>
+        ";
     }
-    echo "<script>window.alert('Đặt hàng thành công')
-    window.location= '/faion/index.php/cart/'
-    </script>
-    ";
-    unset($_SESSION['cart']);
 }
 else if(isset($_POST['delete'])){
     $key = $_POST['key'];
