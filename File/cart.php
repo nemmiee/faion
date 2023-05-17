@@ -26,7 +26,7 @@ if (isset($_SESSION['id'])) {
 									foreach ($_SESSION['cart'] as $key) {
 										echo "
 			<tr>
-				<form method=\"POST\" action=\"/faion/action/actionCart.php\">			
+							
 					<td>" . $key['name'] . "</td>
 					<td class=\"size\">" . $key['size'] . "</td>
 					<td style = \"text-align:center;\">
@@ -36,8 +36,8 @@ if (isset($_SESSION['id'])) {
 					</td>
 					<td class=\"price\" style=\"text-align: center;\">" . $key['price'] . "</td>
 					<td><input type=\"submit\" name=\"delete\" class =\"button\" value=\"Xóa\">
-					<input type=\"hidden\" name=\"key\" value=" . $key['key'] . "></td>
-				</form>
+					<input type=\"hidden\" name=\"DeleteKey\" value=" . $key['key'] . "></td>
+				
 			</tr>";
 									}
 								}
