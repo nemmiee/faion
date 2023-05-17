@@ -1,7 +1,6 @@
 <?php
 if (isset($_SESSION['id'])) {
 ?>
-
 	<body onload='changeTotal()'>
 		<main id="content">
 			<form method="POST" action="/faion/action/actionCart.php">
@@ -15,7 +14,6 @@ if (isset($_SESSION['id'])) {
 								<tr>
 									<th>Tên sản phẩm</th>
 									<th>Kích cỡ</th>
-
 									<th>Số lượng</th>
 									<th>Giá</th>
 									<th></th>
@@ -29,7 +27,7 @@ if (isset($_SESSION['id'])) {
 										echo "
 			<tr>
 				<form method=\"POST\" action=\"/faion/action/actionCart.php\">			
-					<td>" . $key['name'] . "</a></td>
+					<td>" . $key['name'] . "</td>
 					<td class=\"size\">" . $key['size'] . "</td>
 					<td style = \"text-align:center;\">
 						<input class = \"quantity\" min=\"1\" max=\"" . getQuantity($key['product_id']) . "\" 
@@ -43,17 +41,6 @@ if (isset($_SESSION['id'])) {
 			</tr>";
 									}
 								}
-
-								function getQuantity($id)
-								{
-									$productList = getProductList();
-									for ($i = 0; $i < count($productList); $i++) {
-										if ($productList[$i]->getId() == $id) {
-											return $productList[$i]->getQuantity();
-										}
-									}
-								}
-
 								?>
 							</tbody>
 						</table>
@@ -74,7 +61,6 @@ if (isset($_SESSION['id'])) {
 						<input type="submit" class="button" value="HỦY GIỎ HÀNG" name="delete-cart"></button>
 					</div>
 			</form>
-			</div>
 		</main>
 	</body>
 
@@ -87,9 +73,17 @@ if (isset($_SESSION['id'])) {
 		window.location = '/faion/index.php/login/';
 	</script>";
 }
+
+function getQuantity($id)
+{
+	$productList = getProductList();
+	for ($i = 0; $i < count($productList); $i++) {
+		if ($productList[$i]->getId() == $id) {
+			return $productList[$i]->getQuantity();
+		}
+	}
+}
 ?>
-
-
 
 <script type="text/javascript">
 	function changeTotal() {
